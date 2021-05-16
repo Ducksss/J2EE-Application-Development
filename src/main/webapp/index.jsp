@@ -123,10 +123,8 @@
 	<main id="main">
 		<!-- ======= About Section ======= -->
 		<section id="about" class="about">
-
 			<div class="container" data-aos="fade-up">
 				<div class="row gx-0">
-
 					<div class="col-lg-6 d-flex flex-column justify-content-center"
 						data-aos="fade-up" data-aos-delay="200">
 						<div class="content">
@@ -1478,7 +1476,6 @@
 
 	<!-- ======= Footer ======= -->
 	<footer id="footer" class="footer">
-
 		<div class="footer-newsletter">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -1579,7 +1576,6 @@
 	<a href="#"
 		class="back-to-top d-flex align-items-center justify-content-center"><i
 		class="bi bi-arrow-up-short"></i></a>
-
 
 	<!-- Vendor JS Files -->
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
