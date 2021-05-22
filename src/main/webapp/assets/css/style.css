@@ -436,22 +436,32 @@ section {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# Special Fonts
+--------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;1,300&display=swap');
+
 .hero {
   width: 100%;
   height: 100vh;
-  background: url(../img/hero-bg.png) top center no-repeat;
+  background: url(../img/W22HKnlM.jpg) top center no-repeat;
   background-size: cover;
 }
 
 .hero h1 {
   margin: 0;
   font-size: 48px;
-  font-weight: 700;
-  color: #012970;
+  /* font size and weight*/
+  font-size: 5rem;
+  font-weight: 800;
+  color: #fff;
+  /* font-family*/
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
 }
 
 .hero h2 {
-  color: #444444;
+  color: #fff;
   margin: 15px 0 0 0;
   font-size: 26px;
 }
@@ -690,10 +700,13 @@ section {
 }
 
 .features .feture-tabs h3 {
-  color: #012970;
-  font-weight: 700;
-  font-size: 32px;
+  color: #000;
+  font-weight: 800;
+  font-size: 4.5rem;
   margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+  letter-spacing: -.05rem;
 }
 
 @media (max-width: 768px) {
@@ -2397,4 +2410,20 @@ section {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.sech3 {
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 10rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.secp {
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #000;
+  font-size: 1.3rem;
 }
