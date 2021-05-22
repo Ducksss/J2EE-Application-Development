@@ -101,40 +101,30 @@
 
 				<div class="row gy-4">
 
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
 						<div class="count-box">
 							<i class="bi bi-emoji-smile"></i>
 							<div>
-								<span data-purecounter-start="0" data-purecounter-end="232"
+								<span data-purecounter-start="0" data-purecounter-end="24834"
 									data-purecounter-duration="1" class="purecounter"></span>
-								<p>Happy Clients</p>
+								<p>Happy Customers</p>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
 						<div class="count-box">
 							<i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
 							<div>
-								<span data-purecounter-start="0" data-purecounter-end="521"
+								<span data-purecounter-start="0" data-purecounter-end="324554"
 									data-purecounter-duration="1" class="purecounter"></span>
-								<p>Projects</p>
+								<p>Food served</p>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-lg-3 col-md-6">
-						<div class="count-box">
-							<i class="bi bi-headset" style="color: #15be56;"></i>
-							<div>
-								<span data-purecounter-start="0" data-purecounter-end="1463"
-									data-purecounter-duration="1" class="purecounter"></span>
-								<p>Hours Of Support</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="col-lg-3 col-md-6">
+					<div class="col-lg-4 col-md-6">
 						<div class="count-box">
 							<i class="bi bi-people" style="color: #bb0852;"></i>
 							<div>
@@ -407,8 +397,8 @@
 			<div class="container" data-aos="fade-up">
 
 				<header class="section-header">
-					<h2>Services</h2>
-					<p>Veritatis et dolores facere numquam et praesentium</p>
+					<h2>Food categories</h2>
+					<p>We offer the best food known to man</p>
 				</header>
 
 				<div class="row gy-4">
@@ -416,12 +406,12 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="200">
 						<div class="service-box blue">
-							<i class="ri-discuss-line icon"></i>
-							<h3>Nesciunt Mete</h3>
-							<p>Provident nihil minus qui consequatur non omnis maiores.
-								Eos accusantium minus dolores iure perferendis tempore et
-								consequatur.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<i class="ri-user-5-line icon"></i>
+							<h3>Breakfast</h3>
+							<p>Our breakfast is unrivaled in the food industry,
+							ensuring that our customers come back wanting more!
+							 </p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the breakfast section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
@@ -429,11 +419,11 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="300">
 						<div class="service-box orange">
-							<i class="ri-discuss-line icon"></i>
-							<h3>Eosle Commodi</h3>
-							<p>Ut autem aut autem non a. Sint sint sit facilis nam iusto
-								sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<i class=" ri-emotion-2-fill icon"></i>
+							<h3>Lunch/Dinner</h3>
+							<p>Our lunch and dinner will ensure that you are too full to even move!
+							This is a must try</p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Lunch/Dinner section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
@@ -442,10 +432,10 @@
 						data-aos-delay="400">
 						<div class="service-box green">
 							<i class="ri-discuss-line icon"></i>
-							<h3>Ledo Markt</h3>
-							<p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur.
-								Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<h3>Signature Dishes</h3>
+							<p>Our signature dishes are approved by renowned chefs around the world
+							like <b>Jericho Jehammed</b> and <b>Mattingson Matto</b>. It will be a sin to not try it!</p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Lunch/Dinner section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
@@ -454,10 +444,10 @@
 						data-aos-delay="500">
 						<div class="service-box red">
 							<i class="ri-discuss-line icon"></i>
-							<h3>Asperiores Commodi</h3>
-							<p>Non et temporibus minus omnis sed dolor esse consequatur.
-								Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<h3>Main Dishes</h3>
+							<p>Our main dishes exude the mouth-watering and appetising taste not known 
+							to humanity before this, saying it is good is a gross understatement. </p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Main Dishes section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
@@ -466,10 +456,10 @@
 						data-aos-delay="600">
 						<div class="service-box purple">
 							<i class="ri-discuss-line icon"></i>
-							<h3>Velit Doloremque.</h3>
-							<p>Cumque et suscipit saepe. Est maiores autem enim facilis
-								ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<h3>Side Dishes</h3>
+							<p>With a palatable and delightful array of dishes, allowing our well-esteemed customers
+							to have a wide selection of choice!</p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Side Dishes section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
@@ -478,10 +468,9 @@
 						data-aos-delay="700">
 						<div class="service-box pink">
 							<i class="ri-discuss-line icon"></i>
-							<h3>Dolori Architecto</h3>
-							<p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut
-								neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-							<a href="#" class="read-more"><span>Read More</span> <i
+							<h3>Desserts</h3>
+							<p>Our desserts will make you quaver! Buy them before it is all sold out</p>
+							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Desserts section</span> <i
 								class="bi bi-arrow-right"></i></a>
 						</div>
 					</div>
