@@ -64,7 +64,7 @@ section {
   font-size: 38px;
   line-height: 42px;
   font-weight: 500;
-  color: #012970;
+  color: #000000;
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-family: 'Poppins', sans-serif;
@@ -455,7 +455,7 @@ section {
   margin: 0;
   font-size: 48px;
   /* font size and weight*/
-  font-size: 5rem;
+  font-size: 8rem;
   font-weight: 800;
   color: #fff;
   /* font-family*/
