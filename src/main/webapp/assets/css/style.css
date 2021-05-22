@@ -63,8 +63,11 @@ section {
   padding: 0;
   font-size: 38px;
   line-height: 42px;
-  font-weight: 700;
+  font-weight: 500;
   color: #012970;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media (max-width: 768px) {
