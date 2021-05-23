@@ -1,0 +1,4 @@
+@media (min-width: 768px) .form-login {
+    display: grid;
+    grid: auto/1fr 40%;
+}
