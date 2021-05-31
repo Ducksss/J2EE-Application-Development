@@ -1,0 +1,99 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" type="image/png"
+        href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <title>CodePen - CSS Grid: Style Guide II</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,500,500i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+
+    <link rel="stylesheet"
+        href="trail.css">
+    <script>
+        window.console = window.console || function (t) {};
+    </script>
+    <script>
+        if (document.location.search.match(/type=embed/gi)) {
+            window.parent.postMessage("resize", "*");
+        }
+    </script>
+</head>
+
+<body translate="no" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed=""
+    style="background: rgb(249, 249, 249);">
+    <input class="variation" id="sunset" type="radio" value="2" name="color" checked="checked">
+    <main>
+        <section class="forms" style="border: 1px solid #4e5166; margin-top: 2.8rem;">
+            <h6>Form</h6>
+            <h1>Login for more aww-someness.</h1>
+            <form class="form-login">
+                <div class="input__wrapper">
+                    <label class="label-form">Email</label>
+                    <input class="input-form" type="text" placeholder="email@email.com">
+                </div>
+                <div class="input__wrapper">
+                    <label class="label-form">Password</label>
+                    <input class="input-form" type="password" placeholder="Password (At least 8 characters)">
+                </div>
+                <div class="checkbox">
+                    <input id="checkbox-rem" type="checkbox">
+                    <label for="checkbox-rem">Remember Me<span class="box"></span></label>
+                </div><a class="button" id="login">Login</a>
+                <div class="spinner__wrapper">
+                    <div class="spinner-1">
+                        <div class="spinner" data-loading="Loading..."></div>
+                        <label>Logging you in...</label>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script
+        src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script id="rendered-js">
+        //the alert is collapsible yay
+        $(".alert").on("click", function () {
+            $(this).hide("slow");
+        });
+
+        //apprearance
+        $("input.variation").on("click", function () {
+            if ($(this).val() > 3) {
+                $("body").css("background", "#111");
+                $("footer").attr("class", "dark");
+            } else {
+                $("body").css("background", "#f9f9f9");
+                $("footer").attr("class", "");
+            }
+        });
+
+        //login works
+        $("#login").on("click", function () {
+            $(".form-login .spinner__wrapper").css({
+                opacity: 1,
+                "z-index": 5
+            });
+        });
+
+        //heart button works
+        $('a.comment__reaction__heart').on('click', function () {
+            $(this).toggleClass('toggled');
+            if ($(this).hasClass('toggled')) {
+                $(this).find('span').html('26 hearts');
+            } else {
+                $(this).find('span').html('25 hearts');
+            }
+        });
+        //# sourceURL=pen.js
+    </script>
+</body>
+
+</html>
