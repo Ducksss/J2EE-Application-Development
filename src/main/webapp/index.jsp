@@ -178,7 +178,7 @@
 									just online shopping. Superb quality supermarket. Thanks @Atlas!
 								</p>
 								<div class="profile mt-auto">
-									<img src="assets/img/testimonials/Users-JollieChoo.jpg" class="testimonial-img"
+									<img src="./assets/img/testimonials/Users-JollieChoo.jpg" class="testimonial-img"
 										alt="">
 									<h3>Jollie Choo</h3>
 								</div>
@@ -196,7 +196,7 @@
 								<p>Excellent value for money. Dry aged burger for $18.50 and very good quality at that!
 									Nice juicy beef patties and perfectly paired with caramelised onions.</p>
 								<div class="profile mt-auto">
-									<img src="assets/img/testimonials/Users-JonLee.jpg" class="testimonial-img" alt="">
+									<img src="./assets/img/testimonials/Users-JonLee.jpg" class="testimonial-img" alt="">
 									<h3>Jon Lee</h3>
 								</div>
 							</div>
@@ -213,7 +213,7 @@
 								<p>This is just a gem with great service and really good food at a reasonable price.
 									We've been coming here for many years and are never disappointed.</p>
 								<div class="profile mt-auto">
-									<img src="assets/img/testimonials/Users-YingLi.jpg" class="testimonial-img" alt="">
+									<img src="./assets/img/testimonials/Users-YingLi.jpg" class="testimonial-img" alt="">
 									<h3>Ying li</h3>
 								</div>
 							</div>
@@ -230,7 +230,7 @@
 								<p>This is a great place to get hearty Central and Eastern European fare like sausages,
 									cheese and goulash.</p>
 								<div class="profile mt-auto">
-									<img src="assets/img/testimonials/Users-ayumi.jpg" class="testimonial-img" alt="">
+									<img src="./assets/img/testimonials/Users-ayumi.jpg" class="testimonial-img" alt="">
 									<h3>Maruyama Ayumi</h3>
 								</div>
 							</div>
@@ -246,7 +246,7 @@
 								</div>
 								<p>Delicious and scrumptious meal. Amazing. Thanks @Atlas</p>
 								<div class="profile mt-auto">
-									<img src="assets/img/testimonials/User-jamie.jpg" class="testimonial-img" alt="">
+									<img src="./assets/img/testimonials/User-jamie.jpg" class="testimonial-img" alt="">
 									<h3>Jamie Ng</h3>
 								</div>
 							</div>
