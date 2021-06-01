@@ -131,14 +131,14 @@
 								Come kick it with us at Black Tap.</p>
 						</div>
 						<div class="col-lg-6">
-							<img src="assets/img/burger3.png" class="img-fluid" alt="">
+							<img src="./assets/img/burger3.png" class="img-fluid" alt="">
 						</div>
 					</div>
 				</div>
 
 				<div class="row feture-tabs" data-aos="fade-up">
 					<div class="col-lg-6">
-						<img src="assets/img/burger2.png" class="img-fluid" alt="">
+						<img src="./assets/img/burger2.png" class="img-fluid" alt="">
 					</div>
 					<div class="col-lg-6">
 						<h3 class="sech3">Come for the shakes. Stay for the burgers.</h3>
