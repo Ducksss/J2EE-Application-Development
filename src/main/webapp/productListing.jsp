@@ -7,10 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="product" method="post">
-	<input type="submit" name="btnsubmit" value="Login">
+	<%-- <jsp:forward page="/product" >
+<jsp:param name="username" value="Smith" />
+</jsp:forward> --%>
+	<script type="text/javascript">
+		function sumRes() {
+			document.getElementById("submitForm").submit();
+		}
+	</script>
+	<form action="product" method="post" id="submitForm">
+		<input type="hidden" name="informal" value="hi">
 	</form>
-	<% out.print("a"); %>
-	
+	<%
+	out.print("aa");
+	%>
+	<script type="text/javascript">
+		sumRes();
+	</script>
+
 </body>
 </html>
