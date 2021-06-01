@@ -269,7 +269,7 @@
 
 				<header class="section-header">
 					<h2>Team</h2>
-					<p>Our hard working team</p>
+					<p>Our hard working</p>
 				</header>
 
 				<div class="row gy-4">
