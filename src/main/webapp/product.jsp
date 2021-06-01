@@ -406,7 +406,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="200">
 						<div class="service-box blue">
-							<i class="ri-user-5-line icon"></i>
+							<i class="icon"><img src="assets/img/product/All-American-Burger-1400x700.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Breakfast</h3>
 							<p>Our breakfast is unrivaled in the food industry,
 							ensuring that our customers come back wanting more!
@@ -419,7 +419,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="300">
 						<div class="service-box orange">
-							<i class=" ri-emotion-2-fill icon"></i>
+							<i class="icon"><img src="assets/img/product/Cheeseburger-and-Fries.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Lunch/Dinner</h3>
 							<p>Our lunch and dinner will ensure that you are too full to even move!
 							This is a must try</p>
@@ -431,7 +431,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box green">
-							<i class="ri-discuss-line icon"></i>
+							<i class="icon"><img src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Signature Dishes</h3>
 							<p>Our signature dishes are approved by renowned chefs around the world
 							like <b>Jericho Jehammed</b> and <b>Mattingson Matto</b>. It will be a sin to not try it!</p>
@@ -443,7 +443,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="500">
 						<div class="service-box red">
-							<i class="ri-discuss-line icon"></i>
+							<i class="icon"><img src="assets/img/product/All-American-Burger-1400x700.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Main Dishes</h3>
 							<p>Our main dishes exude the mouth-watering and appetising taste not known 
 							to humanity before this, saying it is good is a gross understatement. </p>
@@ -455,7 +455,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="600">
 						<div class="service-box purple">
-							<i class="ri-discuss-line icon"></i>
+							<i class="icon"><img src="assets/img/product/French-Fries-and-Onion-Rings.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Side Dishes</h3>
 							<p>With a palatable and delightful array of dishes, allowing our well-esteemed customers
 							to have a wide selection of choice!</p>
@@ -467,7 +467,7 @@
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="700">
 						<div class="service-box pink">
-							<i class="ri-discuss-line icon"></i>
+							<i class="icon"><img src="assets/img/product/Classic-Shakes.jpg" class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Desserts</h3>
 							<p>Our desserts will make you quaver! Buy them before it is all sold out</p>
 							<a href="#productlisting.jsp?desserts" class="read-more"><span>Browse the Desserts section</span> <i
