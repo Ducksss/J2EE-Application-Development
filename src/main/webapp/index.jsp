@@ -70,7 +70,6 @@
 				</div>
 			</div>
 		</div>
-
 	</section>
 	<!-- End Hero -->
 
@@ -240,7 +239,7 @@
 
 				<header class="section-header">
 					<h2>Team</h2>
-					<p>Our hard working team</p>
+					<p>Our award winning team</p>
 				</header>
 
 				<div class="row gy-4">
@@ -248,8 +247,7 @@
 						data-aos="fade-up" data-aos-delay="300">
 						<div class="member">
 							<div class="member-img">
-								<img src="assets/img/testimonials/Users-YingLi.jpg"
-									class="img-fluid" alt="">
+								<img src="assets/img/team/chef1.jpg" class="img-fluid" alt="">
 								<div class="social">
 									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
 										class="bi bi-facebook"></i></a> <a href=""><i
@@ -258,7 +256,7 @@
 								</div>
 							</div>
 							<div class="member-info">
-								<h4>Ying li</h4>
+								<h4>Jason Tan</h4>
 								<p>This is just a gem with great service and really good
 									food at a reasonable price. We've been coming here for many
 									years and are never disappointed.</p>
@@ -269,20 +267,20 @@
 						data-aos="fade-up" data-aos-delay="100">
 						<div class="member">
 							<div class="member-img">
-								<img src="assets/img/testimonials/Users-JollieChoo.jpg"
-									class="img-fluid" alt="">
+								<img src="assets/img/team/chef2.jpg" class="img-fluid" alt="">
 								<div class="social">
 									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
 										class="bi bi-facebook"></i></a> <a href=""><i
-										class="bi bi-instagram"></i></a> <a href=""><i
+										class="bi bi-instagram"></i></a> <a
+										href="https://www.instagram.com/chefjustinquek_/"><i
 										class="bi bi-linkedin"></i></a>
 								</div>
 							</div>
 							<div class="member-info">
-								<h4>Jollie Choo</h4>
-								<p>Finally some genuine stuffs available in Sg in actual
-									shop, not just online shopping. Superb quality supermarket.
-									Thanks @Atlas!</p>
+								<h4>Justin Quek</h4>
+								<p>Chef Justin developed an early interest in the culinary
+									world, quickly realizing that the only way to succeed in such a
+									competitive field was through discipline and dedication.</p>
 							</div>
 						</div>
 					</div>
@@ -290,8 +288,7 @@
 						data-aos="fade-up" data-aos-delay="200">
 						<div class="member">
 							<div class="member-img">
-								<img src="assets/img/testimonials/Users-JonLee.jpg"
-									class="img-fluid" alt="">
+								<img src="assets/img/team/chef3.jpg" class="img-fluid" alt="">
 								<div class="social">
 									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
 										class="bi bi-facebook"></i></a> <a href=""><i
@@ -300,7 +297,7 @@
 								</div>
 							</div>
 							<div class="member-info">
-								<h4>Jon Lee</h4>
+								<h4>Sam Leong</h4>
 								<p>Excellent value for money. Dry aged burger for $18.50 and
 									very good quality at that! Nice juicy beef patties and
 									perfectly paired with caramelised onions.</p>
@@ -311,8 +308,7 @@
 						data-aos="fade-up" data-aos-delay="400">
 						<div class="member">
 							<div class="member-img">
-								<img src="assets/img/testimonials/Users-ayumi.jpg"
-									class="img-fluid" alt="">
+								<img src="assets/img/team/chef4.jpg" class="img-fluid" alt="">
 								<div class="social">
 									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
 										class="bi bi-facebook"></i></a> <a href=""><i
@@ -321,7 +317,7 @@
 								</div>
 							</div>
 							<div class="member-info">
-								<h4>Maruyama Ayumi</h4>
+								<h4>Helena Rizzo</h4>
 								<p>This is a great place to get hearty Central and Eastern
 									European fare like sausages, cheese and goulash.</p>
 							</div>
@@ -338,8 +334,7 @@
 			<div class="container" data-aos="fade-up">
 
 				<header class="section-header">
-					<h2>Our Clients</h2>
-					<p>Temporibus omnis officia</p>
+					<p>Awards and accolades</p>
 				</header>
 
 				<div class="clients-slider swiper-container">
@@ -380,67 +375,7 @@
 					<div class="swiper-pagination"></div>
 				</div>
 			</div>
-
 		</section>
-		<!-- End Clients Section -->
-
-		<!-- ======= Recent Blog Posts Section ======= -->
-		<section id="recent-blog-posts" class="recent-blog-posts">
-
-			<div class="container" data-aos="fade-up">
-
-				<header class="section-header">
-					<h2>Blog</h2>
-					<p>Recent posts form our Blog</p>
-				</header>
-
-				<div class="row">
-
-					<div class="col-lg-4">
-						<div class="post-box">
-							<div class="post-img">
-								<img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt="">
-							</div>
-							<span class="post-date">Tue, September 15</span>
-							<h3 class="post-title">Eum ad dolor et. Autem aut fugiat
-								debitis voluptatem consequuntur sit</h3>
-							<a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read
-									More</span><i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
-
-					<div class="col-lg-4">
-						<div class="post-box">
-							<div class="post-img">
-								<img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
-							</div>
-							<span class="post-date">Fri, August 28</span>
-							<h3 class="post-title">Et repellendus molestiae qui est sed
-								omnis voluptates magnam</h3>
-							<a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read
-									More</span><i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
-
-					<div class="col-lg-4">
-						<div class="post-box">
-							<div class="post-img">
-								<img src="assets/img/blog/blog-3.jpg" class="img-fluid" alt="">
-							</div>
-							<span class="post-date">Mon, July 11</span>
-							<h3 class="post-title">Quia assumenda est et veritatis aut
-								quae</h3>
-							<a href="blog-singe.html" class="readmore stretched-link mt-auto"><span>Read
-									More</span><i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</section>
-		<!-- End Recent Blog Posts Section -->
 	</main>
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
