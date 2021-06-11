@@ -85,31 +85,35 @@
 				<div>
 					<div class="row feture-tabs" data-aos="fade-up">
 						<div class="col-lg-6">
-							<h3 class="sech3">So. Crazy. Good.</h3>
+							<h3 class="sech3">humble beginnings.</h3>
 							<!-- Tabs -->
-							<p class="secp">Award-winning eats, over-the-top CrazyShake
-								milkshakes, killer craft beers, and a popping playlist - all
-								designed to deliver an awesome experience. Come kick it with us
-								at Black Tap.</p>
+							<p class="secp">Mr Teo, the owner have honed his craft after
+								30 years. As such, he perfected the beverages as well as
+								desserts! But it wasn't all an overnight success. Through
+								experimentation, he managed to better cather to people's
+								palette.</p>
 						</div>
 						<div class="col-lg-6">
-							<img src="./assets/img/burger3.png" class="img-fluid" alt="">
+							<img
+								src="./assets/img/index/e49cf4_e547ebe82b14460b9873870a6d8429bd_mv2_d_2834_2072_s_2.jpg"
+								class="img-fluid" alt="">
 						</div>
 					</div>
 				</div>
 
 				<div class="row feture-tabs" data-aos="fade-up">
 					<div class="col-lg-6">
-						<img src="./assets/img/burger2.png" class="img-fluid" alt="">
+						<img
+							src="./assets/img/index/e49cf4_5cf390054ecb4129a231a8d24261fbe4_mv2_d_2834_2072_s_2.jpg"
+							class="img-fluid" alt="">
 					</div>
 					<div class="col-lg-6">
-						<h3 class="sech3">Come for the shakes. Stay for the burgers.</h3>
+						<h3 class="sech3">local favourites</h3>
 						<!-- Tabs -->
-						<p class="secp">Inspired by the old-school NYC luncheonettes
-							we grew up in, Black Tap is a fresh, fun take on the classic
-							burger joint, upscale but never fussed up. Come on in for a warm
-							welcome, a cold craft beer, an award-winning burger, and save
-							room for one of our world-famous CrazyShakes!</p>
+						<p class="secp">Residents of Woodlands love the dessert.
+							Though it is not as popular as other brands, the desserts have a
+							very Singapore taste. As such, many residents of Woodlands love
+							it!</p>
 					</div>
 				</div>
 				<!-- End Feature Tabs -->
@@ -157,9 +161,7 @@
 										class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
 										class="bi bi-star-fill"></i>
 								</div>
-								<p>Excellent value for money. Dry aged burger for $18.50 and
-									very good quality at that! Nice juicy beef patties and
-									perfectly paired with caramelised onions.</p>
+								<p>Wow, a very pleasant surprise! Thank you</p>
 								<div class="profile mt-auto">
 									<img src="./assets/img/testimonials/Users-JonLee.jpg"
 										class="testimonial-img" alt="">
@@ -195,8 +197,8 @@
 										class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
 										class="bi bi-star-fill"></i>
 								</div>
-								<p>This is a great place to get hearty Central and Eastern
-									European fare like sausages, cheese and goulash.</p>
+								<p>Love the dessert as white fungus provide collagen to my
+									skin and papaya is good for health. Great combination.</p>
 								<div class="profile mt-auto">
 									<img src="./assets/img/testimonials/Users-ayumi.jpg"
 										class="testimonial-img" alt="">
@@ -213,7 +215,8 @@
 										class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
 										class="bi bi-star-fill"></i>
 								</div>
-								<p>Delicious and scrumptious meal. Amazing. Thanks @Atlas</p>
+								<p>Delicious and scrumptious desserts. Amazing. Thanks
+									@Atlas</p>
 								<div class="profile mt-auto">
 									<img src="./assets/img/testimonials/User-jamie.jpg"
 										class="testimonial-img" alt="">
