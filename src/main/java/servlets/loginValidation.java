@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class loginValidation
@@ -82,6 +83,7 @@ public class loginValidation extends HttpServlet {
 				String role = rs.getString("type");
 
 				// creating a sesson and setting the respective attributes
+				HttpSession session = request.getSession(true);
 				session.setAttribute("sessUserName", username);
 				session.setAttribute("sessUserEmail", useremail);
 				session.setAttribute("sessUserRole", role);
