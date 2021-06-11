@@ -21,7 +21,7 @@
 				<div class="signup-content">
 					<div class="signup-form">
 						<h2 class="form-title">Sign up</h2>
-						<form action="verifyRegistration.jsp" method="post" name="signup" class="register-form" id="register-form">
+						<form action="registration" method="post" name="signup" class="register-form" id="register-form">
 							<div class="form-group">
 								<label for="name"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input

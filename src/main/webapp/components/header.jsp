@@ -34,10 +34,10 @@
 								</ul></li>
 							<li><a href="#">Snacks</a></li>
 						</ul></li>
-					<li><a class="getstarted scrollto loginIcon" href="#about"><img
+					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><img
 							src="./assets/img/user.svg" alt=""
 							style="width: 25px; margin-right: .8rem;">Login</a></li>
-					<li><a class="getstarted scrollto" href="#about">Sign up</a></li>
+					<li><a class="getstarted scrollto" href="register.jsp">Sign up</a></li>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>
