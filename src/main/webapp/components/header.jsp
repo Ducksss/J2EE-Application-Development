@@ -34,10 +34,36 @@
 								</ul></li>
 							<li><a href="#">Snacks</a></li>
 						</ul></li>
+
+					<%
+					String varChar = (String) session.getAttribute("sessUserName");
+					String role = (String) session.getAttribute("sessUserRole");
+					if (varChar == null) {
+					%>
 					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><img
 							src="./assets/img/user.svg" alt=""
-							style="width: 25px; margin-right: .8rem;">Login</a></li>
-					<li><a class="getstarted scrollto" href="register.jsp">Sign up</a></li>
+							style="width: 25px; margin-right: .8rem;">Log in</a></li>
+					<li><a class="getstarted scrollto" href="register.jsp">Sign
+							up</a></li>
+					<%
+					} else {
+					if (role.equals("Admin")) {
+					%>
+					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><img
+							src="./assets/img/add.svg" alt=""
+							style="width: 20px; margin-right: .8rem;">Add products</a></li>
+					<%
+					}
+					%>
+					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><img
+							src="./assets/img/shopping-cart.svg" alt=""
+							style="width: 25px; margin-right: .8rem;">Cart</a></li>
+					<li><a class="getstarted scrollto loginIcon"
+						href="endSession.jsp"><img src="./assets/img/logout.svg"
+							alt="" style="width: 20px; margin-right: .8rem;">Logout</a></li>
+					<%
+					}
+					%>
 				</ul>
 				<i class="bi bi-list mobile-nav-toggle"></i>
 			</nav>

@@ -23,18 +23,34 @@
 						<figure>
 							<img src="assets/img/signin-image.jpg" alt="sing up image">
 						</figure>
-						<a href="register.jsp" class="signup-image-link">Create an account</a>
+						<a href="register.jsp" class="signup-image-link">Create an
+							account</a>
 					</div>
 
 					<div class="signin-form">
-						<h2 class="form-title">Sign up</h2>
-						<form action="loginValidation" method="POST" class="register-form" id="login-form">
+						<h2 class="form-title">Sign in</h2>
+						<form action="loginValidation" method="POST" class="register-form"
+							id="login-form">
 							<div class="form-group">
 								<label for="your_name"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input
 									type="text" name="your_name" id="your_name"
 									placeholder="Your Email" />
 							</div>
+							<%
+							if (request.getParameter("errCode") == null) {
+							} else if (request.getParameter("errCode").equals("NULL")) {
+							%>
+							<p style="color: red">It looks at least one of your fields is
+								null</p>
+							<%
+							} else {
+							%>
+							<p style="color: red;padding: 0;margin-top: -25px;margin-bottom: 10px;">Email
+								and password don't match</p>
+							<%
+							}
+							%>
 							<div class="form-group">
 								<label for="your_pass"><i class="zmdi zmdi-lock"></i></label> <input
 									type="password" name="your_pass" id="your_pass"
