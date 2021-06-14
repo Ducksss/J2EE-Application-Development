@@ -42,6 +42,9 @@ public class product extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		String a = request.getParameter("informal");
+		String url = request.getRequestURL().toString();
+        out.println(url);
+		out.println(a);
 		out.println(a);
 		out.println("<h1>This is a servlet</h1>");
 	}
