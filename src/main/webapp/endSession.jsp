@@ -9,11 +9,8 @@
 <body>
 	<%
 	// for checking the session is available or not, if not available it will throw exception, "Session already invalidated."
-	String varChar = (String) session.getAttribute("sessUserName");
-	if (!varChar.equals(null)) {
-		session.invalidate();
-		response.sendRedirect("index.jsp");
-	}
+	session.invalidate();
+	response.sendRedirect("index.jsp");
 	%>
 </body>
 </html>

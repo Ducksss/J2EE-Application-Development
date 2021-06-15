@@ -82,7 +82,7 @@ public class loginValidation extends HttpServlet {
 				String useremail = rs.getString("email");
 				String role = rs.getString("type");
 
-				// creating a sesson and setting the respective attributes
+				// creating a session and setting the respective attributes
 				HttpSession session = request.getSession(true);
 				session.setAttribute("sessUserName", username);
 				session.setAttribute("sessUserEmail", useremail);

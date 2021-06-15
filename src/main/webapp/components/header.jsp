@@ -15,14 +15,18 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
 	rel="stylesheet">
+<!-- Template Main CSS File -->
+<link href="header.css" rel="stylesheet">
 
 <!-- Favicons -->
 <script src="https://kit.fontawesome.com/fdc798ee43.js"
 	crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<!-- ======= Header ======= -->
-	<header id="header" class="header fixed-top">
+	<header id="header" class="header fixed-top"
+		style="box-shadow: 0px 2px 4px rgb(0 0 0/ 15%);">
 		<div
 			class="container-fluid container-xl d-flex align-items-center justify-content-between">
 			<a href="index.jsp" class="logo d-flex align-items-center"> <img
@@ -63,9 +67,12 @@
 					} else {
 					if (role.equals("Admin")) {
 					%>
-					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><i
-							class="fas fa-plus" style="padding-right: 15px; font-size: 15px;"></i>Add
-							products</a></li>
+					<li><a class="getstarted scrollto loginIcon"
+						href="addProduct.jsp"><i class="fas fa-plus"
+							style="padding-right: 15px; font-size: 15px;"></i>Add products</a></li>
+					<li><a class="getstarted scrollto loginIcon"
+						href="addProduct.jsp"><i class="fas fa-hand-pointer"
+							style="padding-right: 15px; font-size: 15px;"></i>Add category</a></li>
 					<%
 					}
 					%>

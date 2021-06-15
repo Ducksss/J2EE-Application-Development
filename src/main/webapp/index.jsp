@@ -107,16 +107,16 @@
 						<div class="col-lg-6">
 							<img
 								src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623744080/odqj8llyaz47sqtieaty.jpg"
-								class="img-fluid" alt="" style="margin-top: -5rem;">
+								class="img-fluid beancurd-image" alt="">
 						</div>
 					</div>
 				</div>
 
 				<div class="row feture-tabs" data-aos="fade-up">
-					<div class="col-lg-6">
+					<div class="col-lg-6 orderLabel">
 						<img
 							src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623746991/ldtapnstnlcby0sl2nvq.jpg"
-							class="img-fluid" alt="" style="margin-top: -5rem;">
+							class="img-fluid soy-drink" alt="">
 					</div>
 					<div class="col-lg-6">
 						<h3 class="sech3" style="font-family: 'Pangolin';">local
