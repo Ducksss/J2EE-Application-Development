@@ -120,7 +120,7 @@
 							<p>Our breakfast is unrivaled in the food industry, ensuring
 								that our customers come back wanting more!</p>
 							<form action="product" method="POST">
-							<input type="hidden" name="type" value="val" />
+							<input type="hidden" name="category" value="1" />
 							<a href="product" class="read-more" onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
 									the breakfast section</span> <i class="bi bi-arrow-right"></i></a>
 									</form>
