@@ -21,7 +21,8 @@
 				<div class="signup-content">
 					<div class="signup-form">
 						<h2 class="form-title">Sign up</h2>
-						<form action="registration" method="post" name="signup" class="register-form" id="register-form">
+						<form action="registration" method="post" name="signup"
+							class="register-form" id="register-form">
 							<div class="form-group">
 								<label for="name"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input
@@ -31,6 +32,22 @@
 								<label for="email"><i class="zmdi zmdi-email"></i></label> <input
 									type="email" name="email" id="email" placeholder="Your Email" />
 							</div>
+							<%
+							if (request.getParameter("errCode") == null) {
+
+							} else if (request.getParameter("errCode").equals("accountAlreadyExists")) {
+							%>
+							<p style="color: red; font-size: 13px; margin-top: -1.4rem;">Email
+								has already been taken.</p>
+							<%
+							} else {
+							%>
+							<p
+								style="color: red; padding: 0; margin-top: -25px; margin-bottom: 10px;">Email
+								and password don't match</p>
+							<%
+							}
+							%>
 							<div class="form-group">
 								<label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
 									type="password" name="pass" id="pass" placeholder="Password" />
@@ -42,7 +59,7 @@
 							</div>
 							<div class="form-group">
 								<input type="checkbox" name="agree-term" id="agree-term"
-									class="agree-term" required/> <label for="agree-term"
+									class="agree-term" required /> <label for="agree-term"
 									class="label-agree-term"><span><span></span></span>I
 									agree all statements in <a href="#" class="term-service">Terms
 										of service</a></label>
@@ -57,7 +74,8 @@
 						<figure>
 							<img src="assets/img/signup-image.jpg" alt="sing up image">
 						</figure>
-						<a href="login.jsp" class="signup-image-link">I am already member</a>
+						<a href="login.jsp" class="signup-image-link">I am already
+							member</a>
 					</div>
 				</div>
 			</div>
