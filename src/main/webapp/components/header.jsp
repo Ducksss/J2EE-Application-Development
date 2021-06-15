@@ -67,12 +67,15 @@
 					} else {
 					if (role.equals("Admin")) {
 					%>
-					<li><a class="getstarted scrollto loginIcon"
-						href="addProduct.jsp"><i class="fas fa-plus"
-							style="padding-right: 15px; font-size: 15px;"></i>Add products</a></li>
-					<li><a class="getstarted scrollto loginIcon"
-						href="addProduct.jsp"><i class="fas fa-hand-pointer"
-							style="padding-right: 15px; font-size: 15px;"></i>Add category</a></li>
+					<li class="dropdown"><a href="#"><span>Admin tools</span> <i
+							class="bi bi-chevron-down"></i></a>
+						<ul>
+							<li><a href="addProduct.jsp"><i class="fas fa-plus"
+									style="padding-right: 1px; font-size: 15px;"></i>Add products</a></li>
+							<li><a href="addCategory.jsp"><i
+									class="fas fa-hand-pointer"
+									style="padding-right: 1px; font-size: 15px;"></i>Add category</a></li>
+						</ul></li>
 					<%
 					}
 					%>

@@ -74,28 +74,27 @@
 							<li style="display: inline-block;" class="activeStatus"><a
 								href="#"
 								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
-							</a>Add Products</li>
+							</a>Add category</li>
 						</ol>
 						<h4 class="sech4" style="font-family: 'Poppins'; font-size: 3em">Admin
-							Console - Add product</h4>
+							Console - Add category</h4>
 					</div>
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST" action="addProduct"
-							novalidate>
+						<form class="needs-validation" method="POST"
+							action="addCategory" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
 									if (request.getParameter("errCode") == null) {
-									} else if (request.getParameter("errCode").equals("productAlreadyExists")) {
+									} else if (request.getParameter("errCode").equals("categoryAlreadyExists")) {
 									%>
-									<p style="color: red">The category has already been
-										registered!</p>
+									<p style="color: red">The category has been made before!</p>
 									<%
 									} else {
 									%>
-									<p style="color: red">Category insertion failure</p>
+									<p style="color: red">Insertion failure</p>
 									<%
 									}
 									%>
@@ -106,111 +105,29 @@
 									<%
 									} else if (request.getParameter("successCode").equals("successInsertion")) {
 									%>
-									<p style="color: green">Success! A new category has
-										created!</p>
+									<p style="color: green">Success! The product have been
+										registered!</p>
 									<%
 									}
 									%>
 								</div>
 								<div class="col-sm-12">
-									<label for="productTitle" class="form-label">Product
-										title</label> <input type="text" class="form-control"
-										id="productTitle" placeholder="" value="" name="productTitle"
-										required>
-									<div class="invalid-feedback">A Valid product title is
+									<label for="categoryName" class="form-label">Category
+										name</label> <input type="text" class="form-control" id="categoryName"
+										placeholder="" value="" name="categoryName" required>
+									<div class="invalid-feedback">A Valid category name is
 										required.</div>
 								</div>
 
 								<div class="col-sm-12">
-									<label for="briefDescription" class="form-label">A
-										Brief description</label>
+									<label for="categoryDescription" class="form-label">Category
+										Description</label>
 									<textarea type="text" class="form-control"
-										id="briefDescription" placeholder="" value="" rows="2"
-										name="briefDescription" required></textarea>
-									<div class="invalid-feedback">A valid short product
-										description is required.</div>
-								</div>
-
-								<div class="col-sm-12">
-									<label for="detailedDescription" class="form-label">A
-										detailed description</label>
-									<textarea type="text" class="form-control"
-										id="detailedDescription" placeholder="" value="" rows="4"
-										name="detailedDescription" required></textarea>
-									<div class="invalid-feedback">A valid detailed product
-										description is required.</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label for="costPrice" class="form-label">Cost Price</label><input
-										type="text" class="form-control" id="costPrice" placeholder=""
-										value="0.80" name="costPrice" required>
-									<div class="invalid-feedback">A Valid cost price is
+										id="categoryDescription" placeholder="" value="" rows="2"
+										name="categoryDescription" required></textarea>
+									<div class="invalid-feedback">A valid description is
 										required.</div>
 								</div>
-
-								<div class="col-sm-4">
-									<label for="retailPrice" class="form-label">Retail
-										price</label><input type="text" class="form-control" id="retailPrice"
-										placeholder="2.10" value="" name="retailPrice" required>
-									<div class="invalid-feedback">A Valid retail price is
-										required.</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label for="stockQuantity" class="form-label">Stock
-										quantity</label><input type="text" class="form-control"
-										id="retailPrice" placeholder="" value="" name="stockQuantity"
-										required>
-									<div class="invalid-feedback">A Valid stock price is
-										required.</div>
-								</div>
-							</div>
-
-							<hr class="my-4">
-
-							<h4 class="mb-3">Categories</h4>
-							<%
-							// Step1: Load JDBC Driver
-							Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
-
-							// Step 2: Define Connection URL
-							String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-
-							// Step 3: Establish connection to URL
-							Connection conn = DriverManager.getConnection(connURL);
-
-							// Step 4: Create Statement object
-							Statement stmt = conn.createStatement();
-
-							// Step 5: Execute SQL Command
-							String sqlStr = "SELECT * FROM sp_shop.category";
-							ResultSet rs = stmt.executeQuery(sqlStr);
-
-							// Step 6: Process Result
-							while (rs.next()) {
-								int id = rs.getInt("category_id");
-								String name = rs.getString("catname");
-							%>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="categories"
-									name="categories" value=<%=name%>> <label
-									class="form-check-label" for="categories"><%=name%></label>
-							</div>
-							<%
-							}
-
-							// Step 7: Close connection
-							conn.close();
-							%>
-
-							<hr class="my-4">
-
-							<h4 class="mb-3">Image</h4>
-
-							<div class="my-3">
-								<input type="file" class="form-control-file"
-									id="exampleFormControlFile1">
 							</div>
 
 							<hr class="my-4">
