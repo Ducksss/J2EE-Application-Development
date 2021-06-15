@@ -96,7 +96,7 @@
 		</section>
 		<!-- End Counts Section -->
 
-		
+
 
 		<!-- ======= Services Section ======= -->
 		<section id="services" class="services">
@@ -119,8 +119,11 @@
 							<h3>Breakfast</h3>
 							<p>Our breakfast is unrivaled in the food industry, ensuring
 								that our customers come back wanting more!</p>
-							<a href="productListing.jsp?breakfast" class="read-more"><span>Browse
+							<form action="product" method="POST">
+							<input type="hidden" name="type" value="val" />
+							<a href="product" class="read-more" onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
 									the breakfast section</span> <i class="bi bi-arrow-right"></i></a>
+									</form>
 						</div>
 					</div>
 
@@ -133,6 +136,7 @@
 							<h3>Lunch/Dinner</h3>
 							<p>Our lunch and dinner will ensure that you are too full to
 								even move! This is a must try</p>
+								
 							<a href="productListing.jsp?lunch" class="read-more"><span>Browse
 									the Lunch/Dinner section</span> <i class="bi bi-arrow-right"></i></a>
 						</div>
@@ -180,6 +184,7 @@
 							<p>With a palatable and delightful array of dishes, allowing
 								our well-esteemed customers to have a wide selection of choice!</p>
 							<form action="add" method="get">
+
 								<a href="productlisting.jsp?side" class="read-more"><span>Browse
 										the Side Dishes section</span> <i class="bi bi-arrow-right"></i></a>
 							</form>
@@ -207,8 +212,8 @@
 		</section>
 		<!-- End Services Section -->
 
-		
-		
+
+
 
 	</main>
 	<!-- End #main -->
