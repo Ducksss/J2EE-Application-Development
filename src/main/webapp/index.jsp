@@ -21,6 +21,15 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
 	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
+	rel="stylesheet">
 
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
@@ -55,10 +64,11 @@
 			<div class="row">
 				<div class="col-lg-6 d-flex flex-column justify-content-center">
 					<h1 data-aos="fade-up"
-						style="filter: drop-shadow(15px 5px 2px black);">Atlas</h1>
+						style="filter: drop-shadow(15px 5px 2px black); font-family: 'Pangolin'; font-size: 5rem;">Whompa
+						soy desserts</h1>
 					<h2 data-aos="fade-up" data-aos-delay="400"
-						style="filter: drop-shadow(15px 5px 2px black);">Singapore's
-						best hawker x burger food</h2>
+						style="filter: drop-shadow(15px 5px 2px black); font-family: 'Pangolin'">Once
+						you start, you can't stop!</h2>
 					<div data-aos="fade-up" data-aos-delay="600">
 						<div class="text-center text-lg-start">
 							<a href="#about"
@@ -85,7 +95,8 @@
 				<div>
 					<div class="row feture-tabs" data-aos="fade-up">
 						<div class="col-lg-6">
-							<h3 class="sech3">humble beginnings.</h3>
+							<h3 class="sech3" style="font-family: 'Pangolin';">humble
+								beginnings.</h3>
 							<!-- Tabs -->
 							<p class="secp">Mr Teo, the owner have honed his craft after
 								30 years. As such, he perfected the beverages as well as
@@ -95,8 +106,8 @@
 						</div>
 						<div class="col-lg-6">
 							<img
-								src="./assets/img/index/e49cf4_e547ebe82b14460b9873870a6d8429bd_mv2_d_2834_2072_s_2.jpg"
-								class="img-fluid" alt="">
+								src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623744080/odqj8llyaz47sqtieaty.jpg"
+								class="img-fluid" alt="" style="margin-top: -5rem;">
 						</div>
 					</div>
 				</div>
@@ -104,11 +115,12 @@
 				<div class="row feture-tabs" data-aos="fade-up">
 					<div class="col-lg-6">
 						<img
-							src="./assets/img/index/e49cf4_5cf390054ecb4129a231a8d24261fbe4_mv2_d_2834_2072_s_2.jpg"
-							class="img-fluid" alt="">
+							src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623746991/ldtapnstnlcby0sl2nvq.jpg"
+							class="img-fluid" alt="" style="margin-top: -5rem;">
 					</div>
 					<div class="col-lg-6">
-						<h3 class="sech3">local favourites</h3>
+						<h3 class="sech3" style="font-family: 'Pangolin';">local
+							favourites</h3>
 						<!-- Tabs -->
 						<p class="secp">Residents of Woodlands love the dessert.
 							Though it is not as popular as other brands, the desserts have a
@@ -229,117 +241,16 @@
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
-
 			</div>
-
 		</section>
 		<!-- End Testimonials Section -->
 
-		<!-- ======= Team Section ======= -->
-		<section id="team" class="team">
-
-			<div class="container" data-aos="fade-up">
-
-				<header class="section-header">
-					<h2>Team</h2>
-					<p>Our award winning team</p>
-				</header>
-
-				<div class="row gy-4">
-					<div class="col-lg-3 col-md-6 d-flex align-items-stretch"
-						data-aos="fade-up" data-aos-delay="300">
-						<div class="member">
-							<div class="member-img">
-								<img src="assets/img/team/chef1.jpg" class="img-fluid" alt="">
-								<div class="social">
-									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
-										class="bi bi-facebook"></i></a> <a href=""><i
-										class="bi bi-instagram"></i></a> <a href=""><i
-										class="bi bi-linkedin"></i></a>
-								</div>
-							</div>
-							<div class="member-info">
-								<h4>Jason Tan</h4>
-								<p>This is just a gem with great service and really good
-									food at a reasonable price. We've been coming here for many
-									years and are never disappointed.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 d-flex align-items-stretch"
-						data-aos="fade-up" data-aos-delay="100">
-						<div class="member">
-							<div class="member-img">
-								<img src="assets/img/team/chef2.jpg" class="img-fluid" alt="">
-								<div class="social">
-									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
-										class="bi bi-facebook"></i></a> <a href=""><i
-										class="bi bi-instagram"></i></a> <a
-										href="https://www.instagram.com/chefjustinquek_/"><i
-										class="bi bi-linkedin"></i></a>
-								</div>
-							</div>
-							<div class="member-info">
-								<h4>Justin Quek</h4>
-								<p>Chef Justin developed an early interest in the culinary
-									world, quickly realizing that the only way to succeed in such a
-									competitive field was through discipline and dedication.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 d-flex align-items-stretch"
-						data-aos="fade-up" data-aos-delay="200">
-						<div class="member">
-							<div class="member-img">
-								<img src="assets/img/team/chef3.jpg" class="img-fluid" alt="">
-								<div class="social">
-									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
-										class="bi bi-facebook"></i></a> <a href=""><i
-										class="bi bi-instagram"></i></a> <a href=""><i
-										class="bi bi-linkedin"></i></a>
-								</div>
-							</div>
-							<div class="member-info">
-								<h4>Sam Leong</h4>
-								<p>Excellent value for money. Dry aged burger for $18.50 and
-									very good quality at that! Nice juicy beef patties and
-									perfectly paired with caramelised onions.</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 d-flex align-items-stretch"
-						data-aos="fade-up" data-aos-delay="400">
-						<div class="member">
-							<div class="member-img">
-								<img src="assets/img/team/chef4.jpg" class="img-fluid" alt="">
-								<div class="social">
-									<a href=""><i class="bi bi-twitter"></i></a> <a href=""><i
-										class="bi bi-facebook"></i></a> <a href=""><i
-										class="bi bi-instagram"></i></a> <a href=""><i
-										class="bi bi-linkedin"></i></a>
-								</div>
-							</div>
-							<div class="member-info">
-								<h4>Helena Rizzo</h4>
-								<p>This is a great place to get hearty Central and Eastern
-									European fare like sausages, cheese and goulash.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- End Team Section -->
-
 		<!-- ======= Clients Section ======= -->
 		<section id="clients" class="clients">
-
 			<div class="container" data-aos="fade-up">
-
 				<header class="section-header">
 					<p>Awards and accolades</p>
 				</header>
-
 				<div class="clients-slider swiper-container">
 					<div class="swiper-wrapper align-items-center">
 						<div class="swiper-slide">
