@@ -251,7 +251,7 @@
 							<td><%=description%></td>
 							<td><a href="editCategory.jsp?categoryID=<%=category_id%>">Edit</a>
 							</td>
-							<td><a href="url_to_delete"
+							<td><a href="deleteCategory.jsp?categoryID=<%=category_id%>"
 								onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
 							</td>
 						</tr>
