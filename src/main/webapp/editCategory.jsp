@@ -58,9 +58,42 @@
 	<!-- ======= Validation ======= -->
 	<%@ include file="./components/adminValidation.jsp"%>
 
+
 	<!-- ======= Header ======= -->
 	<%@ include file="./components/header.jsp"%>
 	<!-- End Header -->
+
+	<!-- ======= Getting Data ====== -->
+	<%
+	// Extracting values
+	int category_id = Integer.parseInt(request.getParameter("categoryID"));
+
+	// Step1: Load JDBC Driver
+	Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
+
+	// Step 2: Define Connection URL
+	String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+
+	// Step 3: Establish connection to URL
+	Connection conn = DriverManager.getConnection(connURL);
+
+	// instead of editing directly, use ? to prevent injection attacks
+	String sql = "SELECT * FROM sp_shop.category WHERE category_id = ?";
+
+	/// executing to DB - Statement to check if an account exist before it
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt.setInt(1, category_id);
+	ResultSet rs = pstmt.executeQuery();
+
+	String catname = "";
+	String description = "";
+	if (rs.next()) {
+		catname = rs.getString("catname");
+		description = rs.getString("description");
+	} else {
+		response.sendRedirect("statistics.jsp");
+	}
+	%>
 
 	<main id="main">
 		<!-- ======= Features Section ======= -->
@@ -77,28 +110,23 @@
 							<li style="display: inline-block;" class="activeStatus"><a
 								href="#"
 								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
-							</a>Add Products</li>
+							</a>Edit category</li>
 						</ol>
 						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-							Console - Add product</h4>
+							Console - Edit category</h4>
 					</div>
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST" action="addProduct"
-							novalidate>
+						<form class="needs-validation" method="POST"
+							action="editCategory" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
 									if (request.getParameter("errCode") == null) {
-									} else if (request.getParameter("errCode").equals("productAlreadyExists")) {
-									%>
-									<p style="color: red">The product has already been
-										registered!</p>
-									<%
 									} else {
 									%>
-									<p style="color: red">Product insertion failure</p>
+									<p style="color: red">Insertion failure</p>
 									<%
 									}
 									%>
@@ -109,117 +137,42 @@
 									<%
 									} else if (request.getParameter("successCode").equals("successInsertion")) {
 									%>
-									<p style="color: green">Success! The product have been
-										registered!</p>
+									<p style="color: green">
+										Success! The category,
+										<%=catname%>
+										have been edited!
+									</p>
 									<%
 									}
 									%>
 								</div>
 								<div class="col-sm-12">
-									<label for="productTitle" class="form-label">Product
-										title</label> <input type="text" class="form-control"
-										id="productTitle" placeholder="" value="" name="productTitle"
+									<label for="categoryName" class="form-label">Category
+										name</label> <input type="text" class="form-control" id="categoryName"
+										placeholder="" value="<%=catname%>" name="categoryName"
 										required>
-									<div class="invalid-feedback">A Valid product title is
+									<div class="invalid-feedback">A Valid category name is
 										required.</div>
 								</div>
 
 								<div class="col-sm-12">
-									<label for="briefDescription" class="form-label">A
-										Brief description</label>
+									<label for="categoryDescription" class="form-label">Category
+										Description</label>
 									<textarea type="text" class="form-control"
-										id="briefDescription" placeholder="" value="" rows="2"
-										name="briefDescription" required></textarea>
-									<div class="invalid-feedback">A valid short product
-										description is required.</div>
-								</div>
-
-								<div class="col-sm-12">
-									<label for="detailedDescription" class="form-label">A
-										detailed description</label>
-									<textarea type="text" class="form-control"
-										id="detailedDescription" placeholder="" value="" rows="4"
-										name="detailedDescription" required></textarea>
-									<div class="invalid-feedback">A valid detailed product
-										description is required.</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label for="costPrice" class="form-label">Cost Price</label><input
-										type="text" class="form-control" id="costPrice" placeholder=""
-										value="0.80" name="costPrice" required>
-									<div class="invalid-feedback">A Valid cost price is
-										required.</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label for="retailPrice" class="form-label">Retail
-										price</label><input type="text" class="form-control" id="retailPrice"
-										placeholder="2.10" value="" name="retailPrice" required>
-									<div class="invalid-feedback">A Valid retail price is
-										required.</div>
-								</div>
-
-								<div class="col-sm-4">
-									<label for="stockQuantity" class="form-label">Stock
-										quantity</label><input type="text" class="form-control"
-										id="retailPrice" placeholder="" value="" name="stockQuantity"
-										required>
-									<div class="invalid-feedback">A Valid stock price is
+										id="categoryDescription" placeholder="" value="" rows="2"
+										name="categoryDescription" required><%=description%></textarea>
+									<div class="invalid-feedback">A valid description is
 										required.</div>
 								</div>
 							</div>
 
-							<hr class="my-4">
-
-							<h4 class="mb-3">Categories</h4>
-							<%
-							// Step1: Load JDBC Driver
-							Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
-
-							// Step 2: Define Connection URL
-							String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-
-							// Step 3: Establish connection to URL
-							Connection conn = DriverManager.getConnection(connURL);
-
-							// Step 4: Create Statement object
-							Statement stmt = conn.createStatement();
-
-							// Step 5: Execute SQL Command
-							String sqlStr = "SELECT * FROM sp_shop.category";
-							ResultSet rs = stmt.executeQuery(sqlStr);
-
-							// Step 6: Process Result
-							while (rs.next()) {
-								int id = rs.getInt("category_id");
-								String name = rs.getString("catname");
-							%>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input" id="categories"
-									name="categories" value=<%=name%>> <label
-									class="form-check-label" for="categories"><%=name%></label>
-							</div>
-							<%
-							}
-
-							// Step 7: Close connection
-							conn.close();
-							%>
-
-							<hr class="my-4">
-
-							<h4 class="mb-3">Image</h4>
-
-							<div class="my-3">
-								<input type="file" class="form-control-file"
-									id="exampleFormControlFile1">
-							</div>
+							<input type="hidden" id="category_id" name="category_id"
+								value="<%=category_id%>">
 
 							<hr class="my-4">
 
 							<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
-								to checkout</button>
+								to edit</button>
 						</form>
 					</div>
 				</div>

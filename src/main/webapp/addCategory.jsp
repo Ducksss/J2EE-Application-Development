@@ -98,7 +98,7 @@
 									<%
 									} else {
 									%>
-									<p style="color: red">Insertion failure</p>
+									<p style="color: red">Category insertion failure</p>
 									<%
 									}
 									%>
@@ -109,8 +109,8 @@
 									<%
 									} else if (request.getParameter("successCode").equals("successInsertion")) {
 									%>
-									<p style="color: green">Success! The product have been
-										registered!</p>
+									<p style="color: green">Success! A new category has
+										created!</p>
 									<%
 									}
 									%>

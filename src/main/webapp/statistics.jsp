@@ -221,6 +221,8 @@
 							<th scope="col">#</th>
 							<th scope="col">Category</th>
 							<th scope="col">Description</th>
+							<th scope="col">Edit</th>
+							<th scope="col">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -239,6 +241,7 @@
 						id = 1;
 						// Step 6: Process Result
 						while (rs.next()) {
+							int category_id = rs.getInt("category_id");
 							String catname = rs.getString("catname");
 							String description = rs.getString("description");
 						%>
@@ -246,6 +249,11 @@
 							<th scope="row"><%=id%></th>
 							<td><%=catname%></td>
 							<td><%=description%></td>
+							<td><a href="editCategory.jsp?categoryID=<%=category_id%>">Edit</a>
+							</td>
+							<td><a href="url_to_delete"
+								onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+							</td>
 						</tr>
 						<%
 						id++;
