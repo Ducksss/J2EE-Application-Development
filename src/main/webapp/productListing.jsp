@@ -87,7 +87,7 @@
 		%>
 		<%=rsmd.getColumnName(1)%>
 		<%=rs.getString(1)%>
-		
+
 
 
 		<!-- ======= Services Section ======= -->
@@ -97,120 +97,51 @@
 
 				<header class="section-header">
 					<h2>Food categories</h2>
-					<p><%=rsmd.getColumnName(10)%></p>
 					<p><%=categoryName%></p>
 				</header>
 
 				<div class="row gy-4">
 
 					<%
-		while (rs.next()) {
-			%>
-			<div class="col-lg-4 col-md-6" data-aos="fade-up"
-					data-aos-delay="400">
-					<div class="service-box green">
-						<i class="icon"><img
-							src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
-							class="img-fluid" alt="Girl in  jacket"></i>
-							
-						<h3><%=rs.getString(2)%></h3>
-						<p>
-							<%=rs.getString(4)%>
-						</p>
-						<p>
-							<%=rs.getString(6)%>
-						</p>
-						
-					</div>
-				</div><% 
-		}
-		out.println("");
-		}
-
-		} catch (Exception e) {
-		out.print(e);
-		out.print("xd there seems to be soemthig wrong");
-		}
-		%>
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="300">
-						<div class="service-box orange">
-							<i class="icon"><img
-								src="assets/img/product/Cheeseburger-and-Fries.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Lunch/Dinner</h3>
-							<p>Our lunch and dinner will ensure that you are too full to
-								even move! This is a must try</p>
-						</div>
-					</div>
-
+					while (rs.next()) {
+					%>
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box green">
 							<i class="icon"><img
 								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Signature Dishes</h3>
+
+							<h3><%=rs.getString(2)%></h3>
 							<p>
-								Our signature dishes are approved by renowned chefs around the
-								world like <b>Jericho Jehammed</b> and <b>Mattingson Matto</b>.
-								It will be a sin to not try it!
+								<%=rs.getString(4)%>
 							</p>
-							<a href="productListing.jsp?signature" class="read-more"><span>Browse
-									the Lunch/Dinner section</span> <i class="bi bi-arrow-right"></i></a>
+							<p>
+								<%=rs.getString(6)%>
+							</p>
+							<p>
+								Categories
+								<%=rs.getString(16)%>
+							</p>
+							<p>
+								<%=rs.getString(17)%>
+							</p>
+
 						</div>
 					</div>
+					<%
+					}
+					out.println("");
+					}
 
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="500">
-						<div class="service-box red">
-							<i class="icon"><img
-								src="assets/img/product/All-American-Burger-1400x700.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Main Dishes</h3>
-							<p>Our main dishes exude the mouth-watering and appetising
-								taste not known to humanity before this, saying it is good is a
-								gross understatement.</p>
-							<a href="productListing.jsp?main" class="read-more"><span>Browse
-									the Main Dishes section</span> <i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="600">
-						<div class="service-box purple">
-							<i class="icon"><img
-								src="assets/img/product/French-Fries-and-Onion-Rings.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Side Dishes</h3>
-							<p>With a palatable and delightful array of dishes, allowing
-								our well-esteemed customers to have a wide selection of choice!</p>
-							<form action="add" method="get">
-
-								<a href="productlisting.jsp?side" class="read-more"><span>Browse
-										the Side Dishes section</span> <i class="bi bi-arrow-right"></i></a>
-							</form>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="700">
-						<div class="service-box pink">
-							<i class="icon"><img
-								src="assets/img/product/Classic-Shakes.jpg" class="img-fluid"
-								alt="Girl in  jacket"></i>
-							<h3>Desserts</h3>
-							<p>Our desserts will make you quaver! Buy them before it is
-								all sold out</p>
-							<a href="productlisting.jsp?desserts" class="read-more"><span>Browse
-									the Desserts section</span> <i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
+					} catch (Exception e) {
+					out.print(e);
+					out.print("xd there seems to be soemthig wrong");
+					}
+					%>
 
 				</div>
-
 			</div>
-
 		</section>
 		<!-- End Services Section -->
 
