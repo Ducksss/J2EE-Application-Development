@@ -80,7 +80,7 @@
 								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
 							</a>View data</li>
 						</ol>
-						<h4 class="sech4" style="font-family: 'Poppins'; font-size: 3em">Admin
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
 							Console - View Users</h4>
 					</div>
 				</div>
@@ -138,7 +138,7 @@
 							style="margin-top: -5rem; margin-left: 1rem;">
 
 						</ol>
-						<h4 class="sech4" style="font-family: 'Poppins'; font-size: 3em">Admin
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
 							Console - View products</h4>
 					</div>
 				</div>
@@ -211,7 +211,7 @@
 							style="margin-top: -5rem; margin-left: 1rem;">
 
 						</ol>
-						<h4 class="sech4" style="font-family: 'Poppins'; font-size: 3em">Admin
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
 							Console - View category</h4>
 					</div>
 				</div>
