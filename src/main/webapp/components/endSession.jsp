@@ -8,9 +8,13 @@
 </head>
 <body>
 	<%
-	// for checking the session is available or not, if not available it will throw exception, "Session already invalidated."
-	session.invalidate();
-	response.sendRedirect("index.jsp");
+	try {
+		// for checking the session is available or not, if not available it will throw exception, "Session already invalidated."
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+	} catch (Exception e) {
+
+	}
 	%>
 </body>
 </html>
