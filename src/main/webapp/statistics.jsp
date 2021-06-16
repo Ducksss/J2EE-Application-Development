@@ -55,6 +55,9 @@
 </head>
 
 <body>
+	<!-- ======= Validation ======= -->
+	<%@ include file="./components/adminValidation.jsp"%>
+
 	<!-- ======= Header ======= -->
 	<%@ include file="./components/header.jsp"%>
 	<!-- End Header -->

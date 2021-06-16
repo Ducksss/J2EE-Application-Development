@@ -55,6 +55,10 @@
 </head>
 
 <body>
+	<!-- ======= Validation ======= -->
+	<%@ include file="./components/adminValidation.jsp"%>
+
+
 	<!-- ======= Header ======= -->
 	<%@ include file="./components/header.jsp"%>
 	<!-- End Header -->
@@ -82,8 +86,8 @@
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST"
-							action="addCategory" novalidate>
+						<form class="needs-validation" method="POST" action="addCategory"
+							novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
