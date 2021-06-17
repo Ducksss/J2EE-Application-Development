@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="javax.servlet.http.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,6 +55,8 @@
 	<main id="main">
 
 		<%
+		List<String> colourList = Arrays.asList( "blue", "green", "red", "purple", "pink");
+		int automaticColour = 0;
 		ResultSetMetaData rsmd = null;
 		ResultSet rs = null;
 		String categoryName = null;
@@ -68,7 +72,7 @@
 
 			// instead of editing directly, use ? to prevent injection attacks
 			String sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
-			+ "JOIN sp_shop.category_tags ON products.product_id = category_tags.category_tags_id\r\n"
+			+ "JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
 			+ "JOIN sp_shop.category ON products.product_id = category.category_id \r\n" + "WHERE fk_category_id = ?";
 
 			// executing to DB
@@ -85,7 +89,7 @@
 				out.println("</script>"); */
 				categoryName = rs.getString(16);
 		%>
-		<%=rsmd.getColumnName(1)%>
+
 		<%=rs.getString(1)%>
 
 
@@ -104,10 +108,11 @@
 
 					<%
 					while (rs.next()) {
+						
 					%>
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
-						<div class="service-box green">
+						<div class="service-box <%=colourList.get(automaticColour)%>">
 							<i class="icon"><img
 								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
@@ -120,7 +125,7 @@
 								<%=rs.getString(6)%>
 							</p>
 							<p>
-								Categories
+								<b>Categories</b> <br>
 								<%=rs.getString(16)%>
 							</p>
 							<p>
@@ -130,6 +135,7 @@
 						</div>
 					</div>
 					<%
+					automaticColour++;
 					}
 					out.println("");
 					}
@@ -139,7 +145,7 @@
 					out.print("xd there seems to be soemthig wrong");
 					}
 					%>
-
+				
 				</div>
 			</div>
 		</section>

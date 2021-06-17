@@ -116,7 +116,7 @@
 							<i class="icon"><img
 								src="assets/img/product/All-American-Burger-1400x700.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Breakfast</h3>
+							<h3>Drink</h3>
 							<p>Our breakfast is unrivaled in the food industry, ensuring
 								that our customers come back wanting more!</p>
 							<form action="product" method="POST">
@@ -129,21 +129,24 @@
 					</div>
 
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="300">
-						<div class="service-box orange">
+						data-aos-delay="200">
+						<div class="service-box red">
 							<i class="icon"><img
-								src="assets/img/product/Cheeseburger-and-Fries.jpg"
+								src="assets/img/product/All-American-Burger-1400x700.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Lunch/Dinner</h3>
-							<p>Our lunch and dinner will ensure that you are too full to
-								even move! This is a must try</p>
-
-							<a href="productListing.jsp?lunch" class="read-more"><span>Browse
-									the Lunch/Dinner section</span> <i class="bi bi-arrow-right"></i></a>
+							<h3>Desserts</h3>
+							<p>Our breakfast is unrivaled in the food industry, ensuring
+								that our customers come back wanting more!</p>
+							<form action="product" method="POST">
+								<input type="hidden" name="category" value="2" /> <a
+									href="product" class="read-more"
+									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
+										the breakfast section</span> <i class="bi bi-arrow-right"></i></a>
+							</form>
 						</div>
 					</div>
 
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
+					<!-- <div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box green">
 							<i class="icon"><img
@@ -203,8 +206,8 @@
 								all sold out</p>
 							<a href="productlisting.jsp?desserts" class="read-more"><span>Browse
 									the Desserts section</span> <i class="bi bi-arrow-right"></i></a>
-						</div>
-					</div>
+						</div> -->
+					<!-- </div> -->
 
 				</div>
 
