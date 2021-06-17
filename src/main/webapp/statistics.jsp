@@ -152,6 +152,8 @@
 							<th scope="col">Cost price</th>
 							<th scope="col">Retail price</th>
 							<th scope="col">Stock quantity</th>
+							<th scope="col">Edit</th>
+							<th scope="col">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -170,6 +172,7 @@
 						id = 1;
 						// Step 6: Process Result
 						while (rs.next()) {
+							int product_id = Integer.parseInt(rs.getString("product_id"));
 							String product_title = rs.getString("product_title");
 							String brief_description = rs.getString("brief_description");
 							String detail_description = rs.getString("detail_description");
@@ -185,6 +188,11 @@
 							<td><%=String.format("%.2f", cost_price)%></td>
 							<td><%=String.format("%.2f", retail_price)%></td>
 							<td><%=stock_quantity%></td>
+							<td><a href="editProduct.jsp?productID=<%=product_id%>">Edit</a>
+							</td>
+							<td><a href="deleteProduct.jsp?productID=<%=product_id%>"
+								onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+							</td>
 						</tr>
 						<%
 						id++;
