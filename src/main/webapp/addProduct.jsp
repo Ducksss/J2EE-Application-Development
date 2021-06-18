@@ -146,25 +146,25 @@
 
 								<div class="col-sm-4">
 									<label for="costPrice" class="form-label">Cost Price</label><input
-										type="text" class="form-control" id="costPrice" placeholder=""
-										value="0.80" name="costPrice" required>
+										type="number" class="form-control" id="costPrice" placeholder=""
+										value="0.80" name="costPrice" min="0.00" step="0.01" required>
 									<div class="invalid-feedback">A Valid cost price is
 										required.</div>
 								</div>
 
 								<div class="col-sm-4">
 									<label for="retailPrice" class="form-label">Retail
-										price</label><input type="text" class="form-control" id="retailPrice"
-										placeholder="2.10" value="" name="retailPrice" required>
+										price</label><input type="number" class="form-control" id="retailPrice"
+										placeholder="2.10" value="" name="retailPrice" min="0.00" step="0.01" required>
 									<div class="invalid-feedback">A Valid retail price is
 										required.</div>
 								</div>
 
 								<div class="col-sm-4">
 									<label for="stockQuantity" class="form-label">Stock
-										quantity</label><input type="text" class="form-control"
+										quantity</label><input type="number" class="form-control"
 										id="retailPrice" placeholder="" value="" name="stockQuantity"
-										required>
+										min="0.00" step="0.01" required>
 									<div class="invalid-feedback">A Valid stock price is
 										required.</div>
 								</div>
@@ -197,7 +197,7 @@
 							%>
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="categories"
-									name="categories" value=<%=name%>> <label
+									name="categories" value=<%=id%>> <label
 									class="form-check-label" for="categories"><%=name%></label>
 							</div>
 							<%

@@ -43,6 +43,7 @@ public class addProduct extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		try {
+			int product_id = 0;
 			String productTitle = request.getParameter("productTitle");
 			String briefDescription = request.getParameter("briefDescription");
 			String detailedDescription = request.getParameter("detailedDescription");
@@ -72,6 +73,7 @@ public class addProduct extends HttpServlet {
 				// if the email is associated with an account!
 				response.sendRedirect("addProduct.jsp?errCode=productAlreadyExists");
 			} else {
+				// simple code to extract to insert
 				String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity) values(?,?,?,?,?,?)";
 				PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
 				ipstmt.setString(1, productTitle);
@@ -81,10 +83,30 @@ public class addProduct extends HttpServlet {
 				ipstmt.setString(5, retailPrice);
 				ipstmt.setString(6, stockQuantity);
 
-				int count = ipstmt.executeUpdate();
+				int rowAffected = ipstmt.executeUpdate();
 
-				if (count > 0) {
-					response.sendRedirect("addProduct.jsp?successCode=successInsertion");
+				if (rowAffected > 0) {
+					// simple code to select the product_id for the many to many
+					// STATEMENT.getGeneratedKeys() failed for me, so i had to manually sort.
+					sql = "SELECT * FROM sp_shop.products where product_title = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, productTitle);
+					rs = pstmt.executeQuery();
+
+					if (rs.next()) {
+						int deltaOne = rs.getInt("product_id");
+						// simple for loop to add inot the many to many tables
+						for (int i = 0; i < categories.length; i++) {
+							insertSQL = "INSERT INTO sp_shop.category_tags(fk_product_id, fk_category_id) values(?,?)";
+							ipstmt = conn.prepareStatement(insertSQL);
+							ipstmt.setInt(1, deltaOne);
+							ipstmt.setString(2, categories[i]);
+							rowAffected = ipstmt.executeUpdate();
+						}
+						response.sendRedirect("addProduct.jsp?successCode=successInsertion");
+					} else {
+						response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+					}
 				} else {
 					response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
 				}
@@ -94,5 +116,4 @@ public class addProduct extends HttpServlet {
 
 		}
 	}
-
 }

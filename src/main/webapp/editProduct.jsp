@@ -243,7 +243,7 @@
 							%>
 							<div class="form-check">
 								<input type="checkbox" class="form-check-input" id="categories"
-									name="categories" value=<%=name%>> <label
+									name="categories" value=<%=id%>> <label
 									class="form-check-label" for="categories"><%=name%></label>
 							</div>
 							<%

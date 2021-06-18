@@ -79,12 +79,22 @@ public class editProduct extends HttpServlet {
 			int count = pstmt.executeUpdate();
 
 			if (count > 0) {
+				sql = "DELETE FROM sp_shop.category_tags WHERE fk_product_id = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, product_id);
+				count = pstmt.executeUpdate();
+				for (int i = 0; i < categories.length; i++) {
+					String insertSQL = "INSERT INTO sp_shop.category_tags(fk_product_id, fk_category_id) values(?,?)";
+					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+					ipstmt.setInt(1, product_id);
+					ipstmt.setString(2, categories[i]);
+					int rowAffected = ipstmt.executeUpdate();
+				}
 				response.sendRedirect("editProduct.jsp?successCode=successInsertion&productID=" + product_id);
 			} else {
 				response.sendRedirect("editProduct.jsp?errCode=databaseFailed&productID=" + product_id);
 			}
 			conn.close();
-
 		} catch (Exception e) {
 
 		}
