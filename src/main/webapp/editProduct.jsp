@@ -77,18 +77,18 @@
 	Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
 	// Step 2: Define Connection URL
-	String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+	connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
 
 	// Step 3: Establish connection to URL
-	Connection conn = DriverManager.getConnection(connURL);
+	conn = DriverManager.getConnection(connURL);
 
 	// instead of editing directly, use ? to prevent injection attacks
-	String sql = "SELECT * FROM sp_shop.products WHERE product_id = ?";
+	sql = "SELECT * FROM sp_shop.products WHERE product_id = ?";
 
 	/// executing to DB - Statement to check if an account exist before it
-	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt = conn.prepareStatement(sql);
 	pstmt.setInt(1, productID);
-	ResultSet rs = pstmt.executeQuery();
+	rs = pstmt.executeQuery();
 
 	String product_title = "";
 	String brief_description = "";
@@ -267,8 +267,7 @@
 							<input type="hidden" id="product_id" name="product_id"
 								value="<%=productID%>">
 
-							<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
-								to checkout</button>
+							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed to edit</button>
 						</form>
 					</div>
 				</div>
