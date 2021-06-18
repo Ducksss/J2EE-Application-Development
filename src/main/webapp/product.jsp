@@ -4,6 +4,7 @@
 <%@ page import="javax.servlet.http.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.*"%>
+<%@page import="products.Product"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,12 +82,14 @@
 
 			String product_title = "";
 			String detail_description = "";
+			String cost_price = "";
 			String retail_price = "";
 			int stock_quantity = 0;
 
 			if (rs.next()) {
 				product_title = rs.getString("product_title");
 				detail_description = rs.getString("detail_description");
+				cost_price = String.format("%.2f", rs.getDouble("cost_price"));
 				retail_price = String.format("%.2f", rs.getDouble("retail_price"));
 				stock_quantity = rs.getInt("stock_quantity");
 			}
@@ -133,6 +136,19 @@
 									out.print(rs.getString("catname") + "\n");
 								}
 								%></li>
+								<li>
+									<form method="POST" action="addToCart.jsp">
+										<input type="hidden" id="productTitle" name="productTitle"
+											value="<%=product_title%>"> <input type="hidden"
+											id="costPrice" name="costPrice" value="<%=cost_price%>">
+										<input type="hidden" id="retailPrice" name="retailPrice"
+											value="<%=retail_price%>"> <input type="hidden"
+											id="stockQuantity" name="stockQuantity"
+											value="<%=stock_quantity%>">
+										<button type="submit" class="btn btn-primary">Add to
+											Cart</button>
+									</form>
+								</li>
 							</ul>
 						</div>
 						<div class="portfolio-description">

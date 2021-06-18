@@ -122,6 +122,7 @@
 
 					while (rs.next()) {
 					%>
+
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box <%=colourList.get(automaticColour)%>">
