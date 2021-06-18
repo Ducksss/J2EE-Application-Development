@@ -55,7 +55,7 @@ public class loginValidation extends HttpServlet {
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
 

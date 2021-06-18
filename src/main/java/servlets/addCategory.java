@@ -50,7 +50,7 @@ public class addCategory extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
 			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
 
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
