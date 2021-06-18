@@ -118,7 +118,7 @@
 								class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Beef</h3>
 							<p>Our beef is the most tender</p>
-							<form action="product" method="POST">
+							<form action="category" method="POST">
 								<input type="hidden" name="category" value="1" /> <a
 									href="product" class="read-more"
 									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
@@ -135,7 +135,7 @@
 								class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Chicken</h3>
 							<p>Our chicken is the most tender</p>
-							<form action="product" method="POST">
+							<form action="category" method="POST">
 								<input type="hidden" name="category" value="2" /> <a
 									href="product" class="read-more"
 									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
@@ -152,7 +152,7 @@
 								class="img-fluid" alt="Girl in  jacket"></i>
 							<h3>Bacon</h3>
 							<p>Our bacon is the most tender</p>
-							<form action="product" method="POST">
+							<form action="category" method="POST">
 								<input type="hidden" name="category" value="3" /> <a
 									href="product" class="read-more"
 									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse

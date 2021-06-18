@@ -38,7 +38,7 @@
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-					<li><a href="blog.html">Blog</a></li>
+					<li><a href="category.jsp">Category</a></li>
 					<li class="dropdown"><a href="#"><span>Menu</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
