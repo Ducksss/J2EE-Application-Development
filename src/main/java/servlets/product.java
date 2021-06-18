@@ -51,11 +51,10 @@ public class product extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			// extracting value from the login.html form and storing it in its respective
-			// params
-			String category = request.getParameter("category");
+			String productid = request.getParameter("productid");
 			HttpSession session = request.getSession(true);
-			session.setAttribute("category", category);
-			response.sendRedirect("productListing.jsp");
+			session.setAttribute("productid", productid);
+			response.sendRedirect("product.jsp");
 
 		} catch (Exception e) {
 			out.print(e);

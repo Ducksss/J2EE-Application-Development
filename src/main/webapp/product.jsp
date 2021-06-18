@@ -55,23 +55,13 @@
 	<main id="main">
 
 		<%
-		List<String> colourList = Arrays.asList("blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple",
-				"pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green",
-				"red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink",
-				"blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red",
-				"purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue",
-				"green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple",
-				"pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green",
-				"red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink",
-				"blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red",
-				"purple", "pink");
-		int automaticColour = 0;
+		boolean isDuplicate = false;
 		ResultSetMetaData rsmd = null;
 		rs = null;
 		String categoryName = null;
 		try {
-			String category = (String) session.getAttribute("category");
-
+			String category = (String) session.getAttribute("productid");
+			out.print(category);
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Step 2: Define Connection URL
@@ -83,7 +73,7 @@
 			sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
 			+ "INNER JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
 			+ "INNER JOIN sp_shop.category ON category_tags.fk_category_id = category.category_id  \r\n"
-			+ "WHERE fk_category_id = ?";
+			+ "WHERE product_id = ?";
 
 			// executing to DB
 			pstmt = conn.prepareStatement(sql);
@@ -92,17 +82,7 @@
 			rs = pstmt.executeQuery();
 			rsmd = (ResultSetMetaData) rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			while (rs.next()) {
-				/* out.println("<script type=\"text/javascript\">");
-				out.println("alert('User or password incorrect');");
-				out.println("location='productListing.jsp';");
-				out.println("</script>"); */
-				categoryName = rs.getString(16);
 		%>
-
-		<%=rs.getString(1)%>
-
-
 
 		<!-- ======= Services Section ======= -->
 		<section id="services" class="services">
@@ -110,21 +90,19 @@
 			<div class="container" data-aos="fade-up">
 
 				<header class="section-header">
-					<h2>Food categories</h2>
-					<p><%=categoryName%></p>
+					<h2>Product</h2>
 				</header>
 
 				<div class="row gy-4">
 
 					<%
-					rs.close();
-					rs = pstmt.executeQuery();
-
 					while (rs.next()) {
+
+						if (isDuplicate == false) {
 					%>
 					<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="400">
-						<div class="service-box <%=colourList.get(automaticColour)%>">
+						<div class="service-box green">
 							<i class="icon"><img
 								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
@@ -144,24 +122,30 @@
 								<%=rs.getString(17)%>
 							</p>
 
-							<form action="product" method="POST">
-								<input type="hidden" name="productid" value=<%=rs.getString(1)%> />
-								<a href="product" class="read-more"
-									onclick="event.preventDefault(); this.parentNode.submit()"><span>View
-										this item </span> <i class="bi bi-arrow-right"></i></a>
-							</form>
+							<%
+							isDuplicate = true;
+							} else {
+							%>
+							<p>
+								<%=rs.getString(16)%>
+							</p>
+							<p>
+								<%=rs.getString(17)%>
+							</p>
+
+
+							<%
+							}
+							}
+							} catch (Exception e) {
+							out.print(e);
+							out.print("xd there seems to be soemthig wrong");
+							}
+							%>
 						</div>
 					</div>
 					<%
-					automaticColour++;
-					}
-					out.println("");
-					}
 
-					} catch (Exception e) {
-					out.print(e);
-					out.print("xd there seems to be soemthig wrong");
-					}
 					%>
 
 				</div>
