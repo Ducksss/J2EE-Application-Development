@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,15 +42,29 @@
 					<li class="dropdown"><a href="#"><span>Menu</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="#">Drinks</a></li>
-							<li class="dropdown"><a href="#"><span>Desserts</span> <i
-									class="bi bi-chevron-right"></i></a>
-								<ul>
-									<li><a href="#">Sorbet</a></li>
-									<li><a href="#">Oriental Flavours</a></li>
-									<li><a href="#">Snowy Ice</a></li>
-								</ul></li>
-							<li><a href="#">Snacks</a></li>
+							<%
+							// Step1: Load JDBC Driver
+							Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
+
+							// Step 2: Define Connection URL
+							String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+
+							// Step 3: Establish connection to URL
+							Connection conn = DriverManager.getConnection(connURL);
+
+							// instead of editing directly, use ? to prevent injection attacks
+							String sql = "SELECT * FROM sp_shop.category";
+
+							/// executing to DB - Statement to check if an account exist before it
+							PreparedStatement pstmt = conn.prepareStatement(sql);
+							ResultSet rs = pstmt.executeQuery();
+
+							while (rs.next()) {
+							%>
+							<li><a href="#"><%=rs.getString(2)%></a></li>
+							<%
+							}
+							%>
 						</ul></li>
 
 					<%

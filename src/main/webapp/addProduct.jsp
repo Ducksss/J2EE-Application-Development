@@ -178,17 +178,17 @@
 							Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
 
 							// Step 2: Define Connection URL
-							String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
+							connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
 
 							// Step 3: Establish connection to URL
-							Connection conn = DriverManager.getConnection(connURL);
+							conn = DriverManager.getConnection(connURL);
 
 							// Step 4: Create Statement object
 							Statement stmt = conn.createStatement();
 
 							// Step 5: Execute SQL Command
 							String sqlStr = "SELECT * FROM sp_shop.category";
-							ResultSet rs = stmt.executeQuery(sqlStr);
+							rs = stmt.executeQuery(sqlStr);
 
 							// Step 6: Process Result
 							while (rs.next()) {

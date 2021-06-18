@@ -72,18 +72,18 @@
 	Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
 	// Step 2: Define Connection URL
-	String connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
+	connURL = "jdbc:mysql://localhost/db1?user=adminuser&password=password&serverTimezone=UTC";
 
 	// Step 3: Establish connection to URL
-	Connection conn = DriverManager.getConnection(connURL);
+	conn = DriverManager.getConnection(connURL);
 
 	// instead of editing directly, use ? to prevent injection attacks
-	String sql = "SELECT * FROM sp_shop.category WHERE category_id = ?";
+	sql = "SELECT * FROM sp_shop.category WHERE category_id = ?";
 
 	/// executing to DB - Statement to check if an account exist before it
-	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt = conn.prepareStatement(sql);
 	pstmt.setInt(1, category_id);
-	ResultSet rs = pstmt.executeQuery();
+	rs = pstmt.executeQuery();
 
 	String catname = "";
 	String description = "";
@@ -118,8 +118,8 @@
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST"
-							action="editCategory" novalidate>
+						<form class="needs-validation" method="POST" action="editCategory"
+							novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
