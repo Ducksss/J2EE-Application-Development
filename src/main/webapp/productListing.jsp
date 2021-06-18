@@ -129,14 +129,10 @@
 								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
 
-							<h3><%=rs.getString(2)%></h3>
+							<h3><%=rs.getString("product_title")%></h3>
 							<p>
-								<%=rs.getString(3)%>
+								<%=rs.getString("brief_description")%>
 							</p>
-							<p>
-								<%=rs.getString(6)%>
-							</p>
-							
 
 							<form action="product" method="POST">
 								<input type="hidden" name="productid" value=<%=rs.getString(1)%> />
