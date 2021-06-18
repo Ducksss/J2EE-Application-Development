@@ -81,12 +81,14 @@ public class loginValidation extends HttpServlet {
 				String username = rs.getString("username");
 				String useremail = rs.getString("email");
 				String role = rs.getString("type");
+				int user_id = rs.getInt("user_id");
 
 				// creating a session and setting the respective attributes
 				HttpSession session = request.getSession(true);
 				session.setAttribute("sessUserName", username);
 				session.setAttribute("sessUserEmail", useremail);
 				session.setAttribute("sessUserRole", role);
+				session.setAttribute("sessUserID", user_id);
 
 				// redirects the user upon success
 				response.sendRedirect("index.jsp");

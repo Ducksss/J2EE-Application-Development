@@ -146,16 +146,18 @@
 
 								<div class="col-sm-4">
 									<label for="costPrice" class="form-label">Cost Price</label><input
-										type="number" class="form-control" id="costPrice" placeholder=""
-										value="0.80" name="costPrice" min="0.00" step="0.01" required>
+										type="number" class="form-control" id="costPrice"
+										placeholder="" value="0.80" name="costPrice" min="0.00"
+										step="0.01" required>
 									<div class="invalid-feedback">A Valid cost price is
 										required.</div>
 								</div>
 
 								<div class="col-sm-4">
 									<label for="retailPrice" class="form-label">Retail
-										price</label><input type="number" class="form-control" id="retailPrice"
-										placeholder="2.10" value="" name="retailPrice" min="0.00" step="0.01" required>
+										price</label><input type="number" class="form-control"
+										id="retailPrice" placeholder="2.10" value=""
+										name="retailPrice" min="0.00" step="0.01" required>
 									<div class="invalid-feedback">A Valid retail price is
 										required.</div>
 								</div>
@@ -218,7 +220,8 @@
 
 							<hr class="my-4">
 
-							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed to publish</button>
+							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed
+								to publish</button>
 						</form>
 					</div>
 				</div>
