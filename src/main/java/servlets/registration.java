@@ -45,6 +45,7 @@ public class registration extends HttpServlet {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String password = request.getParameter("pass");
+			String address = request.getParameter("address");
 			String confirmPassword = request.getParameter("re_pass");
 
 			// simple backend guard statement validation to check if the password matches!
@@ -73,11 +74,12 @@ public class registration extends HttpServlet {
 				response.sendRedirect("register.jsp?errCode=accountAlreadyExists");
 			} else {
 				//if the email is not associated with an account!
-				String insertSQL = "INSERT INTO sp_shop.users (username, email, password) VALUES (?, ?, ?)";
+				String insertSQL = "INSERT INTO sp_shop.users (username, email, password, address) VALUES (?, ?, ?, ?)";
 				PreparedStatement pstat = conn.prepareStatement(insertSQL);
 				pstat.setString(1, name);
 				pstat.setString(2, email);
 				pstat.setString(3, password);
+				pstat.setString(4, address);
 
 				int count = pstat.executeUpdate();
 

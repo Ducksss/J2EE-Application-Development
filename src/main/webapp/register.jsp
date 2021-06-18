@@ -7,11 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Register</title>
+
+<!-- Favicons -->
+<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 <!-- Font Icon -->
 <link rel="stylesheet"
 	href="assets/fonts/material-icon/css/material-design-iconic-font.min.css">
 
 <link rel="stylesheet" href="assets/css/login.css">
+
 </head>
 <body>
 	<div class="main">
@@ -34,24 +40,36 @@
 							</div>
 							<%
 							if (request.getParameter("errCode") == null) {
-
-							} else if (request.getParameter("errCode").equals("accountAlreadyExists")) {
+							} else if(request.getParameter("errCode").equals("accountAlreadyExists")){
 							%>
 							<p style="color: red; font-size: 13px; margin-top: -1.4rem;">Email
 								has already been taken.</p>
 							<%
-							} else {
-							%>
-							<p
-								style="color: red; padding: 0; margin-top: -25px; margin-bottom: 10px;">Email
-								and password don't match</p>
-							<%
+							}else{
+								
 							}
 							%>
+							<div class="form-group">
+								<label for="address"><i class="zmdi zmdi-map"></i></label> <input
+									type="text" name="address" id="address"
+									placeholder="Your address..." />
+							</div>
 							<div class="form-group">
 								<label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
 									type="password" name="pass" id="pass" placeholder="Password" />
 							</div>
+							<%
+							if (request.getParameter("errCode") == null) {
+							} else if (request.getParameter("errCode").equals("passwordUnmatch")) {
+							%>
+							<p
+								style="color: red; padding: 0; margin-top: -25px; margin-bottom: 10px; font-size: 13px;">Your
+								Passwords don't match</p>
+							<%
+							} else {
+
+							}
+							%>
 							<div class="form-group">
 								<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
 								<input type="password" name="re_pass" id="re_pass"
@@ -59,7 +77,7 @@
 							</div>
 							<div class="form-group">
 								<input type="checkbox" name="agree-term" id="agree-term"
-									class="agree-term" required /> <label for="agree-term"
+									class="agree-term" /> <label for="agree-term"
 									class="label-agree-term"><span><span></span></span>I
 									agree all statements in <a href="#" class="term-service">Terms
 										of service</a></label>
