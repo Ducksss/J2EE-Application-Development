@@ -53,7 +53,6 @@
 	<!-- End Header -->
 
 	<main id="main">
-
 		<%
 		boolean isDuplicate = false;
 		ResultSetMetaData rsmd = null;
@@ -61,98 +60,99 @@
 		String categoryName = null;
 		try {
 			String category = (String) session.getAttribute("productid");
-			out.print(category);
+			String product_id = (String) session.getAttribute("productid");
+
 			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
+
 			// Step 2: Define Connection URL
 			connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
+
 			// Step 3: Establish connection to URL
 			conn = DriverManager.getConnection(connURL);
 
 			// instead of editing directly, use ? to prevent injection attacks
-			sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
-			+ "INNER JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
-			+ "INNER JOIN sp_shop.category ON category_tags.fk_category_id = category.category_id  \r\n"
-			+ "WHERE product_id = ?";
+			sql = "SELECT * FROM sp_shop.products products where product_id = ?";
 
-			// executing to DB
+			// executing to DB - Statement to check if an account exist before it
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, category);
-
+			pstmt.setString(1, product_id);
 			rs = pstmt.executeQuery();
-			rsmd = (ResultSetMetaData) rs.getMetaData();
-			int columnsNumber = rsmd.getColumnCount();
+
+			String product_title = "";
+			String detail_description = "";
+			String retail_price = "";
+			int stock_quantity = 0;
+
+			if (rs.next()) {
+				product_title = rs.getString("product_title");
+				detail_description = rs.getString("detail_description");
+				retail_price = String.format("%.2f", rs.getDouble("retail_price"));
+				stock_quantity = rs.getInt("stock_quantity");
+			}
 		%>
-
 		<!-- ======= Services Section ======= -->
-		<section id="services" class="services">
-
-			<div class="container" data-aos="fade-up">
-
-				<header class="section-header">
-					<h2>Product</h2>
-				</header>
+		<section id="portfolio-details" class="portfolio-details">
+			<div class="container">
 
 				<div class="row gy-4">
+					<div class="row gy-4"></div>
+					<div class="row gy-4"></div>
+					<div class="row gy-4"></div>
+					<div class="row gy-4"></div>
 
-					<%
-					while (rs.next()) {
 
-						if (isDuplicate == false) {
-					%>
-					<div class="col-lg-10 col-md-10" data-aos="fade-up"
-						data-aos-delay="400">
-						<div class="service-box green">
-							<i class="icon"><img
-								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
+					<div class="col-lg-8">
+						<div class="portfolio-details-slider swiper-container">
+							<div class="swiper-wrapper align-items-center">
 
-							<h3><%=rs.getString("product_title")%></h3>
-							<p>
-								<%=rs.getString("detail_description")%>
-							</p>
-							<p>
-							<b>Retail Price:</b>
-								<%=rs.getString("retail_price")%>
-							</p>
-							<p>
-							<b>Stock:</b>
-								<%=rs.getString("stock_quantity")%>
-							</p>
-							<p>
-								<b>Categories</b> <br>
-								<%=rs.getString("catname")%>
-							</p>
-
-							<%
-							isDuplicate = true;
-							} else {
-							%>
-							<p>
-								<%=rs.getString("catname")%>
-							</p>
-							<%
-							}
-							}
-							} catch (Exception e) {
-							out.print(e);
-							out.print("xd there seems to be soemthig wrong");
-							}
-							%>
+								<div class="swiper-slide">
+									<img
+										src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
+										alt="">
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
 						</div>
 					</div>
-					<%
 
-					%>
+					<div class="col-lg-4">
+						<div class="portfolio-info">
+							<h3><%=product_title%></h3>
+							<ul>
+								<li><strong>Price</strong>: <%=retail_price%></li>
+								<li><strong>Stock Quantity</strong>: <%=stock_quantity%></li>
+								<li><strong>Category</strong>: <%
+								sql = "SELECT * FROM sp_shop.category_tags category_tags, sp_shop.category category where category.category_id = fk_category_id and category_tags.fk_product_id = ?";
+								// executing to DB - Statement to check if an account exist before it
+								pstmt = conn.prepareStatement(sql);
+								pstmt.setString(1, product_id);
+								rs = pstmt.executeQuery();
+
+								while (rs.next()) {
+									out.print(rs.getString("catname") + "\n");
+								}
+								%></li>
+							</ul>
+						</div>
+						<div class="portfolio-description">
+							<h2>Description</h2>
+							<p><%=detail_description%></p>
+						</div>
+					</div>
 
 				</div>
+
 			</div>
 		</section>
+		<%
+		conn.close();
+		} catch (Exception e) {
+		out.print(e);
+		}
+		%>
+		<!-- End Portfolio Details Section -->
 		<!-- End Services Section -->
-
-
-
-
 	</main>
 	<!-- End #main -->
 
