@@ -14,7 +14,7 @@
 					<div class="col-lg-5 col-md-12 footer-info">
 						<a href="index.html" class="logo d-flex align-items-center"> <img
 							src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623741776/mcojwpccv3h2xypf8yq7.png"
-							alt=""> <span>Whompa soy desserts</span>
+							alt=""><span>Whompa soy desserts</span>
 						</a>
 						<p>Cras fermentum odio eu feugiat lide par naso tierra. Justo
 							eget nada terra videa magna derita valies darta donna mare
