@@ -61,7 +61,7 @@
 
 							while (rs.next()) {
 							%>
-							<form action="product" method="POST">
+							<form action="category" method="POST">
 								<input type="hidden" name="category" value=<%=rs.getString(1)%> />
 								<a href="product" class="read-more"
 									onclick="event.preventDefault(); this.parentNode.submit()"><span><%=rs.getString(2)%></span>
