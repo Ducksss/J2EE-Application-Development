@@ -107,21 +107,21 @@
 								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
 
-							<h3><%=rs.getString(2)%></h3>
+							<h3><%=rs.getString("product_title")%></h3>
 							<p>
-								<%=rs.getString(4)%>
+								<%=rs.getString("detail_description")%>
 							</p>
 							<p>
 							<b>Retail Price:</b>
-								<%=rs.getString(6)%>
+								<%=rs.getString("retail_price")%>
 							</p>
 							<p>
 							<b>Stock:</b>
-								<%=rs.getString(7)%>
+								<%=rs.getString("stock_quantity")%>
 							</p>
 							<p>
 								<b>Categories</b> <br>
-								<%=rs.getString(16)%>
+								<%=rs.getString("catname")%>
 							</p>
 
 							<%
@@ -129,7 +129,7 @@
 							} else {
 							%>
 							<p>
-								<%=rs.getString(16)%>
+								<%=rs.getString("catname")%>
 							</p>
 							<%
 							}
