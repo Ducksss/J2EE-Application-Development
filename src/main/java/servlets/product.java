@@ -49,8 +49,6 @@ public class product extends HttpServlet {
 			throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
-		String a = request.getParameter("type");
-		String url = request.getRequestURL().toString();
 		try {
 			// extracting value from the login.html form and storing it in its respective
 			// params
