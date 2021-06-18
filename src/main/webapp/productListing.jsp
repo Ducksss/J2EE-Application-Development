@@ -131,7 +131,7 @@
 
 							<h3><%=rs.getString(2)%></h3>
 							<p>
-								<%=rs.getString(4)%>
+								<%=rs.getString(3)%>
 							</p>
 							<p>
 								<%=rs.getString(6)%>

@@ -100,7 +100,7 @@
 
 						if (isDuplicate == false) {
 					%>
-					<div class="col-lg-8 col-md-8" data-aos="fade-up"
+					<div class="col-lg-10 col-md-10" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box green">
 							<i class="icon"><img
@@ -112,14 +112,16 @@
 								<%=rs.getString(4)%>
 							</p>
 							<p>
+							<b>Retail Price:</b>
 								<%=rs.getString(6)%>
+							</p>
+							<p>
+							<b>Stock:</b>
+								<%=rs.getString(7)%>
 							</p>
 							<p>
 								<b>Categories</b> <br>
 								<%=rs.getString(16)%>
-							</p>
-							<p>
-								<%=rs.getString(17)%>
 							</p>
 
 							<%
@@ -129,11 +131,6 @@
 							<p>
 								<%=rs.getString(16)%>
 							</p>
-							<p>
-								<%=rs.getString(17)%>
-							</p>
-
-
 							<%
 							}
 							}
