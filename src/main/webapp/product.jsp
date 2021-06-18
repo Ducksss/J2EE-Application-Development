@@ -100,7 +100,7 @@
 
 						if (isDuplicate == false) {
 					%>
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
+					<div class="col-lg-8 col-md-8" data-aos="fade-up"
 						data-aos-delay="400">
 						<div class="service-box green">
 							<i class="icon"><img
