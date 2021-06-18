@@ -136,13 +136,7 @@
 							<p>
 								<%=rs.getString(6)%>
 							</p>
-							<p>
-								<b>Categories</b> <br>
-								<%=rs.getString(16)%>
-							</p>
-							<p>
-								<%=rs.getString(17)%>
-							</p>
+							
 
 							<form action="product" method="POST">
 								<input type="hidden" name="productid" value=<%=rs.getString(1)%> />
