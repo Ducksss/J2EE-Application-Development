@@ -55,10 +55,10 @@
 	<main id="main">
 
 		<%
-		List<String> colourList = Arrays.asList( "blue", "green", "red", "purple", "pink");
+		List<String> colourList = Arrays.asList( "blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink","blue", "green", "red", "purple", "pink");
 		int automaticColour = 0;
 		ResultSetMetaData rsmd = null;
-		ResultSet rs = null;
+		rs = null;
 		String categoryName = null;
 		try {
 			String category = (String) session.getAttribute("category");
@@ -66,17 +66,17 @@
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
+			connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
 			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
+			conn = DriverManager.getConnection(connURL);
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
-			+ "JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
-			+ "JOIN sp_shop.category ON products.product_id = category.category_id \r\n" + "WHERE fk_category_id = ?";
+			sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
+			+ "INNER JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
+			+ "INNER JOIN sp_shop.category ON category_tags.fk_category_id = category.category_id  \r\n" + "WHERE fk_category_id = ?";
 
 			// executing to DB
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, category);
 
 			rs = pstmt.executeQuery();
