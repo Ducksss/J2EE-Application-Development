@@ -107,6 +107,7 @@
 				<div class="row gy-4">
 
 					<%
+					rs = pstmt.executeQuery();
 					while (rs.next()) {
 						
 					%>

@@ -61,7 +61,12 @@
 
 							while (rs.next()) {
 							%>
-							<li><a href="#"><%=rs.getString(2)%></a></li>
+							<form action="product" method="POST">
+								<input type="hidden" name="category" value=<%=rs.getString(1)%> />
+								<a href="product" class="read-more"
+									onclick="event.preventDefault(); this.parentNode.submit()"><span><%=rs.getString(2)%></span>
+									<i class="bi bi-arrow-right"></i></a>
+							</form>
 							<%
 							}
 							%>
