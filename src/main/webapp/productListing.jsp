@@ -55,6 +55,9 @@
 	<main id="main">
 
 		<%
+		if(session.getAttribute("category") == null){
+			response.sendRedirect("index.jsp");
+		}
 		List<String> colourList = Arrays.asList("blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple",
 				"pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green",
 				"red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink",
