@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- ======= Validation ======= -->
+	<%@ include file="./components/adminValidation.jsp"%>
+
 	<%
 	try {
 		int product_id = Integer.parseInt(request.getParameter("productID"));
@@ -35,7 +38,7 @@
 		if (count > 0) {
 			response.sendRedirect("statistics.jsp");
 		} else {
-			response.sendRedirect("statistics.jsp?");
+			response.sendRedirect("statistics.jsp");
 		}
 		conn.close();
 	} catch (Exception e) {
