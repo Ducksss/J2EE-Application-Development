@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="javax.servlet.http.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,57 +112,57 @@
 				</header>
 
 				<div class="row gy-4">
+					<%
+					int automaticColour = 0;
+					List<String> colourList = Arrays.asList("blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple",
+							"pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green",
+							"red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink",
+							"blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red",
+							"purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue",
+							"green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple",
+							"pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green",
+							"red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink",
+							"blue", "green", "red", "purple", "pink", "blue", "green", "red", "purple", "pink", "blue", "green", "red",
+							"purple", "pink");
+							// Step1: Load JDBC Driver
+							Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
+							// Step 2: Define Connection URL
+							connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
+
+							// Step 3: Establish connection to URL
+							conn = DriverManager.getConnection(connURL);
+
+							// instead of editing directly, use ? to prevent injection attacks
+							sql = "SELECT * FROM sp_shop.category";
+
+							/// executing to DB - Statement to check if an account exist before it
+							pstmt = conn.prepareStatement(sql);
+							rs = pstmt.executeQuery();
+
+							while (rs.next()) {
+							%>
+							<div class="col-lg-4 col-md-6" data-aos="fade-up"
 						data-aos-delay="200">
-						<div class="service-box blue">
+						<div class="service-box <%=colourList.get(automaticColour)%>">
 							<i class="icon"><img
 								src="assets/img/product/All-American-Burger-1400x700.jpg"
 								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Beef</h3>
-							<p>Our beef is the most tender</p>
+							<h3><%=rs.getString(2)%></h3>
+							<p><%=rs.getString(3)%></p>
 							<form action="category" method="POST">
-								<input type="hidden" name="category" value="1" /> <a
+								<input type="hidden" name="category" value=<%=rs.getString(1)%> /> <a
 									href="product" class="read-more"
-									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
-										the Beef section</span> <i class="bi bi-arrow-right"></i></a>
+									onclick="event.preventDefault(); this.parentNode.submit()"><span><%=rs.getString(2)%></span> <i class="bi bi-arrow-right"></i></a>
 							</form>
 						</div>
 					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="200">
-						<div class="service-box red">
-							<i class="icon"><img
-								src="assets/img/product/All-American-Burger-1400x700.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Chicken</h3>
-							<p>Our chicken is the most tender</p>
-							<form action="category" method="POST">
-								<input type="hidden" name="category" value="2" /> <a
-									href="product" class="read-more"
-									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
-										the Chicken section</span> <i class="bi bi-arrow-right"></i></a>
-							</form>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6" data-aos="fade-up"
-						data-aos-delay="200">
-						<div class="service-box orange">
-							<i class="icon"><img
-								src="assets/img/product/All-American-Burger-1400x700.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
-							<h3>Bacon</h3>
-							<p>Our bacon is the most tender</p>
-							<form action="category" method="POST">
-								<input type="hidden" name="category" value="3" /> <a
-									href="product" class="read-more"
-									onclick="event.preventDefault(); this.parentNode.submit()"><span>Browse
-										the Beef section</span> <i class="bi bi-arrow-right"></i></a>
-							</form>
-						</div>
-					</div>
+					
+							<%
+							automaticColour++;
+							}
+							%>
+					
 
 				</div>
 

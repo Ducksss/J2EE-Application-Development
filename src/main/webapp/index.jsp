@@ -98,11 +98,16 @@
 							<h3 class="sech3" style="font-family: 'Pangolin';">humble
 								beginnings.</h3>
 							<!-- Tabs -->
-							<p class="secp">Mr Teo, the owner have honed his craft after
-								30 years. As such, he perfected the beverages as well as
-								desserts! But it wasn't all an overnight success. Through
-								experimentation, he managed to better cather to people's
-								palette.</p>
+							<p class="secp">Mr Teo, the owner has honed his craft after a
+								span of 30 years. As such, he has perfected the art of making
+								delicious and scrumptious beverages and desserts that people
+								enjoy till this very day. But it wasn't all an overnight
+								success. Through countless experimentations, he managed to
+								better cater to the common people's palette. Despite the
+								company's success, Mr Teo has not forgotten the people that have
+								brought him to this position in this present day, continuing to
+								serve both cheap and delicious food for people of all ages to
+								enjoy.</p>
 						</div>
 						<div class="col-lg-6">
 							<img
@@ -122,10 +127,11 @@
 						<h3 class="sech3" style="font-family: 'Pangolin';">local
 							favourites</h3>
 						<!-- Tabs -->
-						<p class="secp">Residents of Woodlands love the dessert.
-							Though it is not as popular as other brands, the desserts have a
-							very Singapore taste. As such, many residents of Woodlands love
-							it!</p>
+						<p class="secp">Residents of Woodlands love this dessert.
+							Though it is not as renowned, this dessert has a very unique
+							Singaporean taste that distinguishes it from drinks of a similar
+							nature to it. As such, many residents of Woodlands love it, and
+							there is a high chance that you would too!</p>
 					</div>
 				</div>
 				<!-- End Feature Tabs -->
@@ -140,7 +146,7 @@
 			<div class="container" data-aos="fade-up">
 
 				<header class="section-header">
-					<p>What our patreons say about us?</p>
+					<p>What do our patreons say about us?</p>
 				</header>
 
 				<div class="testimonials-slider swiper-container" data-aos="fade-up"
@@ -307,7 +313,7 @@
 	<script src="assets/vendor/purecounter/purecounter.js"></script>
 	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-	
+
 	<!-- Template Main JS File -->
 	<script src="assets/js/main.js"></script>
 

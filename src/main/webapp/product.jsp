@@ -55,6 +55,7 @@
 
 	<main id="main">
 		<%
+		
 		boolean isDuplicate = false;
 		ResultSetMetaData rsmd = null;
 		rs = null;
@@ -162,6 +163,7 @@
 			</div>
 		</section>
 		<%
+		
 		conn.close();
 		} catch (Exception e) {
 		out.print(e);
