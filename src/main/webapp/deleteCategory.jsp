@@ -9,6 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- ======= Validation ======= -->
+	<%@ include file="./components/adminValidation.jsp"%>
+
 	<%
 	try {
 		int category_id = Integer.parseInt(request.getParameter("categoryID"));
