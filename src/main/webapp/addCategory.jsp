@@ -136,6 +136,15 @@
 
 							<hr class="my-4">
 
+							<h4 class="mb-3">Image</h4>
+
+							<div class="my-3">
+								<input type="file" class="form-control-file"
+									id="exampleFormControlFile1">
+							</div>
+
+							<hr class="my-4">
+
 							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed
 								to publish</button>
 						</form>
