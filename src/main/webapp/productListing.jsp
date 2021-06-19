@@ -127,8 +127,8 @@
 						data-aos-delay="400">
 						<div class="service-box <%=colourList.get(automaticColour)%>">
 							<i class="icon"><img
-								src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
-								class="img-fluid" alt="Girl in  jacket"></i>
+								src="<%=rs.getString("image_location")%>" class="img-fluid"
+								alt="Girl in  jacket"></i>
 
 							<h3><%=rs.getString("product_title")%></h3>
 							<p>

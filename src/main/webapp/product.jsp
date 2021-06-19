@@ -85,6 +85,7 @@
 			String cost_price = "";
 			String retail_price = "";
 			int stock_quantity = 0;
+			String image_location_fk = "";
 
 			if (rs.next()) {
 				product_title = rs.getString("product_title");
@@ -92,6 +93,7 @@
 				cost_price = String.format("%.2f", rs.getDouble("cost_price"));
 				retail_price = String.format("%.2f", rs.getDouble("retail_price"));
 				stock_quantity = rs.getInt("stock_quantity");
+				image_location = rs.getString("image_location");
 			}
 		%>
 		<!-- ======= Services Section ======= -->
@@ -110,9 +112,7 @@
 							<div class="swiper-wrapper align-items-center">
 
 								<div class="swiper-slide">
-									<img
-										src="assets/img/product/Spicy-Mexican-Burger-and-Fries.jpg"
-										alt="">
+									<img src="<%=image_location%>" alt="">
 								</div>
 							</div>
 							<div class="swiper-pagination"></div>
