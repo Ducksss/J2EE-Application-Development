@@ -62,6 +62,9 @@
 		try {
 			String category = (String) session.getAttribute("productid");
 			String product_id = (String) session.getAttribute("productid");
+			if (product_id == null) {
+				response.sendRedirect("index.jsp");
+			}
 
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
