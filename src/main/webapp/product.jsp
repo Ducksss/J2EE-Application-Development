@@ -85,7 +85,7 @@
 			String cost_price = "";
 			String retail_price = "";
 			int stock_quantity = 0;
-			String image_location_fk = "";
+			String image_location = "";
 
 			if (rs.next()) {
 				product_title = rs.getString("product_title");
