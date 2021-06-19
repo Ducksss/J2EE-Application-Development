@@ -184,7 +184,7 @@
 							created_at = rs.getString("created_at");
 						}
 						%>
-						<form class="needs-validation" novalidate>
+						<form class="needs-validation" novalidate method="POST">
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<label for="lastName" class="form-label">Full name</label> <input
