@@ -55,7 +55,6 @@
 
 	<main id="main">
 		<%
-		
 		boolean isDuplicate = false;
 		ResultSetMetaData rsmd = null;
 		rs = null;
@@ -160,13 +159,125 @@
 							<p><%=detail_description%></p>
 						</div>
 					</div>
+				</div>
+			</div>
+		</section>
 
+		<!-- ======= Blog Single Section ======= -->
+		<section id="blog" class="blog">
+			<div class="container" data-aos="fade-up">
+
+				<div class="row">
+
+					<div class="col-lg-8 entries">
+						<!-- End blog author bio -->
+
+						<div class="blog-comments">
+							<%
+							sql = "SELECT * FROM sp_shop.reviews reviews, sp_shop.users users where reviews.fk_product_id = ? and reviews.fk_user_id = users.user_id";
+
+							// executing to DB - Statement to check if an account exist before it
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, product_id);
+							rs = pstmt.executeQuery();
+							int i = 0;
+							while (rs.next()) {
+								i++;
+							}
+							%>
+							<h4 class="comments-count"><%=i%>
+								Comments
+							</h4>
+							<%
+							sql = "SELECT * FROM sp_shop.reviews reviews, sp_shop.users users where reviews.fk_product_id = ? and reviews.fk_user_id = users.user_id";
+
+							// executing to DB - Statement to check if an account exist before it
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, product_id);
+							rs = pstmt.executeQuery();
+
+							String content = "";
+							String name = "";
+							boolean hasContent = false;
+							while (rs.next()) {
+								hasContent = true;
+								content = rs.getString("content");
+								name = rs.getString("username");
+							%>
+							<div id="comment-1" class="comment">
+								<div class="d-flex">
+									<div class="comment-img">
+										<i class="far fa-user-circle" style="font-size: 50px;"></i>
+									</div>
+									<div>
+										<h5>
+											<a href=""><%=name%></a>
+										</h5>
+										<p><%=content%></p>
+									</div>
+								</div>
+							</div>
+							<%
+							}
+
+							if (!hasContent) {
+							%>
+							<div id="comment-1" class="comment">
+								<div class="d-flex">
+									<h2>No Comments</h2>
+								</div>
+							</div>
+							<%
+							}
+							%>
+
+							<%
+							try {
+								String userRole = (String) session.getAttribute("sessUserRole");
+								if (userRole == null) {
+							%>
+							<hr>
+							<h3>Sign in to leave a comment!</h3>
+							<%
+							} else {
+							int sessUserID = (int) session.getAttribute("sessUserID");
+							%>
+							<div class="reply-form">
+								<h4>Leave a Reply</h4>
+								<p>Your email address will not be published. Required fields
+									are marked *</p>
+								<form action="addComment.jsp" method="POST">
+									<div class="row">
+										<div class="col form-group">
+											<textarea class="form-control" placeholder="Your Comment*"
+												name="content"></textarea>
+										</div>
+									</div>
+
+									<input type="hidden" id="productTitle" name="fk_product_id"
+										value="<%=product_id%>"> <input type="hidden"
+										id="productTitle" name="fk_user_id" value="<%=sessUserID%>">
+									<button type="submit" class="btn btn-primary">Post
+										Comment</button>
+								</form>
+
+							</div>
+							<%
+							}
+							} catch (Exception e) {
+							}
+							%>
+						</div>
+						<!-- End blog comments -->
+
+					</div>
+					<!-- End blog entries list -->
 				</div>
 
 			</div>
 		</section>
+		<!-- End Blog Single Section -->
 		<%
-		
 		conn.close();
 		} catch (Exception e) {
 		out.print(e);
