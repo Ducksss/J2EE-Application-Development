@@ -17,7 +17,9 @@
 		for (int i = 0; i < productList.size(); i++) {
 			//extracts the value out from the arrayList
 			String selectISBN = productList.get(i).getProductTitle();
+			double retailPrize = productList.get(i).getRetailPrice();
 			out.print(selectISBN);
+			out.print(retailPrize);
 		}
 	} catch (Exception e) {
 

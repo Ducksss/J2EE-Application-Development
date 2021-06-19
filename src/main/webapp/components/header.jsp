@@ -102,7 +102,7 @@
 					<li><a class="getstarted scrollto loginIcon"
 						href="editProfile.jsp"><i class="fas fa-user"
 							style="padding-right: 15px; font-size: 15px;"></i>Profile</a></li>
-					<li><a class="getstarted scrollto loginIcon" href="login.jsp"><i
+					<li><a class="getstarted scrollto loginIcon" href="cart.jsp"><i
 							class="fas fa-shopping-cart"
 							style="padding-right: 15px; font-size: 15px;"></i>Cart</a></li>
 					<li><a class="getstarted scrollto loginIcon"
