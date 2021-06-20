@@ -14,7 +14,7 @@
 					<div class="col-lg-5 col-md-12 footer-info">
 						<a href="index.jsp" class="logo d-flex align-items-center"> <img
 							src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623741776/mcojwpccv3h2xypf8yq7.png"
-							alt=""> <span>Whompa Soy Desserts</span>
+							alt=""> <span>Whompa!</span>
 						</a>
 						<p>
 							Woodland's famous soy desserts! Come and try our very best
