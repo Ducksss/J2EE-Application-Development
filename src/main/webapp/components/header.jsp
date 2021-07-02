@@ -32,7 +32,8 @@
 			class="container-fluid container-xl d-flex align-items-center justify-content-between">
 			<a href="index.jsp" class="logo d-flex align-items-center"> <img
 				src="https://res.cloudinary.com/sp-dit-chai-pin-zheng/image/upload/v1623741776/mcojwpccv3h2xypf8yq7.png"
-				alt="" /><span style="font-family: 'Pangolin';">Whompa!</span>
+				alt="" /><span style="font-family: 'Pangolin';">Whompa Soy
+					Desserts</span>
 			</a>
 			<nav id="navbar" class="navbar">
 				<ul>
