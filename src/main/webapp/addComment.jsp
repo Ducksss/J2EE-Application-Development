@@ -48,7 +48,7 @@
 		if (rowAffected > 0) {
 			response.sendRedirect("product.jsp");
 		} else {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("product.jsp");
 		}
 	} catch (Exception e) {
 		response.sendRedirect("index.jsp");
