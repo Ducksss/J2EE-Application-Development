@@ -1,17 +1,23 @@
 package servlets;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class addProduct
  */
+
+@MultipartConfig
 @WebServlet("/addProduct")
 public class addProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,6 +58,25 @@ public class addProduct extends HttpServlet {
 			String stockQuantity = request.getParameter("stockQuantity");
 			String[] categories = request.getParameterValues("categories");
 
+			Part file = request.getPart("img");
+			String fileUploadname = "";
+			String imgFileName = file.getSubmittedFileName();
+			boolean haveImage = true;
+			if (imgFileName.equals("") || imgFileName == null) {
+				haveImage = false;
+			} else {
+				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+				FileOutputStream fos = new FileOutputStream(uploadPath);
+				InputStream is = file.getInputStream();
+
+				byte[] data = new byte[is.available()];
+				is.read(data);
+				fos.write(data);
+				fos.close();
+
+				fileUploadname = "assets/img/product/" + imgFileName;
+			}
+
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
@@ -73,17 +98,32 @@ public class addProduct extends HttpServlet {
 				// if the email is associated with an account!
 				response.sendRedirect("addProduct.jsp?errCode=productAlreadyExists");
 			} else {
+				int rowAffected = 0;
 				// simple code to extract to insert
-				String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity) values(?,?,?,?,?,?)";
-				PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
-				ipstmt.setString(1, productTitle);
-				ipstmt.setString(2, briefDescription);
-				ipstmt.setString(3, detailedDescription);
-				ipstmt.setString(4, costPrice);
-				ipstmt.setString(5, retailPrice);
-				ipstmt.setString(6, stockQuantity);
+				if (haveImage) {
+					String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity, image_location) values(?,?,?,?,?,?,?)";
+					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+					ipstmt.setString(1, productTitle);
+					ipstmt.setString(2, briefDescription);
+					ipstmt.setString(3, detailedDescription);
+					ipstmt.setString(4, costPrice);
+					ipstmt.setString(5, retailPrice);
+					ipstmt.setString(6, stockQuantity);
+					ipstmt.setString(7, fileUploadname);
 
-				int rowAffected = ipstmt.executeUpdate();
+					rowAffected = ipstmt.executeUpdate();
+				} else {
+					String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity) values(?,?,?,?,?,?)";
+					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+					ipstmt.setString(1, productTitle);
+					ipstmt.setString(2, briefDescription);
+					ipstmt.setString(3, detailedDescription);
+					ipstmt.setString(4, costPrice);
+					ipstmt.setString(5, retailPrice);
+					ipstmt.setString(6, stockQuantity);
+
+					rowAffected = ipstmt.executeUpdate();
+				}
 
 				if (rowAffected > 0) {
 					// simple code to select the product_id for the many to many
@@ -97,7 +137,8 @@ public class addProduct extends HttpServlet {
 						int deltaOne = rs.getInt("product_id");
 						// simple for loop to add inot the many to many tables
 						for (int i = 0; i < categories.length; i++) {
-							insertSQL = "INSERT INTO sp_shop.category_tags(fk_product_id, fk_category_id) values(?,?)";
+							String insertSQL = "INSERT INTO sp_shop.category_tags(fk_product_id, fk_category_id) values(?,?)";
+							PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
 							ipstmt = conn.prepareStatement(insertSQL);
 							ipstmt.setInt(1, deltaOne);
 							ipstmt.setString(2, categories[i]);
@@ -113,7 +154,7 @@ public class addProduct extends HttpServlet {
 			}
 			conn.close();
 		} catch (Exception e) {
-
+			response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
 		}
 	}
 }
