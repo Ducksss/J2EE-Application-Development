@@ -91,14 +91,18 @@
 								<div class="col-sm-12">
 									<%
 									if (request.getParameter("errCode") == null) {
-									} else if (request.getParameter("errCode").equals("productAlreadyExists")) {
+									} else if (request.getParameter("errCode").equals("notAnImage")) {
 									%>
-									<p style="color: red">The product has already been
-										registered!</p>
+									<p style="color: red">The file you provided is not an
+										image!</p>
+									<%
+									} else if (request.getParameter("errCode").equals("noCategoriesSelected")) {
+									%>
+									<p style="color: red">You did not select any category!</p>
 									<%
 									} else {
 									%>
-									<p style="color: red">Product insertion failure</p>
+									<p style="color: red">Product update failure</p>
 									<%
 									}
 									%>

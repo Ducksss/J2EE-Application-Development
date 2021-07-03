@@ -58,6 +58,11 @@ public class addProduct extends HttpServlet {
 			String stockQuantity = request.getParameter("stockQuantity");
 			String[] categories = request.getParameterValues("categories");
 
+			// Guard statement
+			if (categories == null) {
+				response.sendRedirect("addProduct.jsp?errCode=noCategoriesSelected&productID=" + product_id);
+			}
+
 			// Image storage section
 			Part file = request.getPart("img");
 			String fileUploadname = "";
@@ -66,16 +71,24 @@ public class addProduct extends HttpServlet {
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
-				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
-				FileOutputStream fos = new FileOutputStream(uploadPath);
-				InputStream is = file.getInputStream();
+				Object type = file.getHeader("content-type");
+				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
+						|| type.equals("image/gif") || type.equals("image/bmp")) {
+					String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+					FileOutputStream fos = new FileOutputStream(uploadPath);
+					InputStream is = file.getInputStream();
 
-				byte[] data = new byte[is.available()];
-				is.read(data);
-				fos.write(data);
-				fos.close();
+					byte[] data = new byte[is.available()];
+					is.read(data);
+					fos.write(data);
+					fos.close();
 
-				fileUploadname = "assets/img/product/" + imgFileName;
+					fileUploadname = "assets/img/product/" + imgFileName;
+					System.out.println("Is an image");
+				} else {
+					haveImage = false;
+					response.sendRedirect("addProduct.jsp?errCode=notAnImage&productID=" + product_id);
+				}
 			}
 
 			// Step1: Load JDBC Driver

@@ -1,5 +1,6 @@
 package servlets;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Servlet implementation class editProduct
@@ -59,6 +63,10 @@ public class editProduct extends HttpServlet {
 			int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
 			String[] categories = request.getParameterValues("categories");
 
+			if (categories == null) {
+				response.sendRedirect("editProduct.jsp?errCode=noCategoriesSelected&productID=" + product_id);
+			}
+
 			// Image storage section
 			Part file = request.getPart("img");
 			String fileUploadname = "";
@@ -67,16 +75,24 @@ public class editProduct extends HttpServlet {
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
-				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
-				FileOutputStream fos = new FileOutputStream(uploadPath);
-				InputStream is = file.getInputStream();
+				Object type = file.getHeader("content-type");
+				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
+						|| type.equals("image/gif") || type.equals("image/bmp")) {
+					String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+					FileOutputStream fos = new FileOutputStream(uploadPath);
+					InputStream is = file.getInputStream();
 
-				byte[] data = new byte[is.available()];
-				is.read(data);
-				fos.write(data);
-				fos.close();
+					byte[] data = new byte[is.available()];
+					is.read(data);
+					fos.write(data);
+					fos.close();
 
-				fileUploadname = "assets/img/product/" + imgFileName;
+					fileUploadname = "assets/img/product/" + imgFileName;
+					System.out.println("Is an image");
+				} else {
+					haveImage = false;
+					response.sendRedirect("editProduct.jsp?errCode=notAnImage&productID=" + product_id);
+				}
 			}
 
 			// Step1: Load JDBC Driver

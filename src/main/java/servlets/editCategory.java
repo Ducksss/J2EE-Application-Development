@@ -82,6 +82,7 @@ public class editCategory extends HttpServlet {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			int count = 0;
+			
 			if (haveImage) {
 				String sql = "UPDATE sp_shop.category SET catname=?, description=?, category_image=? WHERE category_id = ?";
 
