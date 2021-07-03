@@ -58,11 +58,6 @@ public class addProduct extends HttpServlet {
 			String stockQuantity = request.getParameter("stockQuantity");
 			String[] categories = request.getParameterValues("categories");
 
-			// Guard statement
-			if (categories == null) {
-				response.sendRedirect("addProduct.jsp?errCode=noCategoriesSelected&productID=" + product_id);
-			}
-
 			// Image storage section
 			Part file = request.getPart("img");
 			String fileUploadname = "";
@@ -87,7 +82,7 @@ public class addProduct extends HttpServlet {
 					System.out.println("Is an image");
 				} else {
 					haveImage = false;
-					response.sendRedirect("addProduct.jsp?errCode=notAnImage&productID=" + product_id);
+					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
 				}
 			}
 
