@@ -133,7 +133,7 @@
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
 						<form class="needs-validation" method="POST" action="editProduct"
-							novalidate>
+							enctype="multipart/form-data" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
@@ -258,8 +258,7 @@
 							<h4 class="mb-3">Image</h4>
 
 							<div class="my-3">
-								<input type="file" class="form-control-file"
-									id="exampleFormControlFile1">
+								<input class="input1" type="file" id="img" name="img">
 							</div>
 
 							<hr class="my-4">
@@ -267,7 +266,8 @@
 							<input type="hidden" id="product_id" name="product_id"
 								value="<%=productID%>">
 
-							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed to edit</button>
+							<button class="w-100 btn btn-primary btn-lg" type="submit">Proceed
+								to edit</button>
 						</form>
 					</div>
 				</div>

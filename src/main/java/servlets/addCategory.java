@@ -1,17 +1,22 @@
 package servlets;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class addCategory
  */
+@MultipartConfig
 @WebServlet("/addCategory")
 public class addCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,6 +51,28 @@ public class addCategory extends HttpServlet {
 			String categoryName = request.getParameter("categoryName");
 			String categoryDescription = request.getParameter("categoryDescription");
 
+			// Image storage section
+			Part file = request.getPart("img");
+			String fileUploadname = "";
+			String imgFileName = file.getSubmittedFileName();
+			boolean haveImage = true;
+			if (imgFileName.equals("") || imgFileName == null) {
+				haveImage = false;
+			} else {
+				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+				FileOutputStream fos = new FileOutputStream(uploadPath);
+				InputStream is = file.getInputStream();
+
+				byte[] data = new byte[is.available()];
+				is.read(data);
+				fos.write(data);
+				fos.close();
+
+				fileUploadname = "assets/img/product/" + imgFileName;
+			}
+			
+			System.out.println("Success till here");
+
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
@@ -67,12 +94,24 @@ public class addCategory extends HttpServlet {
 				// if the email is associated with an account!
 				response.sendRedirect("addCategory.jsp?errCode=categoryAlreadyExists");
 			} else {
-				String insertSQL = "INSERT INTO sp_shop.category(catname, description) values(?,?)";
-				PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
-				ipstmt.setString(1, categoryName);
-				ipstmt.setString(2, categoryDescription);
+				int count = 0;
 
-				int count = ipstmt.executeUpdate();
+				if (haveImage) {
+					System.out.println("With image is in here");
+					String insertSQL = "INSERT INTO sp_shop.category(catname, description, category_image) values(?,?,?)";
+					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+					ipstmt.setString(1, categoryName);
+					ipstmt.setString(2, categoryDescription);
+					ipstmt.setString(3, fileUploadname);
+					count = ipstmt.executeUpdate();
+				} else {
+					System.out.println("With no image is in here");
+					String insertSQL = "INSERT INTO sp_shop.category(catname, description) values(?,?)";
+					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+					ipstmt.setString(1, categoryName);
+					ipstmt.setString(2, categoryDescription);
+					count = ipstmt.executeUpdate();
+				}
 
 				if (count > 0) {
 					response.sendRedirect("addCategory.jsp?successCode=successInsertion");

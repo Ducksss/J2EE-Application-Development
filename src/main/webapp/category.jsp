@@ -146,7 +146,7 @@
 						data-aos-delay="200">
 						<div class="service-box <%=colourList.get(automaticColour)%>">
 							<i class="icon"><img src=<%=hi%> class="img-fluid"
-								alt="Girl in  jacket"></i>
+								alt="Food!"></i>
 							<h3><%=rs.getString(2)%></h3>
 							<p><%=rs.getString(3)%></p>
 							<form action="category" method="POST">

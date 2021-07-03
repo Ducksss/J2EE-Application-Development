@@ -1,17 +1,23 @@
 package servlets;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class editProduct
  */
+
+@MultipartConfig
 @WebServlet("/editProduct")
 public class editProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -53,6 +59,26 @@ public class editProduct extends HttpServlet {
 			int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
 			String[] categories = request.getParameterValues("categories");
 
+			// Image storage section
+			Part file = request.getPart("img");
+			String fileUploadname = "";
+			String imgFileName = file.getSubmittedFileName();
+			boolean haveImage = true;
+			if (imgFileName.equals("") || imgFileName == null) {
+				haveImage = false;
+			} else {
+				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+				FileOutputStream fos = new FileOutputStream(uploadPath);
+				InputStream is = file.getInputStream();
+
+				byte[] data = new byte[is.available()];
+				is.read(data);
+				fos.write(data);
+				fos.close();
+
+				fileUploadname = "assets/img/product/" + imgFileName;
+			}
+
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
@@ -63,24 +89,38 @@ public class editProduct extends HttpServlet {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=? WHERE product_id = ?";
+			int count = 0;
 
-			/// executing to DB - Statement to check if an account exist before it
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			if (haveImage) {
+				String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=?, image_location = ? WHERE product_id = ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, productTitle);
-			pstmt.setString(2, briefDescription);
-			pstmt.setString(3, detailedDescription);
-			pstmt.setDouble(4, costPrice);
-			pstmt.setDouble(5, retailPrice);
-			pstmt.setInt(6, stockQuantity);
-			pstmt.setInt(7, product_id);
+				pstmt.setString(1, productTitle);
+				pstmt.setString(2, briefDescription);
+				pstmt.setString(3, detailedDescription);
+				pstmt.setDouble(4, costPrice);
+				pstmt.setDouble(5, retailPrice);
+				pstmt.setInt(6, stockQuantity);
+				pstmt.setString(7, fileUploadname);
+				pstmt.setInt(8, product_id);
 
-			int count = pstmt.executeUpdate();
+				count = pstmt.executeUpdate();
+			} else {
+				String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=? WHERE product_id = ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, productTitle);
+				pstmt.setString(2, briefDescription);
+				pstmt.setString(3, detailedDescription);
+				pstmt.setDouble(4, costPrice);
+				pstmt.setDouble(5, retailPrice);
+				pstmt.setInt(6, stockQuantity);
+				pstmt.setInt(7, product_id);
+			}
 
 			if (count > 0) {
-				sql = "DELETE FROM sp_shop.category_tags WHERE fk_product_id = ?";
-				pstmt = conn.prepareStatement(sql);
+				String sql = "DELETE FROM sp_shop.category_tags WHERE fk_product_id = ?";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, product_id);
 				count = pstmt.executeUpdate();
 				for (int i = 0; i < categories.length; i++) {
