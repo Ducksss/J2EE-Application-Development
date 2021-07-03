@@ -66,24 +66,17 @@ public class addProduct extends HttpServlet {
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
-				Object type = file.getHeader("content-type");
-				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
-						|| type.equals("image/gif") || type.equals("image/bmp")) {
-					String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
-					FileOutputStream fos = new FileOutputStream(uploadPath);
-					InputStream is = file.getInputStream();
 
-					byte[] data = new byte[is.available()];
-					is.read(data);
-					fos.write(data);
-					fos.close();
+				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
+				FileOutputStream fos = new FileOutputStream(uploadPath);
+				InputStream is = file.getInputStream();
 
-					fileUploadname = "assets/img/product/" + imgFileName;
-					System.out.println("Is an image");
-				} else {
-					haveImage = false;
-					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
-				}
+				byte[] data = new byte[is.available()];
+				is.read(data);
+				fos.write(data);
+				fos.close();
+
+				fileUploadname = "assets/img/product/" + imgFileName;
 			}
 
 			// Step1: Load JDBC Driver
@@ -141,6 +134,7 @@ public class addProduct extends HttpServlet {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, productTitle);
 					rs = pstmt.executeQuery();
+					
 
 					if (rs.next()) {
 						int deltaOne = rs.getInt("product_id");

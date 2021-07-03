@@ -102,7 +102,7 @@
 									<%
 									} else if (request.getParameter("errCode").equals("productAlreadyExists")) {
 									%>
-									<p style="color: red">The product name has already been taken.</p>
+									<p style="color: red">The product name has already been taken. </p>
 									<%
 									} else {
 									%>
