@@ -58,6 +58,7 @@ public class addProduct extends HttpServlet {
 			String stockQuantity = request.getParameter("stockQuantity");
 			String[] categories = request.getParameterValues("categories");
 
+			// Image storage section
 			Part file = request.getPart("img");
 			String fileUploadname = "";
 			String imgFileName = file.getSubmittedFileName();
