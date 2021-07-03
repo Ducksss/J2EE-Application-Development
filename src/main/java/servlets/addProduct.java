@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.util.Date;
 
 /**
  * Servlet implementation class addProduct
  */
-
 @MultipartConfig
 @WebServlet("/addProduct")
 public class addProduct extends HttpServlet {
@@ -58,6 +58,11 @@ public class addProduct extends HttpServlet {
 			String stockQuantity = request.getParameter("stockQuantity");
 			String[] categories = request.getParameterValues("categories");
 
+			if (categories == null) {
+				System.out.print("IS NULL???");
+				response.sendRedirect("addProduct.jsp?errCode=noCategorySelected");
+			}
+
 			// Image storage section
 			Part file = request.getPart("img");
 			String fileUploadname = "";
@@ -66,17 +71,34 @@ public class addProduct extends HttpServlet {
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
+				Object type = file.getHeader("content-type");
+				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
+						|| type.equals("image/gif") || type.equals("image/bmp")) {
+					// Convert into String to concat with the file
+					// Getting the current date
+					Date date = new Date();
+					// This method returns the time in millis
+					long timeMilli = date.getTime();
 
-				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
-				FileOutputStream fos = new FileOutputStream(uploadPath);
-				InputStream is = file.getInputStream();
+					// File
+					System.out.println(imgFileName + timeMilli);
+					String uploadPath = getServletContext()
+							.getRealPath("/assets/img/product/" + timeMilli + imgFileName);
+					System.out.println(uploadPath);
+					FileOutputStream fos = new FileOutputStream(uploadPath);
+					InputStream is = file.getInputStream();
 
-				byte[] data = new byte[is.available()];
-				is.read(data);
-				fos.write(data);
-				fos.close();
+					//
+					byte[] data = new byte[is.available()];
+					is.read(data);
+					fos.write(data);
+					fos.close();
 
-				fileUploadname = "assets/img/product/" + imgFileName;
+					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
+				} else {
+					System.out.println("Error!");
+					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
+				}
 			}
 
 			// Step1: Load JDBC Driver
@@ -134,7 +156,6 @@ public class addProduct extends HttpServlet {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, productTitle);
 					rs = pstmt.executeQuery();
-					
 
 					if (rs.next()) {
 						int deltaOne = rs.getInt("product_id");

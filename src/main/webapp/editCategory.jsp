@@ -124,6 +124,12 @@
 								<div class="col-sm-12">
 									<%
 									if (request.getParameter("errCode") == null) {
+
+									} else if (request.getParameter("errCode").equals("notAnImage")) {
+									%>
+									<p style="color: red">The file you have provided is not an
+										image.</p>
+									<%
 									} else {
 									%>
 									<p style="color: red">Insertion failure</p>

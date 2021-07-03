@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.util.Date;
 
 /**
  * Servlet implementation class editCategory
@@ -60,16 +61,31 @@ public class editCategory extends HttpServlet {
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
-				String uploadPath = getServletContext().getRealPath("/assets/img/product/" + imgFileName);
-				FileOutputStream fos = new FileOutputStream(uploadPath);
-				InputStream is = file.getInputStream();
+				Object type = file.getHeader("content-type");
+				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
+						|| type.equals("image/gif") || type.equals("image/bmp")) {
+					// Convert into String to concat with the file
+					// Getting the current date
+					Date date = new Date();
+					// This method returns the time in millis
+					long timeMilli = date.getTime();
 
-				byte[] data = new byte[is.available()];
-				is.read(data);
-				fos.write(data);
-				fos.close();
+					// File
+					String uploadPath = getServletContext()
+							.getRealPath("/assets/img/product/" + timeMilli + imgFileName);
+					FileOutputStream fos = new FileOutputStream(uploadPath);
+					InputStream is = file.getInputStream();
 
-				fileUploadname = "assets/img/product/" + imgFileName;
+					//
+					byte[] data = new byte[is.available()];
+					is.read(data);
+					fos.write(data);
+					fos.close();
+
+					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
+				} else {
+					response.sendRedirect("editCategory.jsp?errCode=notAnImage&categoryID=" + category_id);
+				}
 			}
 
 			// Step1: Load JDBC Driver
@@ -82,7 +98,7 @@ public class editCategory extends HttpServlet {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			int count = 0;
-			
+
 			if (haveImage) {
 				String sql = "UPDATE sp_shop.category SET catname=?, description=?, category_image=? WHERE category_id = ?";
 

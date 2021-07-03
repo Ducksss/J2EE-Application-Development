@@ -96,6 +96,10 @@
 									%>
 									<p style="color: red">The category has been made before!</p>
 									<%
+									} else if (request.getParameter("errCode").equals("notAnImage")) {
+									%>
+									<p style="color: red">The file you provided is not an image!</p>
+									<%
 									} else {
 									%>
 									<p style="color: red">Category insertion failure</p>
