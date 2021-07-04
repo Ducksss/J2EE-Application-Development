@@ -59,8 +59,8 @@ public class addProduct extends HttpServlet {
 			String[] categories = request.getParameterValues("categories");
 
 			if (categories == null) {
-				System.out.print("IS NULL???");
 				response.sendRedirect("addProduct.jsp?errCode=noCategorySelected");
+				return;
 			}
 
 			// Image storage section
@@ -98,10 +98,9 @@ public class addProduct extends HttpServlet {
 				} else {
 					System.out.println("Error!");
 					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
+					return;
 				}
 			}
-			
-			System.out.println("Success, did reach here1");
 
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers

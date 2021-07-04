@@ -91,25 +91,22 @@
 								<div class="col-sm-12">
 									<%
 									if (request.getParameter("errCode") == null) {
-									%>
-									<%
 									} else if (request.getParameter("errCode").equals("notAnImage")) {
 									%>
 									<p style="color: red">The file you provided is not an
 										image!</p>
 									<%
-									} else if (request.getParameter("errCode").equals("noCategoriesSelected")) {
+									} else if (request.getParameter("errCode").equals("noCategorySelected")) {
 									%>
-									<p style="color: red">You did not select any category!</p>
+									<p style="color: red">You did not specify any category!</p>
 									<%
 									} else if (request.getParameter("errCode").equals("productAlreadyExists")) {
 									%>
-									<p style="color: red">The product name has already been
-										taken.</p>
+									<p style="color: red">The name for your product has already been taken!</p>
 									<%
 									} else {
 									%>
-									<p style="color: red">Product insert failure</p>
+									<p style="color: red">Insertion failure!</p>
 									<%
 									}
 									%>

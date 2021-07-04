@@ -101,10 +101,6 @@ public class editProduct extends HttpServlet {
 				}
 			}
 
-			System.out.println("Gamma1");
-			System.out.println("Gamma1");
-			System.out.println("Gamma1");
-
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
@@ -116,9 +112,6 @@ public class editProduct extends HttpServlet {
 
 			// instead of editing directly, use ? to prevent injection attacks
 			int count = 0;
-
-			System.out.println(product_id);
-			System.out.println(product_id);
 
 			if (haveImage) {
 				String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=?, image_location=? WHERE product_id = ?";
