@@ -48,8 +48,9 @@ public class editCategory extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		int category_id = 0;
 		try {
-			int category_id = Integer.parseInt(request.getParameter("category_id"));
+			category_id = Integer.parseInt(request.getParameter("category_id"));
 			String categoryName = request.getParameter("categoryName");
 			String categoryDescription = request.getParameter("categoryDescription");
 
@@ -129,7 +130,7 @@ public class editCategory extends HttpServlet {
 			}
 			conn.close();
 		} catch (Exception e) {
-
+			response.sendRedirect("editCategory.jsp?errCode=CategoryNameHasAlreadyBeenTaken&categoryID=" + category_id);
 		}
 	}
 

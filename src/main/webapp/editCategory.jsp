@@ -130,6 +130,10 @@
 									<p style="color: red">The file you have provided is not an
 										image.</p>
 									<%
+									} else if (request.getParameter("errCode").equals("CategoryNameHasAlreadyBeenTaken")) {
+									%>
+									<p style="color: red">The category name has already been taken!</p>
+									<%
 									} else {
 									%>
 									<p style="color: red">Insertion failure</p>

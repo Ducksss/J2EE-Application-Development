@@ -49,9 +49,10 @@ public class editProduct extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		int product_id = 0;
 		try {
 			// first execute
-			int product_id = Integer.parseInt(request.getParameter("product_id"));
+			product_id = Integer.parseInt(request.getParameter("product_id"));
 			String productTitle = request.getParameter("productTitle");
 			String briefDescription = request.getParameter("briefDescription");
 			String detailedDescription = request.getParameter("detailedDescription");
@@ -62,6 +63,7 @@ public class editProduct extends HttpServlet {
 
 			if (categories == null) {
 				response.sendRedirect("editProduct.jsp?errCode=noCategoriesSelected&productID=" + product_id);
+				return;
 			}
 
 			// Image storage section
@@ -69,7 +71,6 @@ public class editProduct extends HttpServlet {
 			String fileUploadname = "";
 			String imgFileName = file.getSubmittedFileName();
 			boolean haveImage = true;
-			System.out.println("Yes");
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
@@ -96,8 +97,8 @@ public class editProduct extends HttpServlet {
 
 					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 				} else {
-					haveImage = false;
 					response.sendRedirect("editProduct.jsp?errCode=notAnImage&productID=" + product_id);
+					return;
 				}
 			}
 
@@ -138,7 +139,7 @@ public class editProduct extends HttpServlet {
 				pstmt.setDouble(5, retailPrice);
 				pstmt.setInt(6, stockQuantity);
 				pstmt.setInt(7, product_id);
-				
+
 				count = pstmt.executeUpdate();
 			}
 
@@ -154,13 +155,17 @@ public class editProduct extends HttpServlet {
 					ipstmt.setString(2, categories[i]);
 					int rowAffected = ipstmt.executeUpdate();
 				}
+
+				conn.close();
+
 				response.sendRedirect("editProduct.jsp?successCode=successInsertion&productID=" + product_id);
+				return;
 			} else {
 				response.sendRedirect("editProduct.jsp?errCode=databaseFailed&productID=" + product_id);
+				return;
 			}
-			conn.close();
 		} catch (Exception e) {
-
+			response.sendRedirect("editProduct.jsp?errCode=nameHasAlreadyBeenTaken&productID=" + product_id);
 		}
 	}
 

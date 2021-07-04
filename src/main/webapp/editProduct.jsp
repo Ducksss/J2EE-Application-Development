@@ -147,6 +147,10 @@
 									%>
 									<p style="color: red">You did not select any category!</p>
 									<%
+									} else if (request.getParameter("errCode").equals("nameHasAlreadyBeenTaken")) {
+									%>
+									<p style="color: red">The product name has already been taken!</p>
+									<%
 									} else {
 									%>
 									<p style="color: red">Product update failure</p>
