@@ -178,16 +178,20 @@ public class addProduct extends HttpServlet {
 							rowAffected = ipstmt.executeUpdate();
 						}
 						response.sendRedirect("addProduct.jsp?successCode=successInsertion");
+						return;
 					} else {
 						response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+						return;
 					}
 				} else {
 					response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+					return;
 				}
 			}
 			conn.close();
 		} catch (Exception e) {
 			response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+			return;
 		}
 	}
 }
