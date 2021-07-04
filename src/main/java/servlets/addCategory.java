@@ -70,10 +70,17 @@ public class addCategory extends HttpServlet {
 					long timeMilli = date.getTime();
 
 					// File
-					System.out.println(imgFileName + timeMilli);
-					String uploadPath = getServletContext()
-							.getRealPath("/assets/img/product/" + timeMilli + imgFileName);
-					System.out.println(uploadPath);
+					String trial = getServletContext().getRealPath("");
+					String[] tokens = trial.replace("\\", "/").split("/");
+					String finalpathing = "";
+					for (int i = 0; i < tokens.length - 6; i++) {
+						finalpathing += tokens[i] + "/";
+					}
+					
+					finalpathing+= tokens[tokens.length - 1] + "/src/main/webapp/assets/img/product/";
+					System.out.println(finalpathing);
+
+					String uploadPath = (finalpathing + timeMilli + imgFileName);
 					FileOutputStream fos = new FileOutputStream(uploadPath);
 					InputStream is = file.getInputStream();
 
