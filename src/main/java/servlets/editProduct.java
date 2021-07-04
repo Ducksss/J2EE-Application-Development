@@ -69,13 +69,14 @@ public class editProduct extends HttpServlet {
 			String fileUploadname = "";
 			String imgFileName = file.getSubmittedFileName();
 			boolean haveImage = true;
+			System.out.println("Yes");
 			if (imgFileName.equals("") || imgFileName == null) {
 				haveImage = false;
 			} else {
 				Object type = file.getHeader("content-type");
 				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
 						|| type.equals("image/gif") || type.equals("image/bmp")) {
-					
+
 					// Convert into String to concat with the file
 					Date date = new Date();
 					// This method returns the time in millis
@@ -100,6 +101,10 @@ public class editProduct extends HttpServlet {
 				}
 			}
 
+			System.out.println("Gamma1");
+			System.out.println("Gamma1");
+			System.out.println("Gamma1");
+
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
@@ -112,8 +117,11 @@ public class editProduct extends HttpServlet {
 			// instead of editing directly, use ? to prevent injection attacks
 			int count = 0;
 
+			System.out.println(product_id);
+			System.out.println(product_id);
+
 			if (haveImage) {
-				String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=?, image_location = ? WHERE product_id = ?";
+				String sql = "UPDATE sp_shop.products SET product_title=?, brief_description=?, detail_description=?, cost_price=?, retail_price=?, stock_quantity=?, image_location=? WHERE product_id = ?";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, productTitle);
@@ -137,6 +145,8 @@ public class editProduct extends HttpServlet {
 				pstmt.setDouble(5, retailPrice);
 				pstmt.setInt(6, stockQuantity);
 				pstmt.setInt(7, product_id);
+				
+				count = pstmt.executeUpdate();
 			}
 
 			if (count > 0) {

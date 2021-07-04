@@ -250,7 +250,7 @@
 									<div class="row">
 										<div class="col form-group">
 											<textarea class="form-control" placeholder="Your Comment*"
-												name="content"></textarea>
+												name="content" required></textarea>
 										</div>
 									</div>
 

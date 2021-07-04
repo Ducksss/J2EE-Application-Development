@@ -100,6 +100,8 @@ public class addProduct extends HttpServlet {
 					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
 				}
 			}
+			
+			System.out.println("Success, did reach here1");
 
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
@@ -123,6 +125,7 @@ public class addProduct extends HttpServlet {
 				response.sendRedirect("addProduct.jsp?errCode=productAlreadyExists");
 			} else {
 				int rowAffected = 0;
+				System.out.println("Success, did reach here2");
 				// simple code to extract to insert
 				if (haveImage) {
 					String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity, image_location) values(?,?,?,?,?,?,?)";
