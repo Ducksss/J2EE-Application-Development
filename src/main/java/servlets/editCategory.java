@@ -95,6 +95,7 @@ public class editCategory extends HttpServlet {
 					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 				} else {
 					response.sendRedirect("editCategory.jsp?errCode=notAnImage&categoryID=" + category_id);
+					return;
 				}
 			}
 
@@ -134,12 +135,15 @@ public class editCategory extends HttpServlet {
 
 			if (count > 0) {
 				response.sendRedirect("editCategory.jsp?successCode=successInsertion&categoryID=" + category_id);
+				return;
 			} else {
 				response.sendRedirect("editCategory.jsp?errCode=databaseFailed&categoryID=" + category_id);
+				return;
 			}
 			conn.close();
 		} catch (Exception e) {
 			response.sendRedirect("editCategory.jsp?errCode=CategoryNameHasAlreadyBeenTaken&categoryID=" + category_id);
+			return;
 		}
 	}
 

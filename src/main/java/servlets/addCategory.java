@@ -93,6 +93,7 @@ public class addCategory extends HttpServlet {
 					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 				} else {
 					response.sendRedirect("addCategory.jsp?errCode=notAnImage");
+					return;
 				}
 			}
 
@@ -118,6 +119,7 @@ public class addCategory extends HttpServlet {
 			if (rs.next()) {
 				// if the email is associated with an account!
 				response.sendRedirect("addCategory.jsp?errCode=categoryAlreadyExists");
+				return;
 			} else {
 				int count = 0;
 
@@ -137,14 +139,17 @@ public class addCategory extends HttpServlet {
 					ipstmt.setString(2, categoryDescription);
 					count = ipstmt.executeUpdate();
 				}
+				
+				conn.close();
 
 				if (count > 0) {
 					response.sendRedirect("addCategory.jsp?successCode=successInsertion");
+					return;
 				} else {
 					response.sendRedirect("addCategory.jsp?errCode=databaseFailed");
+					return;
 				}
 			}
-			conn.close();
 		} catch (
 
 		Exception e) {
