@@ -78,33 +78,58 @@ public class editProduct extends HttpServlet {
 				if (type.equals("image/jpeg") || type.equals("image/png") || type.equals("image/jpg")
 						|| type.equals("image/gif") || type.equals("image/bmp")) {
 
-					// Convert into String to concat with the file
-					Date date = new Date();
-					// This method returns the time in millis
-					long timeMilli = date.getTime();
+					try {
+						// Convert into String to concat with the file
+						// Getting the current date
+						Date date = new Date();
+						// This method returns the time in millis
+						long timeMilli = date.getTime();
 
-					// File
-					String trial = getServletContext().getRealPath("");
-					String[] tokens = trial.replace("\\", "/").split("/");
-					String finalpathing = "";
-					for (int i = 0; i < tokens.length - 6; i++) {
-						finalpathing += tokens[i] + "/";
+						// File
+						String trial = getServletContext().getRealPath("");
+						String[] tokens = trial.replace("\\", "/").split("/");
+						String finalpathing = "";
+						for (int i = 0; i < tokens.length - 6; i++) {
+							finalpathing += tokens[i] + "/";
+						}
+
+						finalpathing += tokens[tokens.length - 1] + "/src/main/webapp/assets/img/product/";
+						System.out.println(finalpathing);
+
+						String uploadPath = (finalpathing + timeMilli + imgFileName);
+						FileOutputStream fos = new FileOutputStream(uploadPath);
+						InputStream is = file.getInputStream();
+
+						//
+						byte[] data = new byte[is.available()];
+						is.read(data);
+						fos.write(data);
+						fos.close();
+
+						fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
+						System.out.println("Here was reached - img 1");
+					} catch (Exception e) {
+						System.out.println("Here was reached - img 2");
+						// Convert into String to concat with the file
+						// Getting the current date
+						Date date = new Date();
+						// This method returns the time in millis
+						long timeMilli = date.getTime();
+
+						// File
+						String uploadPath = getServletContext()
+								.getRealPath("/assets/img/product/" + timeMilli + imgFileName);
+						FileOutputStream fos = new FileOutputStream(uploadPath);
+						InputStream is = file.getInputStream();
+
+						//
+						byte[] data = new byte[is.available()];
+						is.read(data);
+						fos.write(data);
+						fos.close();
+
+						fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 					}
-					
-					finalpathing+= tokens[tokens.length - 1] + "/src/main/webapp/assets/img/product/";
-					System.out.println(finalpathing);
-
-					String uploadPath = (finalpathing + timeMilli + imgFileName);
-					FileOutputStream fos = new FileOutputStream(uploadPath);
-					InputStream is = file.getInputStream();
-
-					//
-					byte[] data = new byte[is.available()];
-					is.read(data);
-					fos.write(data);
-					fos.close();
-
-					fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 				} else {
 					response.sendRedirect("editProduct.jsp?errCode=notAnImage&productID=" + product_id);
 					return;
