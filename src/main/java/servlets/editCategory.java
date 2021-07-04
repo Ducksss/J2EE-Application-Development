@@ -133,6 +133,8 @@ public class editCategory extends HttpServlet {
 				count = pstmt.executeUpdate();
 			}
 
+			conn.close();
+
 			if (count > 0) {
 				response.sendRedirect("editCategory.jsp?successCode=successInsertion&categoryID=" + category_id);
 				return;
@@ -140,7 +142,6 @@ public class editCategory extends HttpServlet {
 				response.sendRedirect("editCategory.jsp?errCode=databaseFailed&categoryID=" + category_id);
 				return;
 			}
-			conn.close();
 		} catch (Exception e) {
 			response.sendRedirect("editCategory.jsp?errCode=CategoryNameHasAlreadyBeenTaken&categoryID=" + category_id);
 			return;
