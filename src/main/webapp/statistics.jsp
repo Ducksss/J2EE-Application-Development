@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@page import="model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,8 +191,11 @@
 							<td><%=stock_quantity%></td>
 							<td><a href="editProduct.jsp?productID=<%=product_id%>">Edit</a>
 							</td>
-							<td><a href="deleteProduct.jsp?productID=<%=product_id%>"
-								onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+							<td>
+								<form method="POST" action="DeleteProductDetails">
+									<input name="productID" type="hidden" value="<%=product_id%>">
+									<input type="submit" value="Delete" class="btn btn-danger">
+								</form>
 							</td>
 						</tr>
 						<%

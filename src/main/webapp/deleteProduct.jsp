@@ -15,6 +15,7 @@
 	<%
 	try {
 		int product_id = Integer.parseInt(request.getParameter("productID"));
+		System.out.println(product_id);
 
 		// Step1: Load JDBC Driver
 		Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
@@ -35,14 +36,16 @@
 
 		int count = pstmt.executeUpdate();
 
+		conn.close();
+
+		
 		if (count > 0) {
 			response.sendRedirect("statistics.jsp");
 		} else {
 			response.sendRedirect("statistics.jsp");
 		}
-		conn.close();
 	} catch (Exception e) {
-
+		System.out.println(e);
 	}
 	%>
 </body>
