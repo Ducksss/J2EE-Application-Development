@@ -13,16 +13,16 @@ import java.util.*;
 import java.sql.*;
 
 /**
- * Servlet implementation class DeleteProductDetails
+ * Servlet implementation class DeleteCategoryDetails
  */
-@WebServlet("/DeleteProductDetails")
-public class DeleteProductDetails extends HttpServlet {
+@WebServlet("/DeleteCategoryDetails")
+public class DeleteCategoryDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteProductDetails() {
+	public DeleteCategoryDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -46,12 +46,16 @@ public class DeleteProductDetails extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 
-		ProductDB ProductDB = new ProductDB();
+		CategoryDB CategoryDB = new CategoryDB();
 
-		int product_id = Integer.parseInt(request.getParameter("productID"));
-		boolean success = ProductDB.deleteProduct(product_id);
+		int category_id = Integer.parseInt(request.getParameter("categoryID"));
+		boolean success = CategoryDB.deleteCategory(category_id);
 
-		response.sendRedirect("statistics.jsp");
+		if (success) {
+			response.sendRedirect("editCategory.jsp?successCode=successInsertion&categoryID=" + category_id);
+		} else {
+			response.sendRedirect("editCategory.jsp?errCode=databaseFailed&categoryID=" + category_id);
+		}
 	}
 
 }

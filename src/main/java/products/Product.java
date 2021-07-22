@@ -5,20 +5,12 @@ public class Product {
 	private double costPrice;
 	private double retailPrice;
 	private double stockQuantity;
-	private int quantity;
-	
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	public Product(String productTitle, double costPrice, double retailPrice, double stockQuantity, int quantity) {
-		super();
+	public Product(String productTitle, double costPrice, double retailPrice, double stockQuantity) {
 		this.productTitle = productTitle;
 		this.costPrice = costPrice;
 		this.retailPrice = retailPrice;
 		this.stockQuantity = stockQuantity;
-		this.quantity = quantity;
 	}
 
 	public String getProductTitle() {
@@ -53,11 +45,4 @@ public class Product {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 }

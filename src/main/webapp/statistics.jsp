@@ -263,8 +263,11 @@
 							<td><%=description%></td>
 							<td><a href="editCategory.jsp?categoryID=<%=category_id%>">Edit</a>
 							</td>
-							<td><a href="deleteCategory.jsp?categoryID=<%=category_id%>"
-								onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+							<td>
+								<form method="POST" action="DeleteCategoryDetails">
+									<input name="categoryID" type="hidden" value="<%=category_id%>">
+									<input type="submit" value="Delete" class="btn btn-danger">
+								</form>
 							</td>
 						</tr>
 						<%

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
+<%@page import="model.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,8 +87,9 @@
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST" action="addCategory"
-							enctype="multipart/form-data" novalidate>
+						<form class="needs-validation" method="POST"
+							action="AddCategoryDetails" enctype="multipart/form-data"
+							novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<%
@@ -98,7 +100,8 @@
 									<%
 									} else if (request.getParameter("errCode").equals("notAnImage")) {
 									%>
-									<p style="color: red">The file you provided is not an image!</p>
+									<p style="color: red">The file you provided is not an
+										image!</p>
 									<%
 									} else {
 									%>

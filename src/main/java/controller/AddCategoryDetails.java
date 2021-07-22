@@ -1,31 +1,32 @@
-package servlets;
+package controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.util.Date;
 
 /**
- * Servlet implementation class addCategory
+ * Servlet implementation class AddCategory
  */
-@MultipartConfig
-@WebServlet("/addCategory")
-public class addCategory extends HttpServlet {
+@WebServlet("/AddCategory")
+public class AddCategoryDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public addCategory() {
+	public AddCategoryDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -48,7 +49,9 @@ public class addCategory extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 		try {
+			System.out.println("Cato failure");
 			String categoryName = request.getParameter("categoryName");
 			String categoryDescription = request.getParameter("categoryDescription");
 
@@ -179,4 +182,5 @@ public class addCategory extends HttpServlet {
 
 		}
 	}
+
 }
