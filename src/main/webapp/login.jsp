@@ -29,7 +29,7 @@
 
 					<div class="signin-form">
 						<h2 class="form-title">Sign in</h2>
-						<form action="loginValidation" method="POST" class="register-form"
+						<form action="LoginValidation" method="POST" class="register-form"
 							id="login-form">
 							<div class="form-group">
 								<label for="your_name"><i

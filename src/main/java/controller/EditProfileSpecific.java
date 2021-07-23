@@ -13,14 +13,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class editProfileSpecific
  */
-@WebServlet("/editProfileSpecific")
-public class editProfileSpecific extends HttpServlet {
+@WebServlet("/EditProfileSpecific")
+public class EditProfileSpecific extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public editProfileSpecific() {
+	public EditProfileSpecific() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

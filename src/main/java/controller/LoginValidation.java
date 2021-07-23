@@ -16,14 +16,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class loginValidation
  */
-@WebServlet("/loginValidation")
-public class loginValidation extends HttpServlet {
+@WebServlet("/LoginValidation")
+public class LoginValidation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public loginValidation() {
+	public LoginValidation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
