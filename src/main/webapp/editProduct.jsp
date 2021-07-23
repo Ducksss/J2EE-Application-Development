@@ -132,7 +132,7 @@
 				</div>
 				<div class="row g-5">
 					<div class="col-md-11 col-lg-11">
-						<form class="needs-validation" method="POST" action="editProduct"
+						<form class="needs-validation" method="POST" action="EditProductDetails"
 							enctype="multipart/form-data" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
