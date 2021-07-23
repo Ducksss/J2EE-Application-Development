@@ -1,4 +1,4 @@
-package controller;
+package servlets;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,18 +15,17 @@ import javax.servlet.http.Part;
 import java.util.Date;
 
 /**
- * Servlet implementation class AddCategoryServlet
+ * Servlet implementation class addCategory
  */
-
 @MultipartConfig
-@WebServlet("/AddCategoryDetails")
-public class AddCategoryDetails extends HttpServlet {
+@WebServlet("/addCategory")
+public class addCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddCategoryDetails() {
+	public addCategory() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -180,5 +179,4 @@ public class AddCategoryDetails extends HttpServlet {
 
 		}
 	}
-
 }

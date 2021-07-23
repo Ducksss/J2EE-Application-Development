@@ -3,7 +3,11 @@ package controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,21 +16,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.util.Date;
 
 /**
- * Servlet implementation class AddCategoryServlet
+ * Servlet implementation class AddProductDetails
  */
-
 @MultipartConfig
-@WebServlet("/AddCategoryDetails")
-public class AddCategoryDetails extends HttpServlet {
+@WebServlet("/AddProductDetails")
+public class AddProductDetails extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddCategoryDetails() {
+	public AddProductDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -49,9 +51,21 @@ public class AddCategoryDetails extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
 		try {
-			String categoryName = request.getParameter("categoryName");
-			String categoryDescription = request.getParameter("categoryDescription");
+			int product_id = 0;
+			String productTitle = request.getParameter("productTitle");
+			String briefDescription = request.getParameter("briefDescription");
+			String detailedDescription = request.getParameter("detailedDescription");
+			String costPrice = request.getParameter("costPrice");
+			String retailPrice = request.getParameter("retailPrice");
+			String stockQuantity = request.getParameter("stockQuantity");
+			String[] categories = request.getParameterValues("categories");
+
+			if (categories == null) {
+				response.sendRedirect("addProduct.jsp?errCode=noCategorySelected");
+				return;
+			}
 
 			// Image storage section
 			Part file = request.getPart("img");
@@ -118,12 +132,10 @@ public class AddCategoryDetails extends HttpServlet {
 						fileUploadname = "assets/img/product/" + timeMilli + imgFileName;
 					}
 				} else {
-					response.sendRedirect("addCategory.jsp?errCode=notAnImage");
+					response.sendRedirect("addProduct.jsp?errCode=notAnImage");
 					return;
 				}
 			}
-
-			System.out.println("Success till here");
 
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
@@ -135,49 +147,82 @@ public class AddCategoryDetails extends HttpServlet {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "SELECT * FROM sp_shop.category WHERE catname = ?";
+			String sql = "SELECT * FROM sp_shop.products WHERE product_title = ?";
 
-			/// executing to DB - Statement to check if an account exist before it
+			// executing to DB - Statement to check if an account exist before it
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, categoryName);
+			pstmt.setString(1, productTitle);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				// if the email is associated with an account!
-				response.sendRedirect("addCategory.jsp?errCode=categoryAlreadyExists");
+				response.sendRedirect("addProduct.jsp?errCode=productAlreadyExists");
 				return;
 			} else {
-				int count = 0;
-
+				int rowAffected = 0;
+				System.out.println("Success, did reach here2");
+				// simple code to extract to insert
 				if (haveImage) {
-					System.out.println("With image is in here");
-					String insertSQL = "INSERT INTO sp_shop.category(catname, description, category_image) values(?,?,?)";
+					String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity, image_location) values(?,?,?,?,?,?,?)";
 					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
-					ipstmt.setString(1, categoryName);
-					ipstmt.setString(2, categoryDescription);
-					ipstmt.setString(3, fileUploadname);
-					count = ipstmt.executeUpdate();
+					ipstmt.setString(1, productTitle);
+					ipstmt.setString(2, briefDescription);
+					ipstmt.setString(3, detailedDescription);
+					ipstmt.setString(4, costPrice);
+					ipstmt.setString(5, retailPrice);
+					ipstmt.setString(6, stockQuantity);
+					ipstmt.setString(7, fileUploadname);
+
+					rowAffected = ipstmt.executeUpdate();
 				} else {
-					System.out.println("With no image is in here");
-					String insertSQL = "INSERT INTO sp_shop.category(catname, description) values(?,?)";
+					String insertSQL = "INSERT INTO sp_shop.products(product_title, brief_description, detail_description, cost_price, retail_price, stock_quantity) values(?,?,?,?,?,?)";
 					PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
-					ipstmt.setString(1, categoryName);
-					ipstmt.setString(2, categoryDescription);
-					count = ipstmt.executeUpdate();
+					ipstmt.setString(1, productTitle);
+					ipstmt.setString(2, briefDescription);
+					ipstmt.setString(3, detailedDescription);
+					ipstmt.setString(4, costPrice);
+					ipstmt.setString(5, retailPrice);
+					ipstmt.setString(6, stockQuantity);
+
+					rowAffected = ipstmt.executeUpdate();
 				}
 
-				conn.close();
+				if (rowAffected > 0) {
+					// simple code to select the product_id for the many to many
+					// STATEMENT.getGeneratedKeys() failed for me, so i had to manually sort.
+					sql = "SELECT * FROM sp_shop.products where product_title = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, productTitle);
+					rs = pstmt.executeQuery();
 
-				if (count > 0) {
-					response.sendRedirect("addCategory.jsp?successCode=successInsertion");
-					return;
+					if (rs.next()) {
+						int deltaOne = rs.getInt("product_id");
+						// simple for loop to add inot the many to many tables
+						for (int i = 0; i < categories.length; i++) {
+							String insertSQL = "INSERT INTO sp_shop.category_tags(fk_product_id, fk_category_id) values(?,?)";
+							PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+							ipstmt = conn.prepareStatement(insertSQL);
+							ipstmt.setInt(1, deltaOne);
+							ipstmt.setString(2, categories[i]);
+							rowAffected = ipstmt.executeUpdate();
+						}
+
+						conn.close();
+
+						response.sendRedirect("addProduct.jsp?successCode=successInsertion");
+						return;
+					} else {
+						response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+						return;
+					}
 				} else {
-					response.sendRedirect("addCategory.jsp?errCode=databaseFailed");
+					response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
 					return;
 				}
 			}
 		} catch (Exception e) {
-
+			response.sendRedirect("addProduct.jsp?errCode=databaseFailed");
+			return;
 		}
 	}
 
