@@ -17,38 +17,50 @@ import products.Product;
 @WebServlet("/ProductCartAddition")
 public class ProductCartAddition extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductCartAddition() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ProductCartAddition() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		System.out.println("ProductCartDecrementWasReached");
 		try {
 			int productID = Integer.parseInt(request.getParameter("productID"));
 			ArrayList<Product> productList = (ArrayList<Product>) request.getSession().getAttribute("product");
-//			System.out.println(productList.indexOf(productID));
-//			System.out.println(productList.get(productList.indexOf(productID)).getProductTitle());
-			System.out.println("Hello WOrld");
+
+			System.out.println(productID);
+			for (Product product : productList) {
+				if (product.getProductID() == productID) {
+					product.setQuantity(product.getQuantity() + 1);
+					break;
+				}
+			}
+
 			response.sendRedirect("cart.jsp");
-			return;			
+			return;
 		} catch (Exception e) {
+			System.out.print(e);
 			response.sendRedirect("cart.jsp");
 			return;
 		}

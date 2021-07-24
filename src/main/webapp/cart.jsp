@@ -103,6 +103,7 @@
 						<%
 						ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 						int id = 1;
+						double total = 0;
 						// Step 6: Process Result
 
 						try {
@@ -112,17 +113,20 @@
 								String productTitle = productList.get(i).getProductTitle();
 								double retailPrice = productList.get(i).getRetailPrice();
 								String formattedRetailPrice = String.format("%.2f", retailPrice);
+								double rowIndividualPrice = retailPrice * quantity;
 						%>
 						<tr>
 							<th scope="row"><%=i + 1%></th>
 							<td><%=productTitle%></td>
 							<td>
 								<div style="display: flex;">
-									<form action="ProductCartDeletion" method="POST"
+									<!-- Decrement product -->
+									<form method="POST" action="ProductCartDecrement"
 										class="form-inline">
-										<input type="hidden" name="id" value="<%=productID%>"
+										<input type="hidden" name="productID" value="<%=productID%>"
 											class="form-input">
-										<button type="submit" style="border: none; background: transparent;">
+										<button type="submit"
+											style="border: none; background: transparent;">
 											<i class="fa fa-minus-square"
 												style="margin-right: 1rem; margin-top: 0.65rem;"> </i>
 										</button>
@@ -131,17 +135,20 @@
 										<input type="text" name="quantity" class="form-control"
 											value="<%=quantity%>" readonly>
 									</div>
+									<!-- Increment product -->
 									<form action="ProductCartAddition" method="POST"
 										class="form-inline">
-										<input type="hidden" name="id" value="<%=productID%>"
+										<input type="hidden" name="productID" value="<%=productID%>"
 											class="form-input">
-										<button type="submit" style="border: none; background: transparent;">
+										<button type="submit"
+											style="border: none; background: transparent;">
 											<i class="fa fa-plus-square"
 												style="margin-left: 1rem; margin-top: 0.65rem;"></i>
 										</button>
 									</form>
 								</div>
 							</td>
+							<!-- Remove product -->
 							<td scope="col">
 								<form method="POST" action="ProductCartDeletion">
 									<input type="hidden" name="productID" value=<%=productID%>>
@@ -149,7 +156,7 @@
 										from cart</button>
 								</form>
 							</td>
-							<td><%=formattedRetailPrice%></td>
+							<td><%=String.format("%.2f",rowIndividualPrice)%></td>
 						</tr>
 						<%
 						id++;
