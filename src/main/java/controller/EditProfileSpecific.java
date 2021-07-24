@@ -55,6 +55,7 @@ public class EditProfileSpecific extends HttpServlet {
 			String address = request.getParameter("address");
 			String password = request.getParameter("password");
 			String confirmPassword = request.getParameter("confirmPassword");
+			String contactNumber = request.getParameter("contactNumber");
 
 			if (!password.equals(confirmPassword)) {
 				response.sendRedirect("editProfileSpecific.jsp?errCode=passwordsDoNotMatch");
@@ -69,7 +70,7 @@ public class EditProfileSpecific extends HttpServlet {
 				Connection conn = DriverManager.getConnection(connURL);
 
 				// instead of editing directly, use ? to prevent injection attacks
-				String sql = "UPDATE sp_shop.users SET username=?, address=?, password=? WHERE user_id = ?";
+				String sql = "UPDATE sp_shop.users SET username=?, address=?, password=?, contact_number=? WHERE user_id = ?";
 
 				/// executing to DB - Statement to check if an account exist before it
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -77,7 +78,8 @@ public class EditProfileSpecific extends HttpServlet {
 				pstmt.setString(1, username);
 				pstmt.setString(2, address);
 				pstmt.setString(3, password);
-				pstmt.setDouble(4, user_id);
+				pstmt.setString(4, contactNumber);
+				pstmt.setDouble(5, user_id);
 
 				int count = pstmt.executeUpdate();
 
@@ -89,7 +91,7 @@ public class EditProfileSpecific extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-
+			System.out.println(e);
 		}
 	}
 

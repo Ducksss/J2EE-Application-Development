@@ -103,6 +103,7 @@
 	String email = "";
 	String address = "";
 	String username = "";
+	String contact_number = "";
 	String created_at = "";
 	String password = "";
 
@@ -112,6 +113,7 @@
 		username = rs.getString("username");
 		created_at = rs.getString("created_at");
 		password = rs.getString("password");
+		contact_number = rs.getString("contact_number");
 	}
 	%>
 
@@ -172,6 +174,13 @@
 										value="<%=username%>" name="username" required>
 									<div class="invalid-feedback">A Valid user name is
 										required.</div>
+								</div>
+
+								<div class="col-sm-12">
+									<label for="contactNumber" class="form-label">Contact number</label> <input
+										type="text" class="form-control" id="contactNumber" placeholder=""
+										name="contactNumber" value="<%=contact_number%>" required>
+									<div class="invalid-feedback">A valid contact number is required.</div>
 								</div>
 
 								<div class="col-sm-12">

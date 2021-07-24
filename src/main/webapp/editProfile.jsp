@@ -103,12 +103,14 @@
 	String address = "";
 	String username = "";
 	String created_at = "";
+	String contact_number = "";
 
 	if (rs.next()) {
 		email = rs.getString("email");
 		address = rs.getString("address");
 		username = rs.getString("username");
 		created_at = rs.getString("created_at");
+		contact_number = rs.getString("contact_number");
 	}
 
 	// Step 7: Close connection
@@ -142,9 +144,17 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<b
-											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Contact</b>
+											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Email address</b>
 									</div>
 									<div class="col-lg-6"><%=email%></div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-lg-6">
+										<b
+											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Contact Number</b>
+									</div>
+									<div class="col-lg-6"><%=contact_number%></div>
 								</div>
 								<hr>
 								<div class="row">

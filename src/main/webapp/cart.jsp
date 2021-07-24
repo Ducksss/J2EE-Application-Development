@@ -78,7 +78,7 @@
 	<main id="main">
 		<!-- ======= Features Section ======= -->
 		<section id="features" class="features">
-			<div class="container" data-aos="fade-up">
+			<div class="container">
 
 				<!-- Feature Tabs -->
 				<div>
@@ -114,6 +114,8 @@
 								double retailPrice = productList.get(i).getRetailPrice();
 								String formattedRetailPrice = String.format("%.2f", retailPrice);
 								double rowIndividualPrice = retailPrice * quantity;
+
+								total += rowIndividualPrice;
 						%>
 						<tr>
 							<th scope="row"><%=i + 1%></th>
@@ -156,11 +158,13 @@
 										from cart</button>
 								</form>
 							</td>
-							<td><%=String.format("%.2f",rowIndividualPrice)%></td>
+							<td scope="col">$<%=String.format("%.2f", rowIndividualPrice)%></td>
+							<%
+							id++;
+							}
+							%>
 						</tr>
 						<%
-						id++;
-						}
 						} catch (Exception e) {
 						%>
 						<tr>
@@ -179,6 +183,20 @@
 							for (int i = 0; i < productList.size(); i++) {
 							}
 						%>
+						<tr>
+							<td scope="col" colspan="4" style="border-style: none;">
+								Price:</td>
+							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total)%></td>
+						</tr>
+						<tr>
+							<td scope="col" colspan="4" style="border-style: none;">GST:</td>
+							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total * 0.07)%></td>
+						</tr>
+						<tr>
+							<td scope="col" colspan="4"
+								style="font-weight: bold; font-size: 1.2rem;">Total price:</td>
+							<td scope="col" colspan="1" style="font-weight: bold;">$<%=String.format("%.2f", total * 0.07 + total)%></td>
+						</tr>
 						<tr>
 							<td colspan="5" class="right"><a href="checkOut.jsp"><button
 										type="button" class="btn btn-primary">Check out</button></a></td>

@@ -40,15 +40,20 @@
 							</div>
 							<%
 							if (request.getParameter("errCode") == null) {
-							} else if(request.getParameter("errCode").equals("accountAlreadyExists")){
+							} else if (request.getParameter("errCode").equals("accountAlreadyExists")) {
 							%>
 							<p style="color: red; font-size: 13px; margin-top: -1.4rem;">Email
 								has already been taken.</p>
 							<%
-							}else{
-								
+							} else {
+
 							}
 							%>
+							<div class="form-group">
+								<label for="number"><i class="zmdi zmdi-phone"></i> </label> <input
+									type="number" name="number" id="number"
+									placeholder="Your contact number..." />
+							</div>
 							<div class="form-group">
 								<label for="address"><i class="zmdi zmdi-map"></i></label> <input
 									type="text" name="address" id="address"
