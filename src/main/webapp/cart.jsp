@@ -107,6 +107,7 @@
 
 						try {
 							for (int i = 0; i < productList.size(); i++) {
+								int productID = productList.get(i).getProductID();
 								String productTitle = productList.get(i).getProductTitle();
 								double retailPrice = productList.get(i).getRetailPrice();
 								String formattedRetailPrice = String.format("%.2f", retailPrice);
@@ -118,20 +119,29 @@
 								<form action="" method="POST" class="form-inline">
 									<input type="hidden" name="id" value="1%>" class="form-input">
 									<div class="form-group d-flex justify-content-between">
-										<a class="btn btn-sm btn-inc"
-											href="../../ass1-quantity-inc-dec?action=dec&id=<%=1%>"><i
-											class="fa fa-minus-square"></i></a> <input type="text"
-											name="quantity" class="form-control" value="<%=1%>" readonly>
-										<a class="btn btn-sm btn-inc"
-											href="../../ass1-quantity-inc-dec?action=inc&id=<%=1%>"><i
-											class="fa fa-plus-square"></i></a>
+										<div>
+											<a class="btn btn-sm btn-inc"
+												href="../../ass1-quantity-inc-dec?action=dec&id=<%=1%>">
+												<i class="fa fa-minus-square"> </i>
+											</a>
+										</div>
+										<div>
+											<input type="text" name="quantity" class="form-control"
+												value="<%=1%>" readonly>
+										</div>
+										<div>
+											<a class="btn btn-sm btn-inc"
+												href="../../ass1-quantity-inc-dec?action=inc&id=<%=1%>"><i
+												class="fa fa-plus-square"></i></a>
+										</div>
 									</div>
 								</form>
 							</td>
 							<td scope="col">
-								<form>
-									<input type="hidden">
-									<button type="button" class="btn btn-danger">Remove from cart</button>
+								<form method="POST" action="ProductCartDeletion">
+									<input type="hidden" name="productID" value=<%=productID%>>
+									<button type="submit" class="btn btn-danger">Remove
+										from cart</button>
 								</form>
 							</td>
 							<td><%=formattedRetailPrice%></td>
