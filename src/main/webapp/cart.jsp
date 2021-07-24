@@ -94,6 +94,8 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Product name</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Remove</th>
 							<th scope="col">Price</th>
 						</tr>
 					</thead>
@@ -112,6 +114,26 @@
 						<tr>
 							<th scope="row"><%=i + 1%></th>
 							<td><%=productTitle%></td>
+							<td>
+								<form action="" method="POST" class="form-inline">
+									<input type="hidden" name="id" value="1%>" class="form-input">
+									<div class="form-group d-flex justify-content-between">
+										<a class="btn btn-sm btn-inc"
+											href="../../ass1-quantity-inc-dec?action=dec&id=<%=1%>"><i
+											class="fa fa-minus-square"></i></a> <input type="text"
+											name="quantity" class="form-control" value="<%=1%>" readonly>
+										<a class="btn btn-sm btn-inc"
+											href="../../ass1-quantity-inc-dec?action=inc&id=<%=1%>"><i
+											class="fa fa-plus-square"></i></a>
+									</div>
+								</form>
+							</td>
+							<td scope="col">
+								<form>
+									<input type="hidden">
+									<button type="button" class="btn btn-danger">Remove from cart</button>
+								</form>
+							</td>
 							<td><%=formattedRetailPrice%></td>
 						</tr>
 						<%

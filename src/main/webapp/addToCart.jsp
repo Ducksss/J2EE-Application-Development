@@ -17,13 +17,14 @@
 			response.sendRedirect("login.jsp");
 		} else {
 			//extracts the value from the form
+			int productID = Integer.parseInt(request.getParameter("productID"));
 			String productTitle = request.getParameter("productTitle");
 			double costPrice = Double.parseDouble(request.getParameter("costPrice"));
 			double retailPrice = Double.parseDouble(request.getParameter("retailPrice"));
 			int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
 
 			//create a book object
-			Product userProduct = new Product(productTitle, costPrice, retailPrice, stockQuantity);
+			Product userProduct = new Product(productID, productTitle, costPrice, retailPrice, stockQuantity);
 
 			ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 

@@ -83,6 +83,7 @@
 			pstmt.setString(1, product_id);
 			rs = pstmt.executeQuery();
 
+			int productID = 0;
 			String product_title = "";
 			String detail_description = "";
 			String cost_price = "";
@@ -91,6 +92,7 @@
 			String image_location = "";
 
 			if (rs.next()) {
+				productID = rs.getInt("product_id");
 				product_title = rs.getString("product_title");
 				detail_description = rs.getString("detail_description");
 				cost_price = String.format("%.2f", rs.getDouble("cost_price"));
@@ -147,7 +149,8 @@
 										<input type="hidden" id="retailPrice" name="retailPrice"
 											value="<%=retail_price%>"> <input type="hidden"
 											id="stockQuantity" name="stockQuantity"
-											value="<%=stock_quantity%>">
+											value="<%=stock_quantity%>"> <input type="hidden"
+											id="productID" name="productID" value=<%=productID%> />
 										<button type="submit" class="btn btn-primary">Add to
 											Cart</button>
 									</form>
