@@ -1,18 +1,28 @@
 package products;
 
 public class Product {
+	private int quantity;
 	private int productID;
 	private String productTitle;
 	private double costPrice;
 	private double retailPrice;
 	private double stockQuantity;
 
-	public Product(int productID, String productTitle, double costPrice, double retailPrice, double stockQuantity) {
+	public Product(int quantity,int productID, String productTitle, double costPrice, double retailPrice, double stockQuantity) {
+		this.quantity = quantity;
 		this.productID = productID;
 		this.productTitle = productTitle;
 		this.costPrice = costPrice;
 		this.retailPrice = retailPrice;
 		this.stockQuantity = stockQuantity;
+	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	public int getProductID() {

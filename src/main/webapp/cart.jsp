@@ -107,6 +107,7 @@
 
 						try {
 							for (int i = 0; i < productList.size(); i++) {
+								int quantity = productList.get(i).getQuantity();
 								int productID = productList.get(i).getProductID();
 								String productTitle = productList.get(i).getProductTitle();
 								double retailPrice = productList.get(i).getRetailPrice();
@@ -116,26 +117,30 @@
 							<th scope="row"><%=i + 1%></th>
 							<td><%=productTitle%></td>
 							<td>
-								<form action="" method="POST" class="form-inline">
-									<input type="hidden" name="id" value="1%>" class="form-input">
-									<div class="form-group d-flex justify-content-between">
-										<div>
-											<a class="btn btn-sm btn-inc"
-												href="../../ass1-quantity-inc-dec?action=dec&id=<%=1%>">
-												<i class="fa fa-minus-square"> </i>
-											</a>
-										</div>
-										<div>
-											<input type="text" name="quantity" class="form-control"
-												value="<%=1%>" readonly>
-										</div>
-										<div>
-											<a class="btn btn-sm btn-inc"
-												href="../../ass1-quantity-inc-dec?action=inc&id=<%=1%>"><i
-												class="fa fa-plus-square"></i></a>
-										</div>
+								<div style="display: flex;">
+									<form action="ProductCartDeletion" method="POST"
+										class="form-inline">
+										<input type="hidden" name="id" value="<%=productID%>"
+											class="form-input">
+										<button type="submit" style="border: none; background: transparent;">
+											<i class="fa fa-minus-square"
+												style="margin-right: 1rem; margin-top: 0.65rem;"> </i>
+										</button>
+									</form>
+									<div>
+										<input type="text" name="quantity" class="form-control"
+											value="<%=quantity%>" readonly>
 									</div>
-								</form>
+									<form action="ProductCartAddition" method="POST"
+										class="form-inline">
+										<input type="hidden" name="id" value="<%=productID%>"
+											class="form-input">
+										<button type="submit" style="border: none; background: transparent;">
+											<i class="fa fa-plus-square"
+												style="margin-left: 1rem; margin-top: 0.65rem;"></i>
+										</button>
+									</form>
+								</div>
 							</td>
 							<td scope="col">
 								<form method="POST" action="ProductCartDeletion">
@@ -152,7 +157,7 @@
 						} catch (Exception e) {
 						%>
 						<tr>
-							<td colspan=3>You have nothing in your cart so far!</td>
+							<td colspan=5>You have nothing in your cart so far!</td>
 						</tr>
 						<%
 						}

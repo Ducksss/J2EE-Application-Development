@@ -23,20 +23,31 @@
 			double retailPrice = Double.parseDouble(request.getParameter("retailPrice"));
 			int stockQuantity = Integer.parseInt(request.getParameter("stockQuantity"));
 
-			//create a book object
-			Product userProduct = new Product(productID, productTitle, costPrice, retailPrice, stockQuantity);
+			//create a product object
+			Product userProduct = new Product(1, productID, productTitle, costPrice, retailPrice, stockQuantity);
 
 			ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 
 			if ((productList == null)) {
-		//create a arrayList
-		ArrayList<Product> productArrayList = new ArrayList<Product>();
-		productArrayList.add(userProduct);
-		session.setAttribute("product", productArrayList);
+				//create a arrayList
+				ArrayList<Product> productArrayList = new ArrayList<Product>();
+				productArrayList.add(userProduct);
+				session.setAttribute("product", productArrayList);
 			} else {
-		//rewrite the booklist session
-		productList.add(userProduct);
-		session.setAttribute("product", productList);
+				//rewrite the booklist session
+				boolean duplicateExists = false;
+				for (Product product : productList) {
+					if(product.getProductID() == productID){
+						int quantity = product.getQuantity() + 1;
+						product.setQuantity(quantity);
+						duplicateExists = true;
+					}
+				}
+				
+				if(!duplicateExists){
+					productList.add(userProduct);
+					session.setAttribute("product", productList);
+				}
 			}
 
 			//redirects upon success
