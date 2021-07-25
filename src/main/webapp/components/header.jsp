@@ -90,6 +90,9 @@
 					<li class="dropdown"><a href="statistics.jsp"><span>Admin
 								tools</span> <i class="bi bi-chevron-down"></i></a>
 						<ul>
+							<li><a href="manageUserAndAdmin.jsp"><i
+									class="fa fa-wrench"
+									style="padding-right: 1px; font-size: 15px;"></i>Manage users</a></li>
 							<li><a href="addProduct.jsp"><i class="fas fa-plus"
 									style="padding-right: 1px; font-size: 15px;"></i>Add products</a></li>
 							<li><a href="addCategory.jsp"><i
