@@ -112,9 +112,6 @@
 		created_at = rs.getString("created_at");
 		contact_number = rs.getString("contact_number");
 	}
-
-	// Step 7: Close connection
-	conn.close();
 	%>
 	<main id="main">
 		<!-- ======= Features Section ======= -->
@@ -144,7 +141,8 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<b
-											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Email address</b>
+											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Email
+											address</b>
 									</div>
 									<div class="col-lg-6"><%=email%></div>
 								</div>
@@ -152,7 +150,8 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<b
-											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Contact Number</b>
+											style="color: #65676b; font-weight: 600; font-size: 15px; line-height: 20px; letter-spacing: -0.24px;">Contact
+											Number</b>
 									</div>
 									<div class="col-lg-6"><%=contact_number%></div>
 								</div>
@@ -179,8 +178,66 @@
 						<p class="secp"></p>
 					</div>
 
+					<!-- Start of View Product -->
+					<div>
+						<div class="row feture-tabs" data-aos="fade-up">
+							<ol class="breadcrumb"
+								style="margin-top: -5rem; margin-left: 1rem;">
+
+							</ol>
+							<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
+								Console - View products</h4>
+						</div>
+					</div>
+					<table class="table table-hover">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Reciept ID</th>
+								<th scope="col">Price</th>
+								<th scope="col">View more</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+							int id = 1;
+							String sqlStr = "SELECT * FROM sp_shop.reciepts where user_id = ?";
+							pstmt = conn.prepareStatement(sqlStr);
+							pstmt.setInt(1, user_id);
+							rs = pstmt.executeQuery();
+							// Step 6: Process Result
+							while (rs.next()) {
+								int reciept_id = rs.getInt("reciept_id");
+								double total_price = Double.parseDouble(rs.getString("total_price"));
+							%>
+							<tr>
+								<th scope="row"><%=id%></th>
+								<td>ID<%=reciept_id%></td>
+								<td>$<%=String.format("%.2f", total_price)%></td>
+								<td>
+									<form method="POST" action="">
+										<input type="hidden" value="<%=reciept_id%>" name="reciept_id">
+										<input type="submit" value="View more" class="btn btn-primary">
+									</form>
+								</td>
+							</tr>
+							<%
+							id++;
+							}
+
+							// Step 7: Close connection
+							conn.close();
+							%>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5" class="right"><a href="addCategory.jsp"><button
+											type="button" class="btn btn-primary">Add Category</button></a></td>
+							</tr>
+						</tfoot>
+					</table>
+
 				</div>
-			</div>
 			</div>
 		</section>
 		<!-- End Features Section -->
