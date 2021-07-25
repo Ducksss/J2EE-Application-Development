@@ -59,6 +59,7 @@
 <body>
 	<!-- ======= Validation ======= -->
 	<%
+	double totalPrice = 0;
 	try {
 		String userRole = (String) session.getAttribute("sessUserRole");
 		if (userRole == null) {
@@ -91,10 +92,9 @@
 
 				<div class="py-5 text-center">
 					<h2>Checkout form</h2>
-					<p class="lead">Below is an example form built entirely with
-						Bootstrap's form controls. Each required form group has a
-						validation state that can be triggered by attempting to submit the
-						form without completing it.</p>
+					<p class="lead">Please fill in the checkout form with your
+						correct details and particulars to ensure we can deliver to you
+						safely! Do also check the items are correct!</p>
 				</div>
 
 				<div class="row g-5">
@@ -103,7 +103,9 @@
 						int productListSize = 0;
 						ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 						try {
-							productListSize = productList.size();
+							for (int i = 0; i < productList.size(); i++) {
+								productListSize += productList.get(i).getQuantity();
+							}
 
 							if (productListSize == 0) {
 								response.sendRedirect("cart.jsp");
@@ -117,20 +119,20 @@
 						</h4>
 						<ul class="list-group mb-3">
 							<%
-							double totalPrice = 0;
 							String formmatedTotalPrice = "";
 							try {
 								totalPrice = 0;
 								for (int i = 0; i < productList.size(); i++) {
+									int quantity = productList.get(i).getQuantity();
 									String productName = productList.get(i).getProductTitle();
-									double retailPrice = productList.get(i).getRetailPrice();
+									double retailPrice = productList.get(i).getRetailPrice() * quantity;
 									String formattedRetailPrice = String.format("%.2f", retailPrice);
 									totalPrice += retailPrice;
 							%>
 							<li class="list-group-item d-flex justify-content-between lh-sm">
 								<div>
 									<h6 class="my-0"><%=productName%></h6>
-									<small class="text-muted">Dessert</small>
+									<small class="text-muted">Dessert, x<%=quantity%></small>
 								</div> <span class="text-muted">$<%=formattedRetailPrice%></span>
 							</li>
 							<%
@@ -140,8 +142,19 @@
 
 							}
 							%>
+							<%
+							double GST = totalPrice * 0.07;
+							totalPrice = GST + totalPrice;
+							%>
+							<li
+								class="list-group-item d-flex justify-content-between bg-light">
+								<div class="text-danger">
+									<h6 class="my-0">GST</h6>
+									<small>GST</small>
+								</div> <span class="text-danger">$<%=String.format("%.2f", GST)%></span>
+							</li>
 							<li class="list-group-item d-flex justify-content-between">
-								<span>Total (SGD)</span> <strong>$<%=formmatedTotalPrice%></strong>
+								<span>Total (SGD)</span> <strong>$<%=String.format("%.2f", totalPrice)%></strong>
 							</li>
 						</ul>
 					</div>
@@ -184,7 +197,7 @@
 							created_at = rs.getString("created_at");
 						}
 						%>
-						<form class="needs-validation" novalidate method="POST">
+						<form class="needs-validation" novalidate method="POST" action="processCheckOut.jsp">
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<label for="lastName" class="form-label">Full name</label> <input
@@ -304,6 +317,8 @@
 
 							<hr class="my-4">
 
+							<input type="hidden" class="form-control" id="totalPrice"
+								name="totalPrice" placeholder="" value="<%=totalPrice%>">
 							<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
 								to checkout</button>
 						</form>
