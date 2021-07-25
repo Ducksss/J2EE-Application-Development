@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Servlet implementation class loginValidation
  */
@@ -60,41 +62,50 @@ public class LoginValidation extends HttpServlet {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "SELECT * FROM sp_shop.users WHERE email = ? AND password = ?";
+			String sql = "SELECT * FROM sp_shop.users WHERE email = ?";
 
 			// executing to DB
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (password.equals(null) || email.equals(null) || password == "" || email == "") {
 				// checking if the password && userid with its according field
 				response.sendRedirect("login.jsp?errCode=NULL");
-			} else if (rs.next() == false) {
-				// if no rows are fetch, that means pw / username is wrong. As such, just
-				// redirect
-				response.sendRedirect("login.jsp?errCode=invalidLogin");
+				return;
 			} else {
-				// Upon successful verification, lets redirect them to displayUser Page -->
-				// storing the value from the select statement into the variables
-				String username = rs.getString("username");
-				String useremail = rs.getString("email");
-				String role = rs.getString("type");
-				int user_id = rs.getInt("user_id");
+				if (rs.next() == false) {
+					response.sendRedirect("login.jsp?errCode=invalidLogin");
+					return;
+				}
 
-				// creating a session and setting the respective attributes
-				HttpSession session = request.getSession(true);
-				session.setAttribute("sessUserName", username);
-				session.setAttribute("sessUserEmail", useremail);
-				session.setAttribute("sessUserRole", role);
-				session.setAttribute("sessUserID", user_id);
+				if (BCrypt.checkpw(password, rs.getString("password"))) {
+					// Upon successful verification, lets redirect them to displayUser Page -->
+					// storing the value from the select statement into the variables
+					int user_id = rs.getInt("user_id");
+					String role = rs.getString("type");
+					String username = rs.getString("username");
+					String useremail = rs.getString("email");
 
-				// redirects the user upon success
-				response.sendRedirect("index.jsp");
+					// creating a session and setting the respective attributes
+					HttpSession session = request.getSession(true);
+					session.setAttribute("sessUserName", username);
+					session.setAttribute("sessUserEmail", useremail);
+					session.setAttribute("sessUserRole", role);
+					session.setAttribute("sessUserID", user_id);
+
+					// redirects the user upon success
+					response.sendRedirect("index.jsp");
+					return;
+				} else {
+					System.out.println("It does not match");
+					response.sendRedirect("login.jsp?errCode=invalidLogin");
+					return;
+				}
 			}
 		} catch (Exception e) {
-
+			System.out.println(e);
+			System.out.println("Error was found here!");
 		}
 	}
 

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+
 /**
  * Servlet implementation class registration
  */
@@ -51,8 +54,8 @@ public class Registration extends HttpServlet {
 			String address = request.getParameter("address");
 			String confirmPassword = request.getParameter("re_pass");
 			String contactNumber = request.getParameter("number");
-			
-			// String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+
+			String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 
 			// simple backend guard statement validation to check if the password matches!
 			if (!password.equals(confirmPassword)) {
@@ -84,7 +87,7 @@ public class Registration extends HttpServlet {
 				PreparedStatement pstat = conn.prepareStatement(insertSQL);
 				pstat.setString(1, name);
 				pstat.setString(2, email);
-				pstat.setString(3, password);
+				pstat.setString(3, hashed);
 				pstat.setString(4, address);
 				pstat.setString(5, contactNumber);
 
@@ -96,7 +99,7 @@ public class Registration extends HttpServlet {
 			}
 
 		} catch (Exception e) {
-
+			System.out.print(e);
 		}
 	}
 
