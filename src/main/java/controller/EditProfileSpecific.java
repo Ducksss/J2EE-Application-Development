@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Servlet implementation class editProfileSpecific
  */
@@ -74,10 +76,12 @@ public class EditProfileSpecific extends HttpServlet {
 
 				/// executing to DB - Statement to check if an account exist before it
 				PreparedStatement pstmt = conn.prepareStatement(sql);
+				
+				String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 
 				pstmt.setString(1, username);
 				pstmt.setString(2, address);
-				pstmt.setString(3, password);
+				pstmt.setString(3, hashed);
 				pstmt.setString(4, contactNumber);
 				pstmt.setDouble(5, user_id);
 
