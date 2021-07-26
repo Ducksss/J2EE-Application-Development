@@ -139,23 +139,23 @@
 				</table>
 				<div>
 					<div class="row feture-tabs">
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Customers with highest purchase by value</h4>
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Customers
+							with highest purchase by value</h4>
 					</div>
 				</div>
 				<!-- End of View Admins -->
-				<table id="customers" class="display">
+				<table id="customersProducts" class="display">
 					<thead>
 						<tr>
 							<th>Recept ID</th>
 							<th>User Name</th>
 							<th>Email</th>
-							<th>Total price in 1 receipt</th>
+							<th>Total price in 1 receipt($)</th>
 						</tr>
 					</thead>
-					
+
 					<tbody>
 						<%
-						
 						// Step 5: Execute SQL Command
 						sqlStr = "SELECT * FROM sp_shop.reciepts INNER JOIN users on reciepts.user_id = users.user_id";
 						rs = stmt.executeQuery(sqlStr);
@@ -166,7 +166,6 @@
 							String username = rs.getString("username");
 							String email = rs.getString("email");
 							String totalPrice = rs.getString("total_price");
-							
 						%>
 						<tr>
 							<th><%=receiptID%></th>
@@ -179,7 +178,49 @@
 						%>
 					</tbody>
 				</table>
+				<div>
+					<div class="row feture-tabs">
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Listing of customers who purchased certain products</h4>
+					</div>
+				</div>
+				<!-- End of View Admins -->
+				<table id="customers" class="display">
+					<thead>
+						<tr>
+							<th>Order ID</th>
+							<th>User Name</th>
+							<th>Email</th>
+							<th>Product Title</th>
+							<th>Date of Order</th>
+						</tr>
+					</thead>
 
+					<tbody>
+						<%
+						// Step 5: Execute SQL Command
+						sqlStr = "SELECT order_id,username,email,product_title,orders.created_at FROM sp_shop.orders INNER JOIN users ON users.user_id = orders.user_id INNER JOIN products ON products.product_id = orders.product_id";
+						rs = stmt.executeQuery(sqlStr);
+
+						// Step 6: Process Result
+						while (rs.next()) {
+							int orderID = rs.getInt("order_id");
+							String username = rs.getString("username");
+							String email = rs.getString("email");
+							String productTitle = rs.getString("product_title");
+							String createdAt = rs.getString("orders.created_at");
+						%>
+						<tr>
+							<th><%=orderID%></th>
+							<td><%=username%></td>
+							<td><%=email%></td>
+							<td><%=productTitle%></td>
+							<td><%=createdAt%></td>
+						</tr>
+						<%
+						}
+						%>
+					</tbody>
+				</table>
 
 				<!-- End of View Users -->
 			</div>
@@ -195,6 +236,13 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#customers').DataTable({
+					"order" : [ [ 3, "desc" ] ]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#customersProducts').DataTable({
 					"order" : [ [ 3, "desc" ] ]
 				});
 			});
