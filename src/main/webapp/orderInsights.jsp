@@ -31,7 +31,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
 	rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -42,6 +46,10 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+
 
 <!-- Template Main CSS File -->
 <link href="assets/css/form-validation.css" rel="stylesheet">
@@ -80,18 +88,18 @@
 								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
 							</a>View data</li>
 						</ol>
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-							Console - View Admins</h4>
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Listing
+							of Orders</h4>
 					</div>
 				</div>
-				<table class="table table-hover">
-					<thead class="thead-light">
+				<table id="orders" class="display">
+					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">User name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Address</th>
-							<th scope="col">Function</th>
+							<th>Order_id</th>
+							<th>Product Name</th>
+							<th>Cost Price</th>
+							<th>Retail Price</th>
+							<th>Date of Order</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -105,137 +113,94 @@
 						// Step 4: Create Statement object
 						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						String sqlStr = "SELECT * FROM sp_shop.users where type ='Admin' ORDER BY type ASC";
+						String sqlStr = "SELECT order_id,product_title,cost_price,retail_price,orders.created_at FROM sp_shop.orders INNER JOIN users ON users.user_id = orders.user_id INNER JOIN products ON products.product_id = orders.product_id";
 						rs = stmt.executeQuery(sqlStr);
-						int id = 1;
+
 						// Step 6: Process Result
 						while (rs.next()) {
-							int user_id = rs.getInt("user_id");
-							String username = rs.getString("username");
-							String email = rs.getString("email");
-							String type = rs.getString("type");
-							String address = rs.getString("address");
-
-							System.out.println(user_id);
+							int orderID = rs.getInt("order_id");
+							String productTitle = rs.getString("product_title");
+							String costPrice = rs.getString("cost_price");
+							String retailPrice = rs.getString("retail_price");
+							String createdAt = rs.getString("created_at");
 						%>
 						<tr>
-							<th scope="row"><%=id%></th>
-							<td colspan="1"><%=username%></td>
-							<td><%=email%></td>
-							<td><%=address%></td>
-							<td>
-								<form method="POST" action="AdminDemotion">
-									<input name="user_id" type="hidden" value="<%=user_id%>">
-									<input type="submit" value="Remove as admin"
-										class="btn btn-danger">
-								</form>
-							</td>
+							<th><%=orderID%></th>
+							<td><%=productTitle%></td>
+							<td><%=costPrice%></td>
+							<td><%=retailPrice%></td>
+							<td><%=createdAt%></td>
+
 						</tr>
 						<%
-						id++;
 						}
 						%>
 					</tbody>
 				</table>
+				<div>
+					<div class="row feture-tabs">
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Customers with highest purchase by value</h4>
+					</div>
+				</div>
 				<!-- End of View Admins -->
-
-				<div>
-					<div class="row feture-tabs">
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-							Console - View Users</h4>
-					</div>
-				</div>
-				<table class="table table-hover">
-					<thead class="thead-light">
+				<table id="customers" class="display">
+					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">User name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Address</th>
-							<th scope="col">Function</th>
+							<th>Recept ID</th>
+							<th>User Name</th>
+							<th>Email</th>
+							<th>Total price in 1 receipt</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<%
-						sqlStr = "SELECT * FROM sp_shop.users where type ='Customer' ORDER BY type ASC";
-						rs = stmt.executeQuery(sqlStr);
-						id = 1;
-						// Step 6: Process Result
-						while (rs.next()) {
-							int user_id = rs.getInt("user_id");
-							String username = rs.getString("username");
-							String email = rs.getString("email");
-							String type = rs.getString("type");
-							String address= rs.getString("address");
-						%>
-						<tr>
-							<th scope="row"><%=id%></th>
-							<td><%=username%></td>
-							<td><%=email%></td>
-							<td><%=address%></td>
-							<td>
-								<form method="POST" action="AdminPromotion">
-									<input name="user_id" type="hidden" value="<%=user_id%>">
-									<input type="submit" value="Promote to admin"
-										class="btn btn-primary">
-								</form>
-							</td>
-						</tr>
-						<%
-						id++;
-						}
-
 						
-						%>
-					</tbody>
-				</table>
-				
-				<div>
-					<div class="row feture-tabs">
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-							Console - View User inquiries</h4>
-					</div>
-				</div>
-				<table class="table table-hover">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">User name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Content</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-						sqlStr = "SELECT * FROM customer_inquiry INNER JOIN users ON customer_inquiry.fk_user_id = users.user_id";
+						// Step 5: Execute SQL Command
+						sqlStr = "SELECT * FROM sp_shop.reciepts INNER JOIN users on reciepts.user_id = users.user_id";
 						rs = stmt.executeQuery(sqlStr);
-						id = 1;
+
 						// Step 6: Process Result
 						while (rs.next()) {
-							int user_id = rs.getInt("user_id");
+							int receiptID = rs.getInt("reciept_id");
 							String username = rs.getString("username");
 							String email = rs.getString("email");
-							String content = rs.getString("content");
+							String totalPrice = rs.getString("total_price");
+							
 						%>
 						<tr>
-							<th scope="row"><%=id%></th>
+							<th><%=receiptID%></th>
 							<td><%=username%></td>
 							<td><%=email%></td>
-							<td><%=content%></td>
+							<td><%=totalPrice%></td>
 						</tr>
 						<%
-						id++;
 						}
-
-						conn.close();
 						%>
 					</tbody>
 				</table>
+
+
 				<!-- End of View Users -->
 			</div>
 		</section>
 		<!-- End Features Section -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#orders').DataTable({
+					"order" : [ [ 2, "desc" ] ]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#customers').DataTable({
+					"order" : [ [ 3, "desc" ] ]
+				});
+			});
+		</script>
 	</main>
+
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
 	<%@ include file="./components/footer.jsp"%>

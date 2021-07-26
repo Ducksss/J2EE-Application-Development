@@ -39,6 +39,7 @@
 				<ul>
 					<li><a class="nav-link scrollto active" href="index.jsp">Home</a></li>
 					<li><a href="category.jsp">Category</a></li>
+					<li><a href="customerInquiry.jsp">Customer Inquiry</a></li>
 					<li class="dropdown"><a href="#"><span>Menu</span> <i
 							class="bi bi-chevron-down"></i></a>
 						<ul>
@@ -92,7 +93,7 @@
 						<ul>
 							<li><a href="addProduct.jsp"><i class="fa fa-clock-o"
 									style="padding-right: 1px; font-size: 15px;"></i>Order<br>management&nbsp&nbsp</a></li>
-							<li><a href="addProduct.jsp"><i
+							<li><a href="orderInsights.jsp"><i
 									class="fa fa-search-plus"
 									style="padding-right: 1px; font-size: 15px;"></i>Order insights</a></li>
 							<li><a href="manageUserAndAdmin.jsp"><i
@@ -107,6 +108,7 @@
 									class="fas fa-hand-pointer"
 									style="padding-right: 1px; font-size: 15px;"></i>Add category</a></li>
 						</ul></li>
+						
 					<%
 					}
 					%>
