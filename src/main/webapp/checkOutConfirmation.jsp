@@ -78,13 +78,17 @@
 		response.sendRedirect("index.jsp");
 	}
 	%>
+	<!-- ======= Header ======= -->
+	<%@ include file="./components/header.jsp"%>
+
 	<main id="main">
 		<!-- ======= Features Section ======= -->
 		<section id="features" class="features" style="height: 24rem;">
-			<h1 style="padding: 70px 0; text-align: center; font-weight: 700;">THANK
+			<h1
+				style="padding: 70px 0; text-align: center; font-weight: 700; margin-top: 5rem;">THANK
 				YOU!</h1>
 			<div style="text-align: center;">
-				<p style="text-align: center; margin-top: -3rem;">Your order has
+				<p style="text-align: center; margin-top: -5rem;">Your order has
 					been placed. Your receipt can be found in your profile.</p>
 				<a href="index.jsp" style="text-align: center;">Return me back
 					to home.</a>
@@ -95,6 +99,7 @@
 	</main>
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
+	<div style="margin-top: 7rem;"></div>
 	<%@ include file="./components/footer.jsp"%>
 
 	<!-- End Footer -->

@@ -90,7 +90,7 @@
 							<th scope="col">#</th>
 							<th scope="col">User name</th>
 							<th scope="col">Email</th>
-							<th scope="col">Type</th>
+							<th scope="col">Address</th>
 							<th scope="col">Function</th>
 						</tr>
 					</thead>
@@ -114,6 +114,7 @@
 							String username = rs.getString("username");
 							String email = rs.getString("email");
 							String type = rs.getString("type");
+							String address = rs.getString("address");
 
 							System.out.println(user_id);
 						%>
@@ -121,7 +122,7 @@
 							<th scope="row"><%=id%></th>
 							<td colspan="1"><%=username%></td>
 							<td><%=email%></td>
-							<td><%=type%></td>
+							<td><%=address%></td>
 							<td>
 								<form method="POST" action="AdminDemotion">
 									<input name="user_id" type="hidden" value="<%=user_id%>">
@@ -150,7 +151,7 @@
 							<th scope="col">#</th>
 							<th scope="col">User name</th>
 							<th scope="col">Email</th>
-							<th scope="col">Type</th>
+							<th scope="col">Address</th>
 							<th scope="col">Function</th>
 						</tr>
 					</thead>
@@ -165,12 +166,13 @@
 							String username = rs.getString("username");
 							String email = rs.getString("email");
 							String type = rs.getString("type");
+							String address= rs.getString("address");
 						%>
 						<tr>
 							<th scope="row"><%=id%></th>
 							<td><%=username%></td>
 							<td><%=email%></td>
-							<td><%=type%></td>
+							<td><%=address%></td>
 							<td>
 								<form method="POST" action="AdminPromotion">
 									<input name="user_id" type="hidden" value="<%=user_id%>">
