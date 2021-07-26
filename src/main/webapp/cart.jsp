@@ -135,7 +135,7 @@
 									</form>
 									<div>
 										<input type="text" name="quantity" class="form-control"
-											value="<%=quantity%>" readonly>
+											value="<%=quantity%>" readonly style="text-align: center;">
 									</div>
 									<!-- Increment product -->
 									<form action="ProductCartAddition" method="POST"
@@ -191,6 +191,10 @@
 						<tr>
 							<td scope="col" colspan="4" style="border-style: none;">GST:</td>
 							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total * 0.07)%></td>
+						</tr>
+						<tr>
+							<td scope="col" colspan="4" style="border-style: none;">Delivery fee:</td>
+							<td colspan="1" style="border-style: none;">FREE</td>
 						</tr>
 						<tr>
 							<td scope="col" colspan="4"

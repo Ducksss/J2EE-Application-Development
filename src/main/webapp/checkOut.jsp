@@ -197,7 +197,8 @@
 							created_at = rs.getString("created_at");
 						}
 						%>
-						<form class="needs-validation" novalidate method="POST" action="processCheckOut.jsp">
+						<form class="needs-validation" action="ProcessCartPayOut"
+							method="POST" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<label for="lastName" class="form-label">Full name</label> <input

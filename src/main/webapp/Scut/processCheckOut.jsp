@@ -32,6 +32,7 @@
 		pstat.setString(2, String.format("%.2f", totalPrice));
 
 		int count = pstat.executeUpdate();
+		System.out.println(sessUserID);
 
 		if (count > 0) {
 			insertSQL = "SELECT * FROM sp_shop.reciepts where user_id = ? ORDER BY reciept_id desc;";
@@ -40,15 +41,13 @@
 			int reciept_id = 0;
 
 			ResultSet rs = pstat.executeQuery();
-			boolean first = true;
-			if (rs.next()) {
+			boolean isFirst = true;
+			if (rs.next() && isFirst) {
 				reciept_id = rs.getInt("reciept_id");
-				first = false;
+				isFirst = false;
 			}
 
 			for (int i = 0; i < productList.size(); i++) {
-				out.println("product id " + productList.get(i).getProductID());
-				out.println("product quantity " + productList.get(i).getQuantity());
 		
 				for (int n = 0; n < productList.get(i).getQuantity(); n++) {
 					// if the email is not associated with an account!
@@ -61,12 +60,12 @@
 					count = pstat.executeUpdate();
 				}
 			}
-
-			response.sendRedirect("index.jsp");
-		} else {
-
 		}
+
+		response.sendRedirect("checkOutConfirmation.jsp");
+		return;
 	} catch (Exception e) {
+		System.out.println("Failure encountered");
 		out.print(e);
 	}
 	%>

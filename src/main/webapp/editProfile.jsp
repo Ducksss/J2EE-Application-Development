@@ -185,8 +185,8 @@
 								style="margin-top: -5rem; margin-left: 1rem;">
 
 							</ol>
-							<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-								Console - View products</h4>
+							<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">My
+								history - View products</h4>
 						</div>
 					</div>
 					<table class="table table-hover">
@@ -229,12 +229,7 @@
 							conn.close();
 							%>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="5" class="right"><a href="addCategory.jsp"><button
-											type="button" class="btn btn-primary">Add Category</button></a></td>
-							</tr>
-						</tfoot>
+						
 					</table>
 
 				</div>
