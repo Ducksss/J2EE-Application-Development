@@ -180,7 +180,8 @@
 				</table>
 				<div>
 					<div class="row feture-tabs">
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Listing of customers who purchased certain products</h4>
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Listing
+							of customers who purchased certain products</h4>
 					</div>
 				</div>
 				<!-- End of View Admins -->
