@@ -68,70 +68,6 @@
 		<section id="features" class="features">
 			<div class="container" data-aos="fade-up">
 
-				<!-- Feature Tabs -->
-				<!-- Start of View Users -->
-				<div>
-					<div class="row feture-tabs" data-aos="fade-up">
-						<ol class="breadcrumb"
-							style="margin-top: -5rem; margin-left: 1rem;">
-							<li style="display: inline-block;"><a href="index.jsp"
-								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">Home</a></li>
-							<li style="display: inline-block;" class="activeStatus"><a
-								href="#"
-								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
-							</a>View data</li>
-						</ol>
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
-							Console - View Users</h4>
-					</div>
-				</div>
-				<table class="table table-hover">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">User name</th>
-							<th scope="col">Email</th>
-							<th scope="col">Type</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-						// Step1: Load JDBC Driver
-						Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
-						// Step 2: Define Connection URL
-						connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-						// Step 3: Establish connection to URL
-						conn = DriverManager.getConnection(connURL);
-						// Step 4: Create Statement object
-						Statement stmt = conn.createStatement();
-						// Step 5: Execute SQL Command
-						String sqlStr = "SELECT * FROM sp_shop.users ORDER BY type ASC";
-						rs = stmt.executeQuery(sqlStr);
-						int id = 1;
-						// Step 6: Process Result
-						while (rs.next()) {
-							String username = rs.getString("username");
-							String email = rs.getString("email");
-							String type = rs.getString("type");
-						%>
-						<tr>
-							<th scope="row"><%=id%></th>
-							<td><%=username%></td>
-							<td><%=email%></td>
-							<td><%=type%></td>
-						</tr>
-						<%
-						id++;
-						}
-
-						// Step 7: Close connection
-						conn.close();
-						%>
-					</tbody>
-				</table>
-				<!-- End of View Users -->
-
-
 				<!-- Start of View Product -->
 				<div>
 					<div class="row feture-tabs" data-aos="fade-up">
@@ -166,11 +102,11 @@
 						// Step 3: Establish connection to URL
 						conn = DriverManager.getConnection(connURL);
 						// Step 4: Create Statement object
-						stmt = conn.createStatement();
+						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						sqlStr = "SELECT * FROM sp_shop.products";
+						String sqlStr = "SELECT * FROM sp_shop.products";
 						rs = stmt.executeQuery(sqlStr);
-						id = 1;
+						int id = 1;
 						// Step 6: Process Result
 						while (rs.next()) {
 							int product_id = Integer.parseInt(rs.getString("product_id"));
