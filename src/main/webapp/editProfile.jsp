@@ -215,7 +215,7 @@
 								<td>ID<%=reciept_id%></td>
 								<td>$<%=String.format("%.2f", total_price)%></td>
 								<td>
-									<form method="POST" action="">
+									<form method="POST" action="receipt.jsp">
 										<input type="hidden" value="<%=reciept_id%>" name="reciept_id">
 										<input type="submit" value="View more" class="btn btn-primary">
 									</form>
