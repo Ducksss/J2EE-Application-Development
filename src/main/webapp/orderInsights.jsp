@@ -159,7 +159,7 @@
 						// Step 4: Create Statement object
 						stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id;";
+						sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id ORDER BY tally desc;";
 						rs = stmt.executeQuery(sqlStr);
 
 						int id2 = 1;
@@ -202,6 +202,7 @@
 						// Step 5: Execute SQL Command
 						sqlStr = "SELECT users.username, users.email, reciepts.user_id, SUM(total_price) as total_price FROM sp_shop.reciepts reciepts, sp_shop.users users where reciepts.user_id = users.user_id group by users.user_id;";
 						rs = stmt.executeQuery(sqlStr);
+						int id3 = 1;
 
 						// Step 6: Process Result
 						while (rs.next()) {
@@ -210,12 +211,13 @@
 							double totalPrice = rs.getDouble("total_price");
 						%>
 						<tr>
-							<th>1</th>
+							<th><%=id3%></th>
 							<td><%=username%></td>
 							<td><%=email%></td>
 							<td><%=String.format("%.2f", totalPrice)%></td>
 						</tr>
 						<%
+						id3++;
 						}
 						%>
 					</tbody>
@@ -279,7 +281,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#tally').DataTable({
-					"order" : [ [ 0, "asc" ] ]
+					"order" : [ [ 2, "desc" ] ]
 				});
 			});
 		</script>
