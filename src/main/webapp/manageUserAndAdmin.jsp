@@ -84,7 +84,7 @@
 							Console - View Admins</h4>
 					</div>
 				</div>
-				<table class="table table-hover" class="display" id="#Admins">
+				<table class="table table-hover">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -236,27 +236,6 @@
 		</section>
 		<!-- End Features Section -->
 	</main>
-	<script type="text/javascript">
-			$(document).ready(function() {
-				$('##Admins').DataTable({
-					"order" : [ [ 2, "desc" ] ]
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#customers').DataTable({
-					"order" : [ [ 3, "desc" ] ]
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#customersProducts').DataTable({
-					"order" : [ [ 3, "desc" ] ]
-				});
-			});
-		</script>
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
 	<%@ include file="./components/footer.jsp"%>

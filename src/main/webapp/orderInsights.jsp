@@ -137,57 +137,6 @@
 						%>
 					</tbody>
 				</table>
-
-				<!-- Start of best selling products -->
-				<div>
-					<div class="row feture-tabs">
-						<ol class="breadcrumb"
-							style="margin-top: -5rem; margin-left: 1rem;">
-							<li style="display: inline-block;"><a href="index.jsp"
-								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">Home</a></li>
-							<li style="display: inline-block;" class="activeStatus"><a
-								href="#"
-								style="text-decoration: none; margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;">
-							</a>View data</li>
-						</ol>
-						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Products performances</h4>
-					</div>
-				</div>
-				
-				<table id="tally" class="display">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Product Name</th>
-							<th>Number of product sold</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-						// Step 4: Create Statement object
-						stmt = conn.createStatement();
-						// Step 5: Execute SQL Command
-						sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id;";
-						rs = stmt.executeQuery(sqlStr);
-
-						int id2 = 1;
-						// Step 6: Process Result
-						while (rs.next()) {
-							String productTitle = rs.getString("product_title");
-							String tally = rs.getString("tally");
-						%>
-						<tr>
-							<th><%=id2%>
-							<th><%=productTitle%></th>
-							<td><%=tally%></td>
-						</tr>
-						<%
-						id2++;
-						}
-						%>
-					</tbody>
-				</table>
-
 				<div>
 					<div class="row feture-tabs">
 						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Customers
@@ -216,13 +165,13 @@
 							int receiptID = rs.getInt("reciept_id");
 							String username = rs.getString("username");
 							String email = rs.getString("email");
-							double totalPrice = rs.getDouble("total_price");
+							String totalPrice = rs.getString("total_price");
 						%>
 						<tr>
 							<th><%=receiptID%></th>
 							<td><%=username%></td>
 							<td><%=email%></td>
-							<td><%=String.format("%.2f", totalPrice)%></td>
+							<td><%=totalPrice%></td>
 						</tr>
 						<%
 						}
@@ -282,13 +231,6 @@
 			$(document).ready(function() {
 				$('#orders').DataTable({
 					"order" : [ [ 2, "desc" ] ]
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#tally').DataTable({
-					"order" : [ [ 0, "asc" ] ]
 				});
 			});
 		</script>
