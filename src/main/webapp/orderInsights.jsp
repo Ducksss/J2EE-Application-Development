@@ -137,6 +137,49 @@
 						%>
 					</tbody>
 				</table>
+
+				<!-- Start of best selling products -->
+				<div>
+					<div class="row feture-tabs">
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Products
+							performances</h4>
+					</div>
+				</div>
+
+				<table id="tally" class="display">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Product Name</th>
+							<th>Number of product sold</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+						// Step 4: Create Statement object
+						stmt = conn.createStatement();
+						// Step 5: Execute SQL Command
+						sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id;";
+						rs = stmt.executeQuery(sqlStr);
+
+						int id2 = 1;
+						// Step 6: Process Result
+						while (rs.next()) {
+							String productTitle = rs.getString("product_title");
+							String tally = rs.getString("tally");
+						%>
+						<tr>
+							<th><%=id2%>
+							<th><%=productTitle%></th>
+							<td><%=tally%></td>
+						</tr>
+						<%
+						id2++;
+						}
+						%>
+					</tbody>
+				</table>
+
 				<div>
 					<div class="row feture-tabs">
 						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Customers
@@ -150,28 +193,27 @@
 							<th>Recept ID</th>
 							<th>User Name</th>
 							<th>Email</th>
-							<th>Total price in 1 receipt($)</th>
+							<th>Sum of total purchases</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<%
 						// Step 5: Execute SQL Command
-						sqlStr = "SELECT * FROM sp_shop.reciepts INNER JOIN users on reciepts.user_id = users.user_id";
+						sqlStr = "SELECT users.username, users.email, reciepts.user_id, SUM(total_price) as total_price FROM sp_shop.reciepts reciepts, sp_shop.users users where reciepts.user_id = users.user_id group by users.user_id;";
 						rs = stmt.executeQuery(sqlStr);
 
 						// Step 6: Process Result
 						while (rs.next()) {
-							int receiptID = rs.getInt("reciept_id");
 							String username = rs.getString("username");
 							String email = rs.getString("email");
-							String totalPrice = rs.getString("total_price");
+							double totalPrice = rs.getDouble("total_price");
 						%>
 						<tr>
-							<th><%=receiptID%></th>
+							<th>1</th>
 							<td><%=username%></td>
 							<td><%=email%></td>
-							<td><%=totalPrice%></td>
+							<td><%=String.format("%.2f", totalPrice)%></td>
 						</tr>
 						<%
 						}
@@ -231,6 +273,13 @@
 			$(document).ready(function() {
 				$('#orders').DataTable({
 					"order" : [ [ 2, "desc" ] ]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#tally').DataTable({
+					"order" : [ [ 0, "asc" ] ]
 				});
 			});
 		</script>
