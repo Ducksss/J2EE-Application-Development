@@ -92,7 +92,7 @@
 							Console - View Admins</h4>
 					</div>
 				</div>
-				<table class="table table-hover" style="width: 100%" id="admins">
+				<table class="display" id="admins">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -160,7 +160,7 @@
 							Console - View Users</h4>
 					</div>
 				</div>
-				<table class="table table-striped" style="width: 100%" id="users">
+				<table class="display" id="users">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>

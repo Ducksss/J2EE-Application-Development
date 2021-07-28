@@ -44,11 +44,14 @@
 							<p style="color: red">It looks at least one of your fields is
 								null</p>
 							<%
-							} else {
+							} else if (request.getParameter("errCode").equals("invalidLogin")) {
 							%>
-							<p style="color: red;padding: 0;margin-top: -25px;margin-bottom: 10px;">Email
+							<p
+								style="color: red; padding: 0; margin-top: -25px; margin-bottom: 10px;">Email
 								and password don't match</p>
 							<%
+							} else {
+
 							}
 							%>
 							<div class="form-group">
@@ -56,6 +59,18 @@
 									type="password" name="your_pass" id="your_pass"
 									placeholder="Password" />
 							</div>
+							<%
+							if (request.getParameter("errCode") == null) {
+							} else if (request.getParameter("errCode").equals("banned")) {
+							%>
+							<p style="color: red">You account has been banned. Please
+								contact an admin.</p>
+							<%
+							} else {
+							%>
+							<%
+							}
+							%>
 							<div class="form-group">
 								<input type="checkbox" name="remember-me" id="remember-me"
 									class="agree-term" /> <label for="remember-me"

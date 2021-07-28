@@ -79,6 +79,12 @@ public class LoginValidation extends HttpServlet {
 					return;
 				}
 
+				int userStatus = rs.getInt("status");
+				if (userStatus == 1) {
+					response.sendRedirect("login.jsp?errCode=banned");
+					return;
+				}
+
 				if (BCrypt.checkpw(password, rs.getString("password"))) {
 					// Upon successful verification, lets redirect them to displayUser Page -->
 					// storing the value from the select statement into the variables
