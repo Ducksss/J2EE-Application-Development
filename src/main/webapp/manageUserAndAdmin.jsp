@@ -31,7 +31,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
 	rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -42,6 +46,10 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+
 
 <!-- Template Main CSS File -->
 <link href="assets/css/form-validation.css" rel="stylesheet">
@@ -84,7 +92,7 @@
 							Console - View Admins</h4>
 					</div>
 				</div>
-				<table class="table table-hover">
+				<table class="table table-hover" style="width: 100%" id="admins">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -105,7 +113,7 @@
 						// Step 4: Create Statement object
 						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						String sqlStr = "SELECT * FROM sp_shop.users where type ='Admin' ORDER BY type ASC";
+						String sqlStr = "SELECT * FROM sp_shop.users where type ='Admin' and status = 0 ORDER BY type ASC";
 						rs = stmt.executeQuery(sqlStr);
 						int id = 1;
 						// Step 6: Process Result
@@ -124,11 +132,18 @@
 							<td><%=email%></td>
 							<td><%=address%></td>
 							<td>
-								<form method="POST" action="AdminDemotion">
-									<input name="user_id" type="hidden" value="<%=user_id%>">
-									<input type="submit" value="Remove as admin"
-										class="btn btn-danger">
-								</form>
+								<div style="display: inline-flex;">
+									<form method="POST" action="AdminDemotion">
+										<input name="user_id" type="hidden" value="<%=user_id%>">
+										<input type="submit" value="Remove as admin"
+											class="btn btn-danger">
+									</form>
+									<form method="POST" action="BanUser" style="margin-left: 1rem;">
+										<input name="user_id" type="hidden" value="<%=user_id%>">
+										<input type="submit" value="Suspend user"
+											class="btn btn-warning">
+									</form>
+								</div>
 							</td>
 						</tr>
 						<%
@@ -145,7 +160,7 @@
 							Console - View Users</h4>
 					</div>
 				</div>
-				<table class="table table-hover">
+				<table class="table table-striped" style="width: 100%" id="users">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -157,7 +172,7 @@
 					</thead>
 					<tbody>
 						<%
-						sqlStr = "SELECT * FROM sp_shop.users where type ='Customer' ORDER BY type ASC";
+						sqlStr = "SELECT * FROM sp_shop.users where type ='Customer' and status = 0 ORDER BY type ASC";
 						rs = stmt.executeQuery(sqlStr);
 						id = 1;
 						// Step 6: Process Result
@@ -166,7 +181,7 @@
 							String username = rs.getString("username");
 							String email = rs.getString("email");
 							String type = rs.getString("type");
-							String address= rs.getString("address");
+							String address = rs.getString("address");
 						%>
 						<tr>
 							<th scope="row"><%=id%></th>
@@ -174,22 +189,78 @@
 							<td><%=email%></td>
 							<td><%=address%></td>
 							<td>
-								<form method="POST" action="AdminPromotion">
-									<input name="user_id" type="hidden" value="<%=user_id%>">
-									<input type="submit" value="Promote to admin"
-										class="btn btn-primary">
-								</form>
+								<div style="display: inline-flex">
+									<form method="POST" action="AdminPromotion">
+										<input name="user_id" type="hidden" value="<%=user_id%>">
+										<input type="submit" value="Promote to admin"
+											class="btn btn-primary">
+									</form>
+									<form method="POST" action="BanUser" style="margin-left: 1rem;">
+										<input name="user_id" type="hidden" value="<%=user_id%>">
+										<input type="submit" value="Suspend user"
+											class="btn btn-warning">
+									</form>
+								</div>
 							</td>
 						</tr>
 						<%
 						id++;
 						}
-
-						
 						%>
 					</tbody>
 				</table>
 				
+				<div>
+					<div class="row feture-tabs">
+						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
+							Console - Banned Users</h4>
+					</div>
+				</div>
+				<table class="table table-striped" style="width: 100%" id="users">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">User name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Address</th>
+							<th scope="col">Function</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+						sqlStr = "SELECT * FROM sp_shop.users where status = 1 ORDER BY type ASC";
+						rs = stmt.executeQuery(sqlStr);
+						id = 1;
+						// Step 6: Process Result
+						while (rs.next()) {
+							int user_id = rs.getInt("user_id");
+							String username = rs.getString("username");
+							String email = rs.getString("email");
+							String type = rs.getString("type");
+							String address = rs.getString("address");
+						%>
+						<tr>
+							<th scope="row"><%=id%></th>
+							<td><%=username%></td>
+							<td><%=email%></td>
+							<td><%=address%></td>
+							<td>
+								<div style="display: inline-flex">
+									<form method="POST" action="BanRevertUser" style="margin-left: 1rem;">
+										<input name="user_id" type="hidden" value="<%=user_id%>">
+										<input type="submit" value="Unban user"
+											class="btn btn-warning">
+									</form>
+								</div>
+							</td>
+						</tr>
+						<%
+						id++;
+						}
+						%>
+					</tbody>
+				</table>
+
 				<div>
 					<div class="row feture-tabs">
 						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">Admin
@@ -235,6 +306,20 @@
 			</div>
 		</section>
 		<!-- End Features Section -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#admins').DataTable({
+					"order" : [ [ 0, "asc" ] ]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#users').DataTable({
+					"order" : [ [ 0, "asc" ] ]
+				});
+			});
+		</script>
 	</main>
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
