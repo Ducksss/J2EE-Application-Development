@@ -66,8 +66,9 @@
 	<!-- ======= GETTER ======= -->
 	<%
 	int user_id = (int) session.getAttribute("sessUserID");
-	int reciept_id = Integer.parseInt(request.getParameter("reciept_id"));
+	int reciept_id = Integer.parseInt(request.getParameter("recieptID"));
 
+	System.out.println("DELTA123");
 	System.out.println(user_id);
 	System.out.println(reciept_id);
 
@@ -106,7 +107,7 @@
 
 						</ol>
 						<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">
-							Transaction Reference: ID</h4>
+							Transaction Reference: ID<%=reciept_id%></h4>
 					</div>
 				</div>
 				<table class="table table-hover">
@@ -115,37 +116,41 @@
 							<th scope="col">#</th>
 							<th scope="col">Product name</th>
 							<th scope="col">Brief description</th>
-							<th scope="col">Retail price</th>
-							<th scope="col">Stock quantity</th>
-							<th scope="col">Edit</th>
-							<th scope="col">Delete</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Price (Total)</th>
 						</tr>
 					</thead>
 					<tbody>
 						<%
+						System.out.println(user_id);
+						System.out.println(reciept_id);
+						%>
+						<%
 						int id = 1;
-						sqlStr = "SELECT * FROM sp_shop.orders orders, sp_shop.products products where orders.user_id = ? and orders.reciept_id = ? and orders.product_id = products.product_id;";
+						sqlStr = "SELECT *, COUNT('product_id') as tally FROM sp_shop.orders orders, sp_shop.products products where orders.user_id = ? and orders.reciept_id = ? and orders.product_id = products.product_id group by orders.product_id;";
 						pstmt = conn.prepareStatement(sqlStr);
+
 						pstmt.setInt(1, user_id);
-						pstmt.setInt(1, reciept_id);
+						pstmt.setInt(2, reciept_id);
 						rs = pstmt.executeQuery();
 						// Step 6: Process Result
+
+						double total = 0;
 						while (rs.next()) {
 							reciept_id = rs.getInt("reciept_id");
 							String product_title = rs.getString("product_title");
 							String brief_description = rs.getString("brief_description");
+							int tally = rs.getInt("tally");
 							double retail_price = rs.getDouble("retail_price");
+
+							total += tally * retail_price;
 						%>
 						<tr>
 							<th scope="row"><%=id%></th>
-							<td>ID<%=reciept_id%></td>
-							<td>$<%=String.format("%.2f", total_price)%></td>
-							<td>
-								<form method="POST" action="receipt.jsp">
-									<input type="hidden" value="<%=reciept_id%>" name="reciept_id">
-									<input type="submit" value="View more" class="btn btn-primary">
-								</form>
-							</td>
+							<td><%=product_title%></td>
+							<td><%=brief_description%></td>
+							<td><%=tally%></td>
+							<td>$<%=String.format("%.2f", tally * retail_price)%></td>
 						</tr>
 						<%
 						id++;
@@ -157,9 +162,25 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="5" class="right"><a href="addProduct.jsp"><button
-										type="button" class="btn btn-primary">Add Product</button></a></td>
+							<td scope="col" colspan="4" style="border-style: none;">
+								Price:</td>
+							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total)%></td>
 						</tr>
+						<tr>
+							<td scope="col" colspan="4" style="border-style: none;">GST:</td>
+							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total * 0.07)%></td>
+						</tr>
+						<tr>
+							<td scope="col" colspan="4" style="border-style: none;">Delivery
+								fee:</td>
+							<td colspan="1" style="border-style: none;">FREE</td>
+						</tr>
+						<tr>
+							<td scope="col" colspan="4"
+								style="font-weight: bold; font-size: 1.2rem;">Total price:</td>
+							<td scope="col" colspan="1" style="font-weight: bold;">$<%=String.format("%.2f", total * 0.07 + total)%></td>
+						</tr>
+
 					</tfoot>
 				</table>
 				<!-- End of View product -->

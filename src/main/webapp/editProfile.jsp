@@ -30,7 +30,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
 	rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -41,8 +45,13 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+
 
 <!-- Template Main CSS File -->
+<link href="assets/css/form-validation.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 
 <!-- =======================================================
@@ -189,13 +198,14 @@
 								history - View products</h4>
 						</div>
 					</div>
-					<table class="table table-hover">
+					<table class="display" id="recieptInfo">
 						<thead class="thead-light">
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Reciept ID</th>
 								<th scope="col">Price</th>
-								<th scope="col">View more</th>
+								<th scope="col">Time of purchase</th>
+								<th scope="col">Options</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -209,17 +219,17 @@
 							while (rs.next()) {
 								int reciept_id = rs.getInt("reciept_id");
 								double total_price = Double.parseDouble(rs.getString("total_price"));
+								created_at = rs.getString("created_at");
 							%>
 							<tr>
 								<th scope="row"><%=id%></th>
-								<td>ID<%=reciept_id%></td>
+								<td><%=reciept_id%></td>
 								<td>$<%=String.format("%.2f", total_price)%></td>
-								<td>
-									<form method="POST" action="receipt.jsp">
-										<input type="hidden" value="<%=reciept_id%>" name="reciept_id">
-										<input type="submit" value="View more" class="btn btn-primary">
-									</form>
-								</td>
+								<td><%=created_at%></td>
+								<td><a href="receipt.jsp?recieptID=<%=reciept_id%>">
+										<button type="button" class="btn btn-primary">View
+											more</button>
+								</a></td>
 							</tr>
 							<%
 							id++;
@@ -229,32 +239,41 @@
 							conn.close();
 							%>
 						</tbody>
-						
-					</table>
 
+					</table>
 				</div>
 			</div>
 		</section>
-		<!-- End Features Section -->
-		<!-- End #main -->
-		<!-- ======= Footer ======= -->
-		<%@ include file="./components/footer.jsp"%>
+	</main>
 
-		<!-- End Footer -->
-		<a href="#"
-			class="back-to-top d-flex align-items-center justify-content-center"><i
-			class="bi bi-arrow-up-short"></i></a>
-		<!-- Vendor JS Files -->
-		<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-		<script src="assets/vendor/aos/aos.js"></script>
-		<script src="assets/vendor/php-email-form/validate.js"></script>
-		<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-		<script src="assets/vendor/purecounter/purecounter.js"></script>
-		<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-		<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
 
-		<!-- Template Main JS File -->
-		<script src="assets/js/main.js"></script>
+			$('#recieptInfo').DataTable({
+				"order" : [ [ 0, "asc" ] ]
+			});
+		});
+	</script>
+	<!-- End Features Section -->
+	<!-- End #main -->
+	<!-- ======= Footer ======= -->
+	<%@ include file="./components/footer.jsp"%>
+
+	<!-- End Footer -->
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/php-email-form/validate.js"></script>
+	<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+	<script src="assets/vendor/purecounter/purecounter.js"></script>
+	<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="assets/js/main.js"></script>
 </body>
 
 </html>
