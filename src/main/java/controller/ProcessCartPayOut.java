@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
+import com.stripe.param.ChargeCreateParams;
+
 import products.Product;
 
 /**
@@ -46,7 +50,31 @@ public class ProcessCartPayOut extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		try {
+			// Set your secret key. Remember to switch to your live secret key in
+			// production.
+			// See your keys here: https://dashboard.stripe.com/apikeys
+			Stripe.apiKey = "sk_test_51JIbDeEw27jYt5tURmgXyEHj13ws0UKNwhJPJDpqXPW8ULUXQguZURTd5yl6oa3CueZGMVBtBj4soQ5NXRsgiEvJ00k5k5KNLy";
+
+			// Token is created using Stripe Checkout or Elements!
+			// Get the payment token ID submitted by the form:
+			String token = request.getParameter("stripeToken");
 			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
+			
+			System.out.println("JAVA KING!");
+			System.out.println(token);
+			System.out.println("WALCO1");
+			System.out.println("WALCO2");
+			System.out.print(totalPrice);
+
+			System.out.print("DELTA0");
+			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(999L).setCurrency("sgd")
+					.setDescription("Example charge - WALCO 1").setSource(token).build();
+			System.out.print("DELTA1");
+
+			System.out.println("WALCO0");
+			Charge charge = Charge.create(params);
+
+			System.out.println("WALCO2");
 			int sessUserID = (int) request.getSession().getAttribute("sessUserID");
 			ArrayList<Product> productList = (ArrayList<Product>) request.getSession().getAttribute("product");
 
@@ -116,6 +144,7 @@ public class ProcessCartPayOut extends HttpServlet {
 				}
 			}
 
+			System.out.println("Success!");
 			response.sendRedirect("checkOutConfirmation.jsp");
 			return;
 		} catch (Exception e) {

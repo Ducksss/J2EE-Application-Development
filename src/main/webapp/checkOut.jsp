@@ -305,8 +305,8 @@
 									</div>
 									<!-- Used to display Element errors. -->
 									<div id="card-errors" role="alert"></div>
-									<div class="invalid-feedback">Credit
-										card number is required</div>
+									<div class="invalid-feedback">Credit card number is
+										required</div>
 								</div>
 							</div>
 
@@ -381,8 +381,7 @@
 				}
 			});
 		});
-	</script>
-	<script>
+		
 		function stripeTokenHandler(token) {
 			// Insert the token ID into the form so it gets submitted to the server
 			var form = document.getElementById('payment-form');
