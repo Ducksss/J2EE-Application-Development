@@ -293,17 +293,20 @@
 								</div>
 							</div>
 
+							<hr class="my-4">
+
 							<div class="row gy-3">
 								<div class="col-md-12">
 									<label for="cc-number" class="form-label">Credit card
 										number</label>
-									<div id="card-element">
+									<div class="form-control" id="card-element"
+										style="background-color: transparent; padding: .9rem .75rem">
 										<!-- A Stripe Element will be inserted here. -->
 									</div>
 									<!-- Used to display Element errors. -->
 									<div id="card-errors" role="alert"></div>
-									<div class="invalid-feedback">Credit card number is
-										required</div>
+									<div class="invalid-feedback">Credit
+										card number is required</div>
 								</div>
 							</div>
 
@@ -347,16 +350,51 @@
 				// Add your base input styles here. For example:
 				fontSize : '16px',
 				color : '#32325d',
+				display : "block",
+				width : "100%",
 			},
 		};
 
 		// Create an instance of the card Element.
 		var card = elements.create('card', {
-			style : style
+			style : style,
+			iconStyle : 'solid'
 		});
 
 		// Add an instance of the card Element into the `card-element` <div>.
 		card.mount('#card-element');
+	</script>
+	<script>
+		// Create a token or display an error when the form is submitted.
+		var form = document.getElementById('payment-form');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			stripe.createToken(card).then(function(result) {
+				if (result.error) {
+					// Inform the customer that there was an error.
+					var errorElement = document.getElementById('card-errors');
+					errorElement.textContent = result.error.message;
+				} else {
+					// Send the token to your server.
+					stripeTokenHandler(result.token);
+				}
+			});
+		});
+	</script>
+	<script>
+		function stripeTokenHandler(token) {
+			// Insert the token ID into the form so it gets submitted to the server
+			var form = document.getElementById('payment-form');
+			var hiddenInput = document.createElement('input');
+			hiddenInput.setAttribute('type', 'hidden');
+			hiddenInput.setAttribute('name', 'stripeToken');
+			hiddenInput.setAttribute('value', token.id);
+			form.appendChild(hiddenInput);
+
+			// Submit the form
+			form.submit();
+		}
 	</script>
 </body>
 
