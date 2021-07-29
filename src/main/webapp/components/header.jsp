@@ -91,7 +91,7 @@
 					<li class="dropdown"><a href="statistics.jsp"><span>Admin
 								tools</span> <i class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="addProduct.jsp"><i class="fa fa-clock-o"
+							<li><a href="orderManagement.jsp"><i class="fa fa-clock-o"
 									style="padding-right: 1px; font-size: 15px;"></i>Order<br>management&nbsp&nbsp</a></li>
 							<li><a href="orderInsights.jsp"><i
 									class="fa fa-search-plus"
