@@ -31,7 +31,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pangolin&display=swap"
 	rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
 <!-- Vendor CSS Files -->
 <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -42,6 +46,10 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 <link href="assets/vendor/glightbox/css/glightbox.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+
 
 <!-- Template Main CSS File -->
 <link href="assets/css/form-validation.css" rel="stylesheet">
@@ -79,7 +87,7 @@
 							Console - View products</h4>
 					</div>
 				</div>
-				<table class="table table-hover">
+				<table class="display" id="products">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -125,7 +133,11 @@
 							<td><%=String.format("%.2f", cost_price)%></td>
 							<td><%=String.format("%.2f", retail_price)%></td>
 							<td><%=stock_quantity%></td>
-							<td><a href="editProduct.jsp?productID=<%=product_id%>">Edit</a>
+							<td>
+								<form action="editProduct.jsp">
+									<input type="hidden" name="productID" value="<%=product_id%>">
+									<input type="submit" value="Edit" class="btn btn-success">
+								</form>
 							</td>
 							<td>
 								<form method="POST" action="DeleteProductDetails">
@@ -163,7 +175,7 @@
 							Console - View category</h4>
 					</div>
 				</div>
-				<table class="table table-hover">
+				<table class="display" id="categories">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">#</th>
@@ -197,7 +209,11 @@
 							<th scope="row"><%=id%></th>
 							<td><%=catname%></td>
 							<td><%=description%></td>
-							<td><a href="editCategory.jsp?categoryID=<%=category_id%>">Edit</a>
+							<td>
+								<form action="editCategory.jsp">
+									<input type="hidden" name="categoryID" value="<%=category_id%>">
+									<input type="submit" value="Edit" class="btn btn-success">
+								</form>
 							</td>
 							<td>
 								<form method="POST" action="DeleteCategoryDetails">
@@ -225,6 +241,20 @@
 			</div>
 		</section>
 		<!-- End Features Section -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#products').DataTable({
+					"order" : [ [ 0, "asc" ] ]
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#categories').DataTable({
+					"order" : [ [ 0, "asc" ] ]
+				});
+			});
+		</script>
 	</main>
 	<!-- End #main -->
 	<!-- ======= Footer ======= -->
