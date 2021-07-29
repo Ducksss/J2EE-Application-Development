@@ -48,6 +48,15 @@
 <link href="assets/css/form-validation.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 
+<!-- Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+	//Set your publishable key: remember to change this to your live publishable key in production
+	//See your keys here: https://dashboard.stripe.com/apikeys
+	var stripe = Stripe('pk_test_51JIbDeEw27jYt5tUaGWRZ9N3tt3nJI387Ru6qoWX6ceXp6843eorzSIyQL99H6n8QuGVG1ebdHhqnRVFHXQ4gZjo00RyARsu5v');
+	var elements = stripe.elements();
+</script>
+
 <!-- =======================================================
   * Template Name: FlexStart - v1.3.0
   * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
@@ -198,7 +207,7 @@
 						}
 						%>
 						<form class="needs-validation" action="ProcessCartPayOut"
-							method="POST" novalidate>
+							method="POST" id="payment-form" novalidate>
 							<div class="row g-3">
 								<div class="col-sm-12">
 									<label for="lastName" class="form-label">Full name</label> <input
@@ -285,34 +294,16 @@
 							</div>
 
 							<div class="row gy-3">
-								<div class="col-md-6">
-									<label for="cc-name" class="form-label">Name on card</label> <input
-										type="text" class="form-control" id="cc-name" placeholder=""
-										required> <small class="text-muted">Full name
-										as displayed on card</small>
-									<div class="invalid-feedback">Name on card is required</div>
-								</div>
-
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<label for="cc-number" class="form-label">Credit card
-										number</label> <input type="text" class="form-control" id="cc-number"
-										placeholder="" required>
+										number</label>
+									<div id="card-element">
+										<!-- A Stripe Element will be inserted here. -->
+									</div>
+									<!-- Used to display Element errors. -->
+									<div id="card-errors" role="alert"></div>
 									<div class="invalid-feedback">Credit card number is
 										required</div>
-								</div>
-
-								<div class="col-md-3">
-									<label for="cc-expiration" class="form-label">Expiration</label>
-									<input type="text" class="form-control" id="cc-expiration"
-										placeholder="" required>
-									<div class="invalid-feedback">Expiration date required</div>
-								</div>
-
-								<div class="col-md-3">
-									<label for="cc-cvv" class="form-label">CVV</label> <input
-										type="text" class="form-control" id="cc-cvv" placeholder=""
-										required>
-									<div class="invalid-feedback">Security code required</div>
 								</div>
 							</div>
 
@@ -349,7 +340,24 @@
 	<!-- Template Main JS File -->
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/form-validation.js"></script>
+	<script>
+		//Custom styling can be passed to options when creating an Element.
+		var style = {
+			base : {
+				// Add your base input styles here. For example:
+				fontSize : '16px',
+				color : '#32325d',
+			},
+		};
 
+		// Create an instance of the card Element.
+		var card = elements.create('card', {
+			style : style
+		});
+
+		// Add an instance of the card Element into the `card-element` <div>.
+		card.mount('#card-element');
+	</script>
 </body>
 
 </html>

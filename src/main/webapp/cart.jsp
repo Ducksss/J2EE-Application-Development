@@ -47,6 +47,12 @@
 <!-- Template Main CSS File -->
 <link href="assets/css/style.css" rel="stylesheet">
 
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+	var stripe = Stripe('pk_test_51JIbDeEw27jYt5tUaGWRZ9N3tt3nJI387Ru6qoWX6ceXp6843eorzSIyQL99H6n8QuGVG1ebdHhqnRVFHXQ4gZjo00RyARsu5v');
+	var elements = stripe.elements();
+</script>
+
 <!-- =======================================================
   * Template Name: FlexStart - v1.3.0
   * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
@@ -193,7 +199,8 @@
 							<td colspan="1" style="border-style: none;">$<%=String.format("%.2f", total * 0.07)%></td>
 						</tr>
 						<tr>
-							<td scope="col" colspan="4" style="border-style: none;">Delivery fee:</td>
+							<td scope="col" colspan="4" style="border-style: none;">Delivery
+								fee:</td>
 							<td colspan="1" style="border-style: none;">FREE</td>
 						</tr>
 						<tr>

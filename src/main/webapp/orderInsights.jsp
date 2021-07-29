@@ -96,10 +96,12 @@
 					<thead>
 						<tr>
 							<th>Order_id</th>
+							<th>Email</th>
 							<th>Product Name</th>
 							<th>Cost Price</th>
 							<th>Retail Price</th>
 							<th>Date of Order</th>
+							<th>Quantity</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -113,26 +115,47 @@
 						// Step 4: Create Statement object
 						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						String sqlStr = "SELECT order_id,product_title,cost_price,retail_price,orders.created_at FROM sp_shop.orders INNER JOIN users ON users.user_id = orders.user_id INNER JOIN products ON products.product_id = orders.product_id";
+						String sqlStr = "";
+						sqlStr = "SELECT DISTINCT reciept_id, product_id FROM sp_shop.orders;";
+
 						rs = stmt.executeQuery(sqlStr);
 
 						// Step 6: Process Result
 						while (rs.next()) {
-							int orderID = rs.getInt("order_id");
-							String productTitle = rs.getString("product_title");
-							String costPrice = rs.getString("cost_price");
-							String retailPrice = rs.getString("retail_price");
-							String createdAt = rs.getString("created_at");
+							int reciept_id2 = rs.getInt("reciept_id");
+							int product_id = rs.getInt("product_id");
+
+							sqlStr = "SELECT DISTINCT *, count(*) as quantity FROM sp_shop.orders orders, sp_shop.products products, sp_shop.users users where reciept_id = ? and orders.product_id = ? and orders.product_id = products.product_id and users.user_id = orders.user_id group by reciept_id;";
+
+							pstmt = conn.prepareStatement(sqlStr);
+							pstmt.setInt(1, reciept_id2);
+							pstmt.setInt(2, product_id);
+
+							System.out.println(reciept_id2);
+							System.out.println(product_id);
+
+							ResultSet rs2 = pstmt.executeQuery();
+
+							while (rs2.next()) {
+								int orderID = rs2.getInt("order_id");
+								String email = rs2.getString("email");
+								String productTitle = rs2.getString("product_title");
+								String costPrice = rs2.getString("cost_price");
+								String retailPrice = rs2.getString("retail_price");
+								String createdAt = rs2.getString("created_at");
+								String quantity = rs2.getString("quantity");
 						%>
 						<tr>
 							<th><%=orderID%></th>
+							<th><%=email%></th>
 							<td><%=productTitle%></td>
 							<td><%=costPrice%></td>
 							<td><%=retailPrice%></td>
 							<td><%=createdAt%></td>
-
+							<td><%=quantity%></td>
 						</tr>
 						<%
+						}
 						}
 						%>
 					</tbody>
@@ -274,7 +297,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#orders').DataTable({
-					"order" : [ [ 2, "desc" ] ]
+					"order" : [ [ 0, "asc" ] ]
 				});
 			});
 		</script>
