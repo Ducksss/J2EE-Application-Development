@@ -95,7 +95,7 @@
 				<table id="orders" class="display">
 					<thead>
 						<tr>
-							<th>Order_id</th>
+							<th>Receipt ID</th>
 							<th>Email</th>
 							<th>Product Name</th>
 							<th>Cost Price</th>
@@ -125,7 +125,7 @@
 							int reciept_id2 = rs.getInt("reciept_id");
 							int product_id = rs.getInt("product_id");
 
-							sqlStr = "SELECT DISTINCT *, count(*) as quantity FROM sp_shop.orders orders, sp_shop.products products, sp_shop.users users where reciept_id = ? and orders.product_id = ? and orders.product_id = products.product_id and users.user_id = orders.user_id group by reciept_id;";
+							sqlStr = "SELECT DISTINCT *, count(*) as quantity FROM sp_shop.orders orders, sp_shop.products products, sp_shop.users users, sp_shop.reciepts reciepts where orders.reciept_id = ? and orders.product_id = ? and orders.product_id = products.product_id and users.user_id = orders.user_id and reciepts.reciept_id = orders.reciept_id group by orders.reciept_id;";
 
 							pstmt = conn.prepareStatement(sqlStr);
 							pstmt.setInt(1, reciept_id2);
@@ -137,7 +137,7 @@
 							ResultSet rs2 = pstmt.executeQuery();
 
 							while (rs2.next()) {
-								int orderID = rs2.getInt("order_id");
+								int orderID = rs2.getInt("reciept_id");
 								String email = rs2.getString("email");
 								String productTitle = rs2.getString("product_title");
 								String costPrice = rs2.getString("cost_price");
