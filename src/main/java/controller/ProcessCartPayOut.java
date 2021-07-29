@@ -1,8 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stripe.Stripe;
 import com.stripe.model.Charge;
+import com.stripe.model.Price;
 import com.stripe.param.ChargeCreateParams;
 
 import products.Product;
@@ -59,22 +64,16 @@ public class ProcessCartPayOut extends HttpServlet {
 			// Get the payment token ID submitted by the form:
 			String token = request.getParameter("stripeToken");
 			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
-			
-			System.out.println("JAVA KING!");
-			System.out.println(token);
-			System.out.println("WALCO1");
-			System.out.println("WALCO2");
-			System.out.print(totalPrice);
 
-			System.out.print("DELTA0");
-			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(999L).setCurrency("sgd")
+			BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+			double salary = bd.doubleValue() * 100;
+			Long v1 = Math.round(salary);
+
+			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(v1).setCurrency("sgd")
 					.setDescription("Example charge - WALCO 1").setSource(token).build();
-			System.out.print("DELTA1");
 
-			System.out.println("WALCO0");
 			Charge charge = Charge.create(params);
 
-			System.out.println("WALCO2");
 			int sessUserID = (int) request.getSession().getAttribute("sessUserID");
 			ArrayList<Product> productList = (ArrayList<Product>) request.getSession().getAttribute("product");
 
