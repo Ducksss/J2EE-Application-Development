@@ -9,12 +9,12 @@ public class Product {
 	private double stockQuantity;
 
 	public Product(int quantity,int productID, String productTitle, double costPrice, double retailPrice, double stockQuantity) {
-		this.quantity = quantity;
 		this.productID = productID;
 		this.productTitle = productTitle;
 		this.costPrice = costPrice;
 		this.retailPrice = retailPrice;
 		this.stockQuantity = stockQuantity;
+		this.quantity = quantity;
 	}
 	
 	public int getQuantity() {

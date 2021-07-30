@@ -2,6 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
 <%@page import="model.*"%>
+<%@page import="orders.OrderManagement"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="controller.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,64 +109,21 @@
 					</thead>
 					<tbody>
 						<%
-						// Step1: Load JDBC Driver
-						Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
-						// Step 2: Define Connection URL
-						connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-						// Step 3: Establish connection to URL
-						conn = DriverManager.getConnection(connURL);
-						// Step 4: Create Statement object
-						Statement stmt = conn.createStatement();
-						// Step 5: Execute SQL Command
-						String sqlStr = "";
-						String piggyBackedValue = "";
-						sqlStr = "SELECT DISTINCT reciept_id, product_id FROM sp_shop.orders;";
+						ObtainAdminOrderInformation ObtainAdminOrderInformation = new ObtainAdminOrderInformation();
+						ArrayList<OrderManagement> OrderManagement = ObtainAdminOrderInformation.getAllAdminOrderInformation();
 
-						rs = stmt.executeQuery(sqlStr);
-
-						// Step 6: Process Result
-						
-						System.out.println("_-------------------_");
-						while (rs.next()) {
-							int reciept_id2 = rs.getInt("reciept_id");
-							int product_id = rs.getInt("product_id");
-
-							sqlStr = "SELECT DISTINCT *, count(*) as quantity FROM sp_shop.orders orders, sp_shop.products products, sp_shop.users users, sp_shop.reciepts reciepts where orders.reciept_id = ? and orders.product_id = ? and orders.product_id = products.product_id and users.user_id = orders.user_id and reciepts.reciept_id = orders.reciept_id group by orders.reciept_id;";
-
-							pstmt = conn.prepareStatement(sqlStr);
-							pstmt.setInt(1, reciept_id2);
-							pstmt.setInt(2, product_id);
-
-							ResultSet rs2 = pstmt.executeQuery();
-
-							while (rs2.next()) {
-								String orderID = rs2.getString("reciept_id");
-								String email = rs2.getString("email");
-								String productTitle = rs2.getString("product_title");
-								String costPrice = rs2.getString("cost_price");
-								String retailPrice = rs2.getString("retail_price");
-								String createdAt = rs2.getString("created_at");
-								String quantity = rs2.getString("quantity");
-
-								// System.out.println("ATLIS 1 " + orderID);
-								// System.out.println("ATLIS 2 " + piggyBackedValue);
-								// if (orderID.equals(piggyBackedValue)) {
-								//	orderID = "";
-								//	System.out.println("DIE DIE DIE");
-								// }
+						for (OrderManagement s : OrderManagement) {
 						%>
 						<tr>
-							<th><%=orderID%></th>
-							<th><%=email%></th>
-							<td><%=productTitle%></td>
-							<td><%=costPrice%></td>
-							<td><%=retailPrice%></td>
-							<td><%=createdAt%></td>
-							<td><%=quantity%></td>
+							<th><%=s.getOrderID()%></th>
+							<th><%=s.getEmail()%></th>
+							<td><%=s.getProductTitle()%></td>
+							<td><%=s.getCostPrice()%></td>
+							<td><%=s.getRetailPrice()%></td>
+							<td><%=s.getCreatedAt()%></td>
+							<td><%=s.getQuantity()%></td>
 						</tr>
 						<%
-						piggyBackedValue = orderID;
-						}
 						}
 						%>
 					</tbody>
@@ -187,10 +147,16 @@
 					</thead>
 					<tbody>
 						<%
+						// Step1: Load JDBC Driver
+						Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
+						// Step 2: Define Connection URL
+						connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
+						// Step 3: Establish connection to URL
+						conn = DriverManager.getConnection(connURL);
 						// Step 4: Create Statement object
-						stmt = conn.createStatement();
+						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id ORDER BY tally desc;";
+						String sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id ORDER BY tally desc;";
 						rs = stmt.executeQuery(sqlStr);
 
 						int id2 = 1;

@@ -91,11 +91,15 @@
 					<li class="dropdown"><a href="statistics.jsp"><span>Admin
 								tools</span> <i class="bi bi-chevron-down"></i></a>
 						<ul>
-							<li><a href="orderManagement.jsp"><i class="fa fa-clock-o"
+							<li><a href="orderManagement.jsp"><i
+									class="fa fa-clock-o"
 									style="padding-right: 1px; font-size: 15px;"></i>Order<br>management&nbsp&nbsp</a></li>
+
 							<li><a href="orderInsights.jsp"><i
 									class="fa fa-search-plus"
-									style="padding-right: 1px; font-size: 15px;"></i>Order insights</a></li>
+									style="padding-right: 1px; font-size: 15px;" id="mylink"
+									onclick="event.preventDefault(); this.parentNode.submit()"></i>Order
+									insights</a></li>
 							<li><a href="manageUserAndAdmin.jsp"><i
 									class="fa fa-users"
 									style="padding-right: 1px; font-size: 15px;"></i>Manage users</a></li>
@@ -108,7 +112,7 @@
 									class="fas fa-hand-pointer"
 									style="padding-right: 1px; font-size: 15px;"></i>Add category</a></li>
 						</ul></li>
-						
+
 					<%
 					}
 					%>
@@ -132,5 +136,13 @@
 		</div>
 	</header>
 	<!-- End Header -->
+	<script>
+		window.onload = function() {
+			document.getElementById('mylink').onclick = function() {
+				document.getElementById('myform').submit();
+				return false;
+			};
+		};
+	</script>
 </body>
 </html>

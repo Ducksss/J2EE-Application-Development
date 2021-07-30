@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
-<%@page import="model.*"%>
+<%@ page import="java.util.*"%>
+<%@page import="reciept.Reciept"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="controller.*"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,10 +71,6 @@
 	int user_id = (int) session.getAttribute("sessUserID");
 	int reciept_id = Integer.parseInt(request.getParameter("recieptID"));
 
-	System.out.println("DELTA123");
-	System.out.println(user_id);
-	System.out.println(reciept_id);
-
 	// Step1: Load JDBC Driver
 	Class.forName("com.mysql.jdbc.Driver"); //can be omitted for newer version of drivers
 	// Step 2: Define Connection URL
@@ -121,36 +120,28 @@
 						</tr>
 					</thead>
 					<tbody>
+						<!--  -->
 						<%
-						System.out.println(user_id);
-						System.out.println(reciept_id);
-						%>
-						<%
+						ObtainCustomerRecieptInformation ObtainCustomerRecieptInformation = new ObtainCustomerRecieptInformation();
+						ArrayList<Reciept> RecieptItems = ObtainCustomerRecieptInformation.getAllUniqueRecieptOrder(user_id, reciept_id);
 						int id = 1;
-						sqlStr = "SELECT *, COUNT('product_id') as tally FROM sp_shop.orders orders, sp_shop.products products where orders.user_id = ? and orders.reciept_id = ? and orders.product_id = products.product_id group by orders.product_id;";
-						pstmt = conn.prepareStatement(sqlStr);
-
-						pstmt.setInt(1, user_id);
-						pstmt.setInt(2, reciept_id);
-						rs = pstmt.executeQuery();
-						// Step 6: Process Result
-
 						double total = 0;
-						while (rs.next()) {
-							reciept_id = rs.getInt("reciept_id");
-							String product_title = rs.getString("product_title");
-							String brief_description = rs.getString("brief_description");
-							int tally = rs.getInt("tally");
-							double retail_price = rs.getDouble("retail_price");
 
-							total += tally * retail_price;
+						for (Reciept s : RecieptItems) {
+							System.out.println(s.getProductTitle());
+							System.out.println(s.getBriefDescription());
+							System.out.println(s.getQuantity());
+							System.out.println(s.getTotal());
+
+							total += s.getTotal();
 						%>
+
 						<tr>
 							<th scope="row"><%=id%></th>
-							<td><%=product_title%></td>
-							<td><%=brief_description%></td>
-							<td><%=tally%></td>
-							<td>$<%=String.format("%.2f", tally * retail_price)%></td>
+							<td><%=s.getProductTitle()%></td>
+							<td><%=s.getBriefDescription()%></td>
+							<td><%=s.getQuantity()%></td>
+							<td>$<%=String.format("%.2f", s.getTotal())%></td>
 						</tr>
 						<%
 						id++;
