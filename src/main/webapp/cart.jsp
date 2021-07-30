@@ -2,6 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.net.http.HttpRequest"%>
+<%@ page import="java.net.http.HttpResponse"%>
+<%@ page import="java.net.http.HttpClient"%>
+<%@ page import="java.net.URI"%>
 <%@page import="products.Product"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -217,6 +221,17 @@
 
 						}
 						%>
+						<iframe width="450" height="250" frameborder="0" style="border: 0"
+							src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAaTfPu4npzQribsiYotACCd1xMNcuUpSA&origin=Block+363+Woodlands&destination=Polytechnic+Singapore&avoid=tolls|highways"
+							allowfullscreen> </iframe>
+							<%HttpRequest requesta = HttpRequest.newBuilder()
+									.uri(URI.create("https://distanceto.p.rapidapi.com/get?route=singapore&foot=false&car=false"))
+									.header("x-rapidapi-key", "e6dd40d03bmsh1f73d8f3b943795p1767f0jsn4f071df52f05")
+									.header("x-rapidapi-host", "distanceto.p.rapidapi.com")
+									.method("GET", HttpRequest.BodyPublishers.noBody())
+									.build();
+							HttpResponse<String> responsea = HttpClient.newHttpClient().send(requesta, HttpResponse.BodyHandlers.ofString());
+							System.out.println(responsea.body()); %>
 					</tfoot>
 				</table>
 			</div>
