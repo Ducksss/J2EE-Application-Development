@@ -66,8 +66,7 @@ public class ProcessCartPayOut extends HttpServlet {
 			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
 
 			BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
-			double salary = bd.doubleValue() * 100;
-			Long v1 = Math.round(salary);
+			Long v1 = Math.round(bd.doubleValue() * 100);
 
 			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(v1).setCurrency("sgd")
 					.setDescription("Example charge - WALCO 1").setSource(token).build();
