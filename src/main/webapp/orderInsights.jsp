@@ -116,11 +116,14 @@
 						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
 						String sqlStr = "";
+						String piggyBackedValue = "";
 						sqlStr = "SELECT DISTINCT reciept_id, product_id FROM sp_shop.orders;";
 
 						rs = stmt.executeQuery(sqlStr);
 
 						// Step 6: Process Result
+						
+						System.out.println("_-------------------_");
 						while (rs.next()) {
 							int reciept_id2 = rs.getInt("reciept_id");
 							int product_id = rs.getInt("product_id");
@@ -131,19 +134,23 @@
 							pstmt.setInt(1, reciept_id2);
 							pstmt.setInt(2, product_id);
 
-							System.out.println(reciept_id2);
-							System.out.println(product_id);
-
 							ResultSet rs2 = pstmt.executeQuery();
 
 							while (rs2.next()) {
-								int orderID = rs2.getInt("reciept_id");
+								String orderID = rs2.getString("reciept_id");
 								String email = rs2.getString("email");
 								String productTitle = rs2.getString("product_title");
 								String costPrice = rs2.getString("cost_price");
 								String retailPrice = rs2.getString("retail_price");
 								String createdAt = rs2.getString("created_at");
 								String quantity = rs2.getString("quantity");
+
+								// System.out.println("ATLIS 1 " + orderID);
+								// System.out.println("ATLIS 2 " + piggyBackedValue);
+								// if (orderID.equals(piggyBackedValue)) {
+								//	orderID = "";
+								//	System.out.println("DIE DIE DIE");
+								// }
 						%>
 						<tr>
 							<th><%=orderID%></th>
@@ -155,6 +162,7 @@
 							<td><%=quantity%></td>
 						</tr>
 						<%
+						piggyBackedValue = orderID;
 						}
 						}
 						%>

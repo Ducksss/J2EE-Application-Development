@@ -20,6 +20,9 @@ import com.stripe.model.Price;
 import com.stripe.param.ChargeCreateParams;
 
 import products.Product;
+import model.ProductDB;
+import model.RecieptDB;
+import model.OrderDB;
 
 /**
  * Servlet implementation class ProcessCartPayOut
@@ -55,90 +58,47 @@ public class ProcessCartPayOut extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		try {
-			// Set your secret key. Remember to switch to your live secret key in
-			// production.
+			// Requesting Params
+			String token = request.getParameter("stripeToken");
+			int sessUserID = (int) request.getSession().getAttribute("sessUserID");
+			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
+			BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+			ArrayList<Product> productList = (ArrayList<Product>) request.getSession().getAttribute("product");
+			Long v1 = Math.round(bd.doubleValue() * 100);
+
 			// See your keys here: https://dashboard.stripe.com/apikeys
 			Stripe.apiKey = "sk_test_51JIbDeEw27jYt5tURmgXyEHj13ws0UKNwhJPJDpqXPW8ULUXQguZURTd5yl6oa3CueZGMVBtBj4soQ5NXRsgiEvJ00k5k5KNLy";
 
-			// Token is created using Stripe Checkout or Elements!
-			// Get the payment token ID submitted by the form:
-			String token = request.getParameter("stripeToken");
-			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
-
-			BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
-			Long v1 = Math.round(bd.doubleValue() * 100);
-
-			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(v1).setCurrency("sgd")
-					.setDescription("Example charge - WALCO 1").setSource(token).build();
+			// Stripe
+			ChargeCreateParams params = ChargeCreateParams
+					.builder()
+					.setAmount(v1)
+					.setCurrency("sgd")
+					.setDescription("Example charge - WALCO 1")
+					.setSource(token).build();
 
 			Charge charge = Charge.create(params);
 
-			int sessUserID = (int) request.getSession().getAttribute("sessUserID");
-			ArrayList<Product> productList = (ArrayList<Product>) request.getSession().getAttribute("product");
+			// Calling the models
+			OrderDB OrderDB = new OrderDB();
+			RecieptDB RecieptDB = new RecieptDB();
+			ProductDB ProductDB = new ProductDB();
+			
+			boolean success = RecieptDB.insertReciept(sessUserID, totalPrice);
 
-			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
-
-			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-
-			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
-
-			// if the email is not associated with an account!
-			String insertSQL = "INSERT INTO sp_shop.reciepts(user_id, total_price) VALUES (?, ?)";
-			PreparedStatement pstat = conn.prepareStatement(insertSQL);
-			pstat.setInt(1, sessUserID);
-			pstat.setString(2, String.format("%.2f", totalPrice));
-
-			int count = pstat.executeUpdate();
-			System.out.println(sessUserID);
-
-			if (count > 0) {
-				insertSQL = "SELECT * FROM sp_shop.reciepts where user_id = ? ORDER BY reciept_id desc;";
-				pstat = conn.prepareStatement(insertSQL);
-				pstat.setInt(1, sessUserID);
-				int reciept_id = 0;
-
-				ResultSet rs = pstat.executeQuery();
-				boolean isFirst = true;
-				if (rs.next() && isFirst) {
-					reciept_id = rs.getInt("reciept_id");
-					isFirst = false;
-				}
+			if (success) {
+				int recieptID = RecieptDB.getRecieptID(sessUserID);
 
 				for (int i = 0; i < productList.size(); i++) {
-
 					for (int n = 0; n < productList.get(i).getQuantity(); n++) {
 						// if the email is not associated with an account!
-						insertSQL = "INSERT INTO sp_shop.orders(user_id, product_id, reciept_id) VALUES (?, ?, ?)";
-						pstat = conn.prepareStatement(insertSQL);
-						pstat.setInt(1, sessUserID);
-						pstat.setInt(2, productList.get(i).getProductID());
-						pstat.setInt(3, reciept_id);
-
-						count = pstat.executeUpdate();
+						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID);
 					}
 				}
 
 				for (int i = 0; i < productList.size(); i++) {
-					insertSQL = "SELECT * FROM sp_shop.products where product_id = ?;";
-					pstat = conn.prepareStatement(insertSQL);
-					pstat.setInt(1, productList.get(i).getProductID());
-
-					int stock_quantity = 0;
-					rs = pstat.executeQuery();
-					if (rs.next()) {
-						stock_quantity = rs.getInt("stock_quantity");
-					}
-
-					// if the email is not associated with an account!
-					insertSQL = "UPDATE sp_shop.products SET stock_quantity = ? where product_id = ?";
-					pstat = conn.prepareStatement(insertSQL);
-					pstat.setInt(1, stock_quantity - productList.get(i).getQuantity());
-					pstat.setInt(2, productList.get(i).getProductID());
-
-					count = pstat.executeUpdate();
+					int stock_quantity = ProductDB.retriveStockQuantity(productList.get(i).getProductID());
+					ProductDB.updateStockQuantity(stock_quantity - productList.get(i).getQuantity(), productList.get(i).getProductID());
 				}
 			}
 
@@ -148,6 +108,7 @@ public class ProcessCartPayOut extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println("Failure encountered");
 			System.out.print(e);
+			System.out.println("Failure encountered");
 		}
 	}
 
