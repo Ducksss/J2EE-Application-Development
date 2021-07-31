@@ -164,6 +164,12 @@
 							</li>
 							<li class="list-group-item d-flex justify-content-between">
 								<span>Total (SGD)</span> <strong>$<%=String.format("%.2f", totalPrice)%></strong>
+								<%HttpRequest requesta = HttpRequest.newBuilder()
+									.uri(URI.create("https://api.exchangerate-api.com/v4/latest/sgd"))
+									.method("GET", HttpRequest.BodyPublishers.noBody())
+									.build();
+							HttpResponse<String> responsea = HttpClient.newHttpClient().send(requesta, HttpResponse.BodyHandlers.ofString());
+							System.out.println(responsea.body()); %>
 							</li>
 						</ul>
 					</div>
