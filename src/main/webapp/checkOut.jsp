@@ -3,6 +3,12 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
 <%@page import="products.Product"%>
+<%@ page import="java.net.http.HttpRequest"%>
+<%@ page import="java.net.http.HttpResponse"%>
+<%@ page import="java.net.http.HttpClient"%>
+<%@ page import="org.json.*"%>
+<%@ page import="java.net.URI"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +56,8 @@
 
 <!-- Stripe -->
 <script src="https://js.stripe.com/v3/"></script>
+<!-- JQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 	//Set your publishable key: remember to change this to your live publishable key in production
 	//See your keys here: https://dashboard.stripe.com/apikeys
@@ -69,6 +77,7 @@
 	<!-- ======= Validation ======= -->
 	<%
 	double totalPrice = 0;
+	double totalPriceCurrency = 0;
 	try {
 		String userRole = (String) session.getAttribute("sessUserRole");
 		if (userRole == null) {
@@ -129,6 +138,14 @@
 						<ul class="list-group mb-3">
 							<%
 							String formmatedTotalPrice = "";
+							String currencyType;
+							if(session.getAttribute("currencyType") == null){
+								currencyType="SGD";
+							}else{
+								currencyType = String.valueOf(session.getAttribute("currencyType"));
+								System.out.println(currencyType);
+							}
+							
 							try {
 								totalPrice = 0;
 								for (int i = 0; i < productList.size(); i++) {
@@ -163,13 +180,28 @@
 								</div> <span class="text-danger">$<%=String.format("%.2f", GST)%></span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between">
-								<span>Total (SGD)</span> <strong>$<%=String.format("%.2f", totalPrice)%></strong>
-								<%HttpRequest requesta = HttpRequest.newBuilder()
-									.uri(URI.create("https://api.exchangerate-api.com/v4/latest/sgd"))
-									.method("GET", HttpRequest.BodyPublishers.noBody())
-									.build();
-							HttpResponse<String> responsea = HttpClient.newHttpClient().send(requesta, HttpResponse.BodyHandlers.ofString());
-							System.out.println(responsea.body()); %>
+								<span>Total Price <strong>$<%=String.format("%.2f", totalPrice)%></strong></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between">Convert
+								to your own currency
+								<form action="CurrencyConversion" method="POST">
+								<%System.out.println(currencyType); %>
+									<select name="currency" value=<%=currencyType%>>
+										<option value="USD">USD</option>
+										<option value="FJD">FJD</option>
+									</select> <input type="hidden" id="thisField" name="totalPrice"
+										value=<%=totalPrice%>> <input type="submit"
+										value="Submit">
+								</form>
+							</li>
+							<li class="list-group-item d-flex justify-content-between">
+								<%
+								try {
+									totalPriceCurrency = (double) session.getAttribute("totalPriceConverted");
+
+								} catch (Exception e) {
+								}
+								%> <span>Total Converted Currency for <%=currencyType%><strong>$<%=String.format("%.2f", totalPriceCurrency)%></strong></span>
 							</li>
 						</ul>
 					</div>
@@ -387,7 +419,7 @@
 				}
 			});
 		});
-		
+
 		function stripeTokenHandler(token) {
 			// Insert the token ID into the form so it gets submitted to the server
 			var form = document.getElementById('payment-form');

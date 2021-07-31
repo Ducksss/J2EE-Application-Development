@@ -221,9 +221,7 @@
 
 						}
 						%>
-						<iframe width="450" height="250" frameborder="0" style="border: 0"
-							src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAaTfPu4npzQribsiYotACCd1xMNcuUpSA&origin=Block+363+Woodlands&destination=Polytechnic+Singapore&avoid=tolls|highways"
-							allowfullscreen> </iframe>
+						
 							
 					</tfoot>
 				</table>
