@@ -192,7 +192,7 @@
 								Comments
 							</h4>
 							<%
-							sql = "SELECT * FROM sp_shop.reviews reviews, sp_shop.users users where reviews.fk_product_id = ? and reviews.fk_user_id = users.user_id";
+							sql = "SELECT * FROM sp_shop.reviews reviews, sp_shop.users users where reviews.fk_product_id = ? and reviews.fk_user_id = users.user_id and users.status = 0";
 
 							// executing to DB - Statement to check if an account exist before it
 							pstmt = conn.prepareStatement(sql);
