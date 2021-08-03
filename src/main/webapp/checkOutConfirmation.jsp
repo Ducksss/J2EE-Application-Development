@@ -66,11 +66,14 @@
 			ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 			if (productList.isEmpty()) {
 		response.sendRedirect("cart.jsp");
+		return;
 			}
 
 			if (productList.size() == 0) {
 		response.sendRedirect("cart.jsp");
 			}
+			
+			productList.clear();
 		}
 	} catch (Exception e) {
 		// if session times out, it means that there will be no userRole either ways

@@ -117,15 +117,23 @@
 						// Step 6: Process Result
 
 						try {
-							for (int i = 0; i < productList.size(); i++) {
-								int quantity = productList.get(i).getQuantity();
-								int productID = productList.get(i).getProductID();
-								String productTitle = productList.get(i).getProductTitle();
-								double retailPrice = productList.get(i).getRetailPrice();
-								String formattedRetailPrice = String.format("%.2f", retailPrice);
-								double rowIndividualPrice = retailPrice * quantity;
+							if (productList.isEmpty()) {
+						%>
+						<tr>
+							<td colspan=5>You have nothing in your cart so far!</td>
+						</tr>
+						<%
+						}
 
-								total += rowIndividualPrice;
+						for (int i = 0; i < productList.size(); i++) {
+						int quantity = productList.get(i).getQuantity();
+						int productID = productList.get(i).getProductID();
+						String productTitle = productList.get(i).getProductTitle();
+						double retailPrice = productList.get(i).getRetailPrice();
+						String formattedRetailPrice = String.format("%.2f", retailPrice);
+						double rowIndividualPrice = retailPrice * quantity;
+
+						total += rowIndividualPrice;
 						%>
 						<tr>
 							<th scope="row"><%=i + 1%></th>
@@ -190,8 +198,13 @@
 					<tfoot>
 						<%
 						try {
-							for (int i = 0; i < productList.size(); i++) {
-							}
+
+							if (productList.isEmpty()) {
+
+							} else {
+
+								for (int i = 0; i < productList.size(); i++) {
+								}
 						%>
 						<tr>
 							<td scope="col" colspan="4" style="border-style: none;">
@@ -217,12 +230,13 @@
 										type="button" class="btn btn-primary">Check out</button></a></td>
 						</tr>
 						<%
+						}
 						} catch (Exception e) {
 
 						}
 						%>
-						
-							
+
+
 					</tfoot>
 				</table>
 			</div>

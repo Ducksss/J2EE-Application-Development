@@ -85,10 +85,11 @@
 	<!-- Getting from MySQL -->
 	<%
 	int user_id = 0;
+	// int reciept_id = 0;
 	// Getting variables
 	try {
 		user_id = (int) session.getAttribute("sessUserID");
-
+		// reciept_id = Integer.parseInt(request.getParameter("recieptID"));
 	} catch (Exception e) {
 	}
 	// Step1: Load JDBC Driver
@@ -194,8 +195,8 @@
 								style="margin-top: -5rem; margin-left: 1rem;">
 
 							</ol>
-							<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">My
-								history - View products</h4>
+							<h4 class="sech4" style="font-family: 'Pangolin'; font-size: 3em">View
+								purchase history</h4>
 						</div>
 					</div>
 					<table class="display" id="recieptInfo">

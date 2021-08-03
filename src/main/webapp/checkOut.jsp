@@ -85,7 +85,7 @@
 		} else {
 			ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 			if (productList.isEmpty()) {
-		response.sendRedirect("cart.jsp");
+				response.sendRedirect("cart.jsp");
 			}
 
 			if (productList.size() == 0) {
@@ -139,13 +139,13 @@
 							<%
 							String formmatedTotalPrice = "";
 							String currencyType;
-							if(session.getAttribute("currencyType") == null){
-								currencyType="SGD";
-							}else{
+							if (session.getAttribute("currencyType") == null) {
+								currencyType = "SGD";
+							} else {
 								currencyType = String.valueOf(session.getAttribute("currencyType"));
 								System.out.println(currencyType);
 							}
-							
+
 							try {
 								totalPrice = 0;
 								for (int i = 0; i < productList.size(); i++) {
@@ -185,7 +185,9 @@
 							<li class="list-group-item d-flex justify-content-between">Convert
 								to your own currency
 								<form action="CurrencyConversion" method="POST">
-								<%System.out.println(currencyType); %>
+									<%
+									System.out.println(currencyType);
+									%>
 									<select name="currency" value=<%=currencyType%>>
 										<option value="USD">USD</option>
 										<option value="FJD">FJD</option>
