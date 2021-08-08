@@ -123,8 +123,6 @@
 							String email = rs.getString("email");
 							String type = rs.getString("type");
 							String address = rs.getString("address");
-
-							System.out.println(user_id);
 						%>
 						<tr>
 							<th scope="row"><%=id%></th>

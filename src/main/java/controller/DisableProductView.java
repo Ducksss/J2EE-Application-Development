@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import model.ProductDB;
 
 /**
- * Servlet implementation class EnableProductView
+ * Servlet implementation class DisableProductView
  */
-@WebServlet("/EnableProductView")
-public class EnableProductView extends HttpServlet {
+@WebServlet("/DisableProductView")
+public class DisableProductView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EnableProductView() {
+	public DisableProductView() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -50,7 +50,7 @@ public class EnableProductView extends HttpServlet {
 			int product_id = Integer.parseInt(request.getParameter("productID"));
 
 			ProductDB ProductDB = new ProductDB();
-			boolean success = ProductDB.editProductStatus(2, product_id);
+			boolean success = ProductDB.editProductStatus(1, product_id);
 
 			if (success) {
 				response.sendRedirect("manageProductCategory.jsp");

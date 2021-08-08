@@ -101,6 +101,7 @@
 							<th scope="col">Edit</th>
 							<th scope="col">Enable for view</th>
 							<th scope="col">Remove for view</th>
+							<th scope="col">Delete product</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -114,7 +115,7 @@
 						// Step 4: Create Statement object
 						Statement stmt = conn.createStatement();
 						// Step 5: Execute SQL Command
-						String sqlStr = "SELECT * FROM sp_shop.products";
+						String sqlStr = "SELECT * FROM sp_shop.products where status != 2";
 						rs = stmt.executeQuery(sqlStr);
 						int id = 1;
 						// Step 6: Process Result
@@ -157,9 +158,15 @@
 								</form>
 							</td>
 							<td>
-								<form method="POST" action="DeleteProductDetails">
+								<form method="POST" action="DisableProductView">
 									<input name="productID" type="hidden" value="<%=product_id%>">
 									<input type="submit" value="Disable" class="btn btn-danger">
+								</form>
+							</td>
+							<td>
+								<form method="POST" action="DeleteProductDetails">
+									<input name="productID" type="hidden" value="<%=product_id%>">
+									<input type="submit" value="Delete" class="btn btn-dark">
 								</form>
 							</td>
 						</tr>

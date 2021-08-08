@@ -88,7 +88,7 @@
 					} else {
 					if (role.equals("Admin")) {
 					%>
-					<li class="dropdown"><a href="statistics.jsp"><span>Admin
+					<li class="dropdown"><a href="manageUserAndAdmin.jsp"><span>Admin
 								tools</span> <i class="bi bi-chevron-down"></i></a>
 						<ul>
 							<li><a href="orderManagement.jsp"><i

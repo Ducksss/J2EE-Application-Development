@@ -61,12 +61,38 @@ public class ProductDB {
 			Connection conn = DatabaseConnection.getConnection();
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "UPDATE sp_shop.products SET STATUS = 1 WHERE product_id = ?";
+			String sql = "UPDATE sp_shop.products SET STATUS = 2 WHERE product_id = ?";
 
 			/// executing to DB - Statement to check if an account exist before it
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, product_id);
+
+			int count = pstmt.executeUpdate();
+			conn.close();
+
+			if (count > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean editProductStatus(int status, int product_id) {
+		try {
+			Connection conn = DatabaseConnection.getConnection();
+
+			// instead of editing directly, use ? to prevent injection attacks
+			String sql = "UPDATE sp_shop.products SET STATUS = ? WHERE product_id = ?";
+
+			/// executing to DB - Statement to check if an account exist before it
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, product_id);
 
 			int count = pstmt.executeUpdate();
 			conn.close();
