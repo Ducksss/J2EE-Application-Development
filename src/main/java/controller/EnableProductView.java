@@ -1,28 +1,27 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.*;
-import java.util.*;
-import java.sql.*;
 
 /**
- * Servlet implementation class DeleteCategoryDetails
+ * Servlet implementation class EnableProductView
  */
-@WebServlet("/DeleteCategoryDetails")
-public class DeleteCategoryDetails extends HttpServlet {
+@WebServlet("/EnableProductView")
+public class EnableProductView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteCategoryDetails() {
+	public EnableProductView() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,15 +44,30 @@ public class DeleteCategoryDetails extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		try {
+			int product_id = Integer.parseInt(request.getParameter("productID"));
 
-		CategoryDB CategoryDB = new CategoryDB();
+			// Step1: Load JDBC Driver
+			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
 
-		int category_id = Integer.parseInt(request.getParameter("categoryID"));
-		boolean success = CategoryDB.deleteCategory(category_id);
+			// Step 2: Define Connection URL
+			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
 
-		if (success) {
-			response.sendRedirect("manageProductCategory.jsp");
-		} else {
+			// Step 3: Establish connection to URL
+			Connection conn = DriverManager.getConnection(connURL);
+
+			String insertSQL = "UPDATE sp_shop.products SET status = 0 WHERE product_id = ?";
+			PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+			ipstmt.setInt(1, product_id);
+
+			int rowAffected = ipstmt.executeUpdate();
+
+			if (rowAffected > 0) {
+				response.sendRedirect("manageProductCategory.jsp");
+			} else {
+				response.sendRedirect("manageProductCategory.jsp");
+			}
+		} catch (Exception e) {
 			response.sendRedirect("manageProductCategory.jsp");
 		}
 	}

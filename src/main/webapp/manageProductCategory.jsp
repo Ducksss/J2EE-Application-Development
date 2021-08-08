@@ -97,8 +97,10 @@
 							<th scope="col">Cost price</th>
 							<th scope="col">Retail price</th>
 							<th scope="col">Stock quantity</th>
+							<th scope="col">Status</th>
 							<th scope="col">Edit</th>
-							<th scope="col">Delete</th>
+							<th scope="col">Enable for view</th>
+							<th scope="col">Remove for view</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -117,6 +119,7 @@
 						int id = 1;
 						// Step 6: Process Result
 						while (rs.next()) {
+							String active = "";
 							int product_id = Integer.parseInt(rs.getString("product_id"));
 							String product_title = rs.getString("product_title");
 							String brief_description = rs.getString("brief_description");
@@ -124,6 +127,13 @@
 							double cost_price = rs.getDouble("cost_price");
 							double retail_price = rs.getDouble("retail_price");
 							int stock_quantity = rs.getInt("stock_quantity");
+							int status = rs.getInt("status");
+
+							if (status == 0) {
+								active = "Enabled for view";
+							} else {
+								active = "Disabled for view";
+							}
 						%>
 						<tr>
 							<th scope="row"><%=id%></th>
@@ -133,6 +143,7 @@
 							<td><%=String.format("%.2f", cost_price)%></td>
 							<td><%=String.format("%.2f", retail_price)%></td>
 							<td><%=stock_quantity%></td>
+							<td><%=active%>
 							<td>
 								<form action="editProduct.jsp">
 									<input type="hidden" name="productID" value="<%=product_id%>">
@@ -140,9 +151,15 @@
 								</form>
 							</td>
 							<td>
+								<form method="POST" action="EnableProductView">
+									<input name="productID" type="hidden" value="<%=product_id%>">
+									<input type="submit" value="Enable" class="btn btn-warning">
+								</form>
+							</td>
+							<td>
 								<form method="POST" action="DeleteProductDetails">
 									<input name="productID" type="hidden" value="<%=product_id%>">
-									<input type="submit" value="Delete" class="btn btn-danger">
+									<input type="submit" value="Disable" class="btn btn-danger">
 								</form>
 							</td>
 						</tr>

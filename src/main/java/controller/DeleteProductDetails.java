@@ -51,7 +51,7 @@ public class DeleteProductDetails extends HttpServlet {
 		int product_id = Integer.parseInt(request.getParameter("productID"));
 		boolean success = ProductDB.deleteProduct(product_id);
 
-		response.sendRedirect("statistics.jsp");
+		response.sendRedirect("manageProductCategory.jsp");
 	}
 
 }

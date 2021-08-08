@@ -86,7 +86,7 @@
 			sql = "SELECT *\r\n" + "FROM sp_shop.products\r\n"
 			+ "INNER JOIN sp_shop.category_tags ON products.product_id = category_tags.fk_product_id \r\n"
 			+ "INNER JOIN sp_shop.category ON category_tags.fk_category_id = category.category_id  \r\n"
-			+ "WHERE fk_category_id = ?";
+			+ "WHERE fk_category_id = ? and products.status=0";
 
 			// executing to DB
 			pstmt = conn.prepareStatement(sql);

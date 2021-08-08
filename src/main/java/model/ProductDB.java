@@ -62,7 +62,7 @@ public class ProductDB {
 			Connection conn = DatabaseConnection.getConnection();
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "DELETE FROM sp_shop.products WHERE product_id = ?";
+			String sql = "UPDATE sp_shop.products SET STATUS = 1 WHERE product_id = ?";
 
 			/// executing to DB - Statement to check if an account exist before it
 			PreparedStatement pstmt = conn.prepareStatement(sql);
