@@ -65,7 +65,6 @@
 
 	<!-- ======= GETTER ======= -->
 	<%
-	System.out.println("DELTA VARIANT");
 	int user_id = (int) session.getAttribute("sessUserID");
 	int reciept_id = Integer.parseInt(request.getParameter("recieptID"));
 
@@ -88,10 +87,9 @@
 	String total_price = "";
 	if (rs.next()) {
 		total_price = rs.getString("total_price");
-	}else{
+	} else {
 		response.sendRedirect("index.jsp");
 	}
-	System.out.println(total_price);
 	%>
 	<main id="main">
 		<!-- ======= Features Section ======= -->
