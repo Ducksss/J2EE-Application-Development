@@ -57,21 +57,16 @@ public class CurrencyConversion extends HttpServlet {
 			String currency = request.getParameter("currency");
 			Double totalPrice = Double.valueOf( request.getParameter("totalPrice") );
 			String currencyString = request.getParameter("currency");
-			System.out.println(currencyString);
 			HttpRequest requesta = HttpRequest.newBuilder()
 					.uri(URI.create("https://api.exchangerate-api.com/v4/latest/sgd"))
 					.method("GET", HttpRequest.BodyPublishers.noBody()).build();
 			HttpResponse<String> responsea = HttpClient.newHttpClient().send(requesta,
 					HttpResponse.BodyHandlers.ofString());
-			System.out.println(responsea.body());
 			JSONObject obj = new JSONObject(responsea.body());
-			System.out.println(obj.get("rates"));
 			JSONObject objectRates = new JSONObject(obj.get("rates").toString());
 			
-			System.out.println(objectRates.get(currency));
 			
 			double currencyThing = ((BigDecimal) objectRates.get(currency)).doubleValue();
-			System.out.println();
 			double totalPriceConverted = currencyThing * totalPrice;
 			HttpSession session = request.getSession(true);
 			session.removeAttribute("currencyType");

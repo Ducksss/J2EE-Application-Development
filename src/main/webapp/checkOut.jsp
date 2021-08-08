@@ -186,6 +186,7 @@
 								to your own currency
 								<form action="CurrencyConversion" method="POST">
 									<%
+									
 									System.out.println(currencyType);
 									%>
 									<select name="currency" value=<%=currencyType%>>
@@ -193,7 +194,7 @@
 										<option value="FJD">FJD</option>
 									</select> <input type="hidden" id="thisField" name="totalPrice"
 										value=<%=totalPrice%>> <input type="submit"
-										value="Submit">
+										value="Convert">
 								</form>
 							</li>
 							<li class="list-group-item d-flex justify-content-between">
@@ -354,6 +355,8 @@
 
 							<input type="hidden" class="form-control" id="totalPrice"
 								name="totalPrice" placeholder="" value="<%=totalPrice%>">
+								<%session.removeAttribute("currencyType");
+								session.removeAttribute("totalPriceConverted"); %>
 							<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
 								to checkout</button>
 						</form>
