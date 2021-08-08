@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.UserDB;
+
 /**
  * Servlet implementation class AdminPromotion
  */
@@ -46,30 +48,17 @@ public class AdminPromotion extends HttpServlet {
 		doGet(request, response);
 		try {
 			String user_id = request.getParameter("user_id");
+			UserDB UserDB = new UserDB();
+			boolean succcess = UserDB.editUserType("Admin", user_id);
 
-			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
-
-			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-
-			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
-
-			String sql = "UPDATE sp_shop.users SET type='Admin' where user_id = ?;";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, user_id);
-
-			int count = pstmt.executeUpdate();
-
-			if (count > 0) {
+			if (succcess) {
 				response.sendRedirect("manageUserAndAdmin.jsp");
+				return;
 			} else {
 				System.out.println("Fail to update!");
 				response.sendRedirect("manageUserAndAdmin.jsp");
+				return;
 			}
-
 		} catch (Exception e) {
 			System.out.println(e);
 			response.sendRedirect("manageUserAndAdmin.jsp");

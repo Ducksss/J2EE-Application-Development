@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.UserDB;
+
 /**
  * Servlet implementation class BanUser
  */
@@ -44,33 +46,18 @@ public class BanUser extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
 		try {
 			int user_id = Integer.parseInt(request.getParameter("user_id"));
+			UserDB UserDB = new UserDB();
+			boolean success = UserDB.editUserStatus(0, user_id);
 
-			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver"); // can be omitted for newer version of drivers
-
-			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-
-			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
-
-			String insertSQL = "UPDATE sp_shop.users SET status = ? where user_id = ?";
-			PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
-			ipstmt.setInt(1, 1);
-			ipstmt.setInt(2, user_id);
-
-			int rowAffected = ipstmt.executeUpdate();
-
-			if (rowAffected > 0) {
+			if (success) {
 				response.sendRedirect("manageUserAndAdmin.jsp");
 			} else {
-
+				response.sendRedirect("manageUserAndAdmin.jsp");
 			}
 		} catch (Exception e) {
-
+			System.out.println(e);
 		}
 	}
 

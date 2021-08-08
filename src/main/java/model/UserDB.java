@@ -98,4 +98,49 @@ public class UserDB {
 			return null;
 		}
 	}
+
+	public boolean editUserType(String type, String user_id) {
+		try {
+			Connection conn = DatabaseConnection.getConnection();
+
+			String sql = "UPDATE sp_shop.users SET type= ? where user_id = ?;";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, type);
+			pstmt.setString(2, user_id);
+
+			int count = pstmt.executeUpdate();
+
+			if (count > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	public boolean editUserStatus(int status, int user_id) {
+		try {
+			Connection conn = DatabaseConnection.getConnection();
+
+			String insertSQL = "UPDATE sp_shop.users SET status = ? where user_id = ?";
+			PreparedStatement ipstmt = conn.prepareStatement(insertSQL);
+			ipstmt.setInt(1, status);
+			ipstmt.setInt(2, user_id);
+
+			int count = ipstmt.executeUpdate();
+
+			if (count > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
 }
