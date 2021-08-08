@@ -92,7 +92,7 @@ public class ProcessCartPayOut extends HttpServlet {
 				for (int i = 0; i < productList.size(); i++) {
 					for (int n = 0; n < productList.get(i).getQuantity(); n++) {
 						// if the email is not associated with an account!
-						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID,productList.get(i).getCostPrice());
+						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID,productList.get(i).getRetailPrice());
 					}
 				}
 
