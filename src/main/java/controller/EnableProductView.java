@@ -50,7 +50,7 @@ public class EnableProductView extends HttpServlet {
 			int product_id = Integer.parseInt(request.getParameter("productID"));
 
 			ProductDB ProductDB = new ProductDB();
-			boolean success = ProductDB.editProductStatus(2, product_id);
+			boolean success = ProductDB.editProductStatus(0, product_id);
 
 			if (success) {
 				response.sendRedirect("manageProductCategory.jsp");

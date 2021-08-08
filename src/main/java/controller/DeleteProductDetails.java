@@ -49,7 +49,7 @@ public class DeleteProductDetails extends HttpServlet {
 		ProductDB ProductDB = new ProductDB();
 
 		int product_id = Integer.parseInt(request.getParameter("productID"));
-		boolean success = ProductDB.deleteProduct(product_id);
+		boolean success = ProductDB.editProductStatus(2, product_id);
 
 		response.sendRedirect("manageProductCategory.jsp");
 	}
