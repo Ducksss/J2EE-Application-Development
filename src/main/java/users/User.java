@@ -1,53 +1,74 @@
 package users;
 
 public class User {
-	private int user_id;
-	private String role;
-	private String username;
-	private String useremail;
-	
+	private int userID;
+	private String userName;
+	private String userEmail;
+	private String userPassword;
+	private String type;
+	private int status;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int user_id, String role, String username, String useremail) {
+	public User(int userID, String userName, String userEmail, String userPassword, String type, int status) {
 		super();
-		this.user_id = user_id;
-		this.role = role;
-		this.username = username;
-		this.useremail = useremail;
+		this.userID = userID;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.type = type;
+		this.status = status;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-	public String getRole() {
-		return role;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	public String getUseremail() {
-		return useremail;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setUseremail(String useremail) {
-		this.useremail = useremail;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 }

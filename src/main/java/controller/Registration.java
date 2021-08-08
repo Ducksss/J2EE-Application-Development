@@ -55,12 +55,13 @@ public class Registration extends HttpServlet {
 			String address = request.getParameter("address");
 			String confirmPassword = request.getParameter("re_pass");
 			String contactNumber = request.getParameter("number");
-			String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-
+			
 			// simple backend guard statement validation to check if the password matches!
 			if (!password.equals(confirmPassword)) {
 				response.sendRedirect("register.jsp?errCode=passwordUnmatch");
 			}
+			
+			String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 
 			boolean accountDoesExist = UserDB.findDuplicateUser(email);
 

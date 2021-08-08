@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.*;
+import users.User;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -52,54 +54,37 @@ public class LoginValidation extends HttpServlet {
 		try {
 			// extracting value from the login.html form and storing it in its respective
 			// params
+			UserDB UserDB = new UserDB();
 			String email = request.getParameter("your_name");
 			String password = request.getParameter("your_pass");
 
-			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/sp_shop?user=adminuser&password=password&serverTimezone=UTC";
-			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
-
-			// instead of editing directly, use ? to prevent injection attacks
-			String sql = "SELECT * FROM sp_shop.users WHERE email = ?";
-
-			// executing to DB
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, email);
-			ResultSet rs = pstmt.executeQuery();
+			boolean verified = UserDB.verifyUser(email);
 
 			if (password.equals(null) || email.equals(null) || password == "" || email == "") {
 				// checking if the password && userid with its according field
 				response.sendRedirect("login.jsp?errCode=NULL");
 				return;
 			} else {
-				if (rs.next() == false) {
+				if (!verified) {
 					response.sendRedirect("login.jsp?errCode=invalidLogin");
 					return;
 				}
 
-				int userStatus = rs.getInt("status");
-				if (userStatus == 1) {
+				User User = UserDB.retriveUserInformation(email);
+				if (User.getStatus() == 1) {
 					response.sendRedirect("login.jsp?errCode=banned");
 					return;
 				}
 
-				if (BCrypt.checkpw(password, rs.getString("password"))) {
+				if (BCrypt.checkpw(password, User.getUserPassword())) {
 					// Upon successful verification, lets redirect them to displayUser Page -->
 					// storing the value from the select statement into the variables
-					int user_id = rs.getInt("user_id");
-					String role = rs.getString("type");
-					String username = rs.getString("username");
-					String useremail = rs.getString("email");
-
 					// creating a session and setting the respective attributes
 					HttpSession session = request.getSession(true);
-					session.setAttribute("sessUserName", username);
-					session.setAttribute("sessUserEmail", useremail);
-					session.setAttribute("sessUserRole", role);
-					session.setAttribute("sessUserID", user_id);
+					session.setAttribute("sessUserName", User.getUserName());
+					session.setAttribute("sessUserEmail", User.getUserEmail());
+					session.setAttribute("sessUserRole", User.getType());
+					session.setAttribute("sessUserID", User.getUserID());
 
 					// redirects the user upon success
 					response.sendRedirect("index.jsp");
@@ -112,8 +97,7 @@ public class LoginValidation extends HttpServlet {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error was found here!");
+			response.sendRedirect("login.jsp?errCode=invalidLogin");
 		}
 	}
-
 }

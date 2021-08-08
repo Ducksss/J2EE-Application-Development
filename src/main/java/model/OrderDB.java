@@ -70,7 +70,7 @@ public class OrderDB {
 	}
 
 	// Insertion
-	public boolean insertOrder(int userID, int productID, int recieptID,double d) {
+	public boolean insertOrder(int userID, int productID, int recieptID, double price_at_order) {
 		try {
 			Connection conn = DatabaseConnection.getConnection();
 
@@ -83,7 +83,7 @@ public class OrderDB {
 			pstmt.setInt(1, userID);
 			pstmt.setInt(2, productID);
 			pstmt.setInt(3, recieptID);
-			pstmt.setDouble(4, d);
+			pstmt.setDouble(4, price_at_order);
 			int count = pstmt.executeUpdate();
 			conn.close();
 

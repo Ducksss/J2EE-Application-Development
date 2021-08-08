@@ -9,6 +9,7 @@ import reciept.Reciept;
 import users.*;
 
 public class UserDB {
+
 	public boolean findDuplicateUser(String email) {
 		try {
 			Connection conn = DatabaseConnection.getConnection();
@@ -86,9 +87,13 @@ public class UserDB {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
-
-			return new User(rs.getInt("user_id"), rs.getString("type"), rs.getString("username"),
-					rs.getString("email"));
+			if (rs.next()) {
+				User User = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("email"),
+						rs.getString("password"), rs.getString("type"), rs.getInt("status"));
+				return User;
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			return null;
 		}
