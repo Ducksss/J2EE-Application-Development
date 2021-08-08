@@ -18,10 +18,10 @@ public class ProductDB {
 			pstmt.setInt(1, product_id);
 
 			ResultSet rs = pstmt.executeQuery();
-			conn.close();
 
 			if (rs.next()) {
-				return rs.getInt("stock_quantity");
+				int x = rs.getInt("stock_quantity");
+				return x;
 			} else {
 				return 0;
 			}
@@ -43,11 +43,10 @@ public class ProductDB {
 			pstmt.setInt(1, stockQuantity);
 			pstmt.setInt(2, productID);
 
-
 			int count = pstmt.executeUpdate();
 			conn.close();
 
-			if (count > 0 ) {
+			if (count > 0) {
 				return true;
 			} else {
 				return false;

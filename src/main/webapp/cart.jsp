@@ -92,7 +92,7 @@
 
 				<!-- Feature Tabs -->
 				<div>
-					<div class="row feture-tabs" data-aos="fade-up">
+					<div class="row feture-tabs">
 						<div class="col-lg-10">
 							<h3 class="sech3" style="font-family: 'Pangolin';">My cart</h3>
 						</div>

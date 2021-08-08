@@ -70,12 +70,8 @@ public class ProcessCartPayOut extends HttpServlet {
 			Stripe.apiKey = "sk_test_51JIbDeEw27jYt5tURmgXyEHj13ws0UKNwhJPJDpqXPW8ULUXQguZURTd5yl6oa3CueZGMVBtBj4soQ5NXRsgiEvJ00k5k5KNLy";
 
 			// Stripe
-			ChargeCreateParams params = ChargeCreateParams
-					.builder()
-					.setAmount(v1)
-					.setCurrency("sgd")
-					.setDescription("Example charge - WALCO 1")
-					.setSource(token).build();
+			ChargeCreateParams params = ChargeCreateParams.builder().setAmount(v1).setCurrency("sgd")
+					.setDescription("Example charge - WALCO 1").setSource(token).build();
 
 			Charge charge = Charge.create(params);
 
@@ -83,7 +79,7 @@ public class ProcessCartPayOut extends HttpServlet {
 			OrderDB OrderDB = new OrderDB();
 			RecieptDB RecieptDB = new RecieptDB();
 			ProductDB ProductDB = new ProductDB();
-			
+
 			boolean success = RecieptDB.insertReciept(sessUserID, totalPrice);
 
 			if (success) {
@@ -92,13 +88,16 @@ public class ProcessCartPayOut extends HttpServlet {
 				for (int i = 0; i < productList.size(); i++) {
 					for (int n = 0; n < productList.get(i).getQuantity(); n++) {
 						// if the email is not associated with an account!
-						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID,productList.get(i).getRetailPrice());
+						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID,
+								productList.get(i).getRetailPrice());
 					}
 				}
 
 				for (int i = 0; i < productList.size(); i++) {
 					int stock_quantity = ProductDB.retriveStockQuantity(productList.get(i).getProductID());
-					ProductDB.updateStockQuantity(stock_quantity - productList.get(i).getQuantity(), productList.get(i).getProductID());
+
+					ProductDB.updateStockQuantity(stock_quantity - productList.get(i).getQuantity(),
+							productList.get(i).getProductID());
 				}
 			}
 
