@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import reciept.Reciept;
 import orders.OrderManagement;
+import orders.OrderPerformance;
 
 public class OrderDB {
 
@@ -43,6 +44,27 @@ public class OrderDB {
 
 			return OrderManagement;
 		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	public ArrayList<OrderPerformance> getProductPerformance() {
+		try {
+			ArrayList<OrderPerformance> OrderPerformance = new ArrayList<OrderPerformance>();
+
+			Connection conn = DatabaseConnection.getConnection();
+
+			String sqlStr = "SELECT orders.product_id, products.product_title, COUNT(*) as tally FROM sp_shop.orders orders, sp_shop.products products where products.product_id = orders.product_id GROUP BY orders.product_id ORDER BY tally desc;";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sqlStr);
+
+			while (rs.next()) {
+				OrderPerformance.add(new OrderPerformance(rs.getString("product_title"), rs.getInt("tally")));
+			}
+
+			return OrderPerformance;
+		} catch (Exception e) {
+			System.out.print("ERROR!");
 			return null;
 		}
 	}
