@@ -50,7 +50,7 @@ public class RecieptDB {
 
 			while (rs.next()) {
 				Reciept.add(new Reciept(rs.getString("product_title"), rs.getString("brief_description"),
-						rs.getInt("tally"), (rs.getDouble("retail_price") * rs.getInt("tally"))));
+						rs.getInt("tally"), (rs.getDouble("price_at_order") * rs.getInt("tally"))));
 			}
 
 			return Reciept;

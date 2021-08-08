@@ -48,12 +48,12 @@ public class OrderDB {
 	}
 
 	// Insertion
-	public boolean insertOrder(int userID, int productID, int recieptID) {
+	public boolean insertOrder(int userID, int productID, int recieptID,double d) {
 		try {
 			Connection conn = DatabaseConnection.getConnection();
 
 			// instead of editing directly, use ? to prevent injection attacks
-			String insertSQL = "INSERT INTO sp_shop.orders(user_id, product_id, reciept_id) VALUES (?, ?, ?)";
+			String insertSQL = "INSERT INTO sp_shop.orders(user_id, product_id, reciept_id, price_at_order) VALUES (?, ?, ?, ?)";
 
 			/// executing to DB - Statement to check if an account exist before it
 			PreparedStatement pstmt = conn.prepareStatement(insertSQL);
@@ -61,7 +61,7 @@ public class OrderDB {
 			pstmt.setInt(1, userID);
 			pstmt.setInt(2, productID);
 			pstmt.setInt(3, recieptID);
-
+			pstmt.setDouble(4, d);
 			int count = pstmt.executeUpdate();
 			conn.close();
 
