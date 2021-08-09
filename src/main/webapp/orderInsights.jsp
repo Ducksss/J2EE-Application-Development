@@ -99,12 +99,14 @@
 					<thead>
 						<tr>
 							<th>Receipt ID</th>
-							<th>Email</th>
 							<th>Product Name</th>
-							<th>Cost Price</th>
-							<th>Retail Price</th>
-							<th>Date of Order</th>
-							<th>Quantity</th>
+							<th>Order Quantity</th>
+							<th>Time of Order</th>
+							<th>Buyer's Email Address</th>
+							<th>Delivery Address</th>
+							<th>Postal Code</th>
+							<th>Unit Number</th>
+							<th>Contact Number</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -116,12 +118,14 @@
 						%>
 						<tr>
 							<th><%=s.getOrderID()%></th>
-							<th><%=s.getEmail()%></th>
 							<td><%=s.getProductTitle()%></td>
-							<td><%=s.getCostPrice()%></td>
-							<td><%=s.getRetailPrice()%></td>
-							<td><%=s.getCreatedAt()%></td>
 							<td><%=s.getQuantity()%></td>
+							<td><%=s.getCreatedAt()%></td>
+							<th><%=s.getEmail()%></th>
+							<td><%=s.getAddress()%></td>
+							<td><%=s.getPostalCode()%></td>
+							<td><%=s.getUnitNumber()%></td>
+							<td><%=s.getContactNumber()%></td>
 						</tr>
 						<%
 						}

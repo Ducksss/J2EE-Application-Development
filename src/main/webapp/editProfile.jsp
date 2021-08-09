@@ -251,7 +251,7 @@
 		$(document).ready(function() {
 
 			$('#recieptInfo').DataTable({
-				"order" : [ [ 0, "asc" ] ]
+				"order" : [ [ 1, "desc" ] ]
 			});
 		});
 	</script>

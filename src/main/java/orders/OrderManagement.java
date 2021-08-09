@@ -8,6 +8,10 @@ public class OrderManagement {
 	private String retailPrice;
 	private String createdAt;
 	private String quantity;
+	private String address;
+	private String postalCode;
+	private String unitNumber;
+	private String contactNumber;
 	
 	public OrderManagement() {
 		super();
@@ -15,7 +19,8 @@ public class OrderManagement {
 	}
 
 	public OrderManagement(String orderID, String email, String productTitle, String costPrice, String retailPrice,
-			String createdAt, String quantity) {
+			String createdAt, String quantity, String address, String postalCode, String unitNumber,
+			String contactNumber) {
 		super();
 		this.orderID = orderID;
 		this.email = email;
@@ -24,6 +29,10 @@ public class OrderManagement {
 		this.retailPrice = retailPrice;
 		this.createdAt = createdAt;
 		this.quantity = quantity;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.unitNumber = unitNumber;
+		this.contactNumber = contactNumber;
 	}
 
 	public String getOrderID() {
@@ -81,4 +90,37 @@ public class OrderManagement {
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getUnitNumber() {
+		return unitNumber;
+	}
+
+	public void setUnitNumber(String unitNumber) {
+		this.unitNumber = unitNumber;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
 }

@@ -60,6 +60,9 @@ public class ProcessCartPayOut extends HttpServlet {
 		try {
 			// Requesting Params
 			String token = request.getParameter("stripeToken");
+			String address = request.getParameter("address");
+			String postalCode = request.getParameter("postalCode");
+			String blockNumber = request.getParameter("blockNumber");
 			int sessUserID = (int) request.getSession().getAttribute("sessUserID");
 			double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
 			BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
@@ -89,7 +92,7 @@ public class ProcessCartPayOut extends HttpServlet {
 					for (int n = 0; n < productList.get(i).getQuantity(); n++) {
 						// if the email is not associated with an account!
 						OrderDB.insertOrder(sessUserID, productList.get(i).getProductID(), recieptID,
-								productList.get(i).getRetailPrice());
+								productList.get(i).getRetailPrice(), address, postalCode, blockNumber);
 					}
 				}
 

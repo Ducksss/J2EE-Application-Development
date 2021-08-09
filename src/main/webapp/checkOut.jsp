@@ -85,7 +85,7 @@
 		} else {
 			ArrayList<Product> productList = (ArrayList<Product>) session.getAttribute("product");
 			if (productList.isEmpty()) {
-				response.sendRedirect("cart.jsp");
+		response.sendRedirect("cart.jsp");
 			}
 
 			if (productList.size() == 0) {
@@ -186,7 +186,6 @@
 								to your own currency
 								<form action="CurrencyConversion" method="POST">
 									<%
-									
 									System.out.println(currencyType);
 									%>
 									<select name="currency" value=<%=currencyType%>>
@@ -268,7 +267,7 @@
 
 								<div class="col-12">
 									<label for="address2" class="form-label">Address</label><input
-										type="text" class="form-control" id="address2"
+										type="text" class="form-control" id="address2" name="address"
 										placeholder="Apartment or suite" value="<%=address%>">
 								</div>
 
@@ -284,16 +283,17 @@
 
 								<div class="col-md-3">
 									<label for="zip" class="form-label">Postal Code</label> <input
-										type="text" class="form-control" id="zip" placeholder=""
-										required>
+										type="text" class="form-control" id="zip" placeholder="730364"
+										name="postalCode" required>
 									<div class="invalid-feedback">Postal code required.</div>
 								</div>
 
 								<div class="col-md-3">
-									<label for="zip" class="form-label">Zip</label> <input
-										type="text" class="form-control" id="zip" placeholder=""
-										required>
-									<div class="invalid-feedback">Zip code required.</div>
+									<label for="zip" class="form-label">Block Number</label> <input
+										type="text" class="form-control" id="zip"
+										placeholder="#06-437" name="blockNumber">
+									<div class="invalid-feedback">Unit Address</div>
+									<span class="text-muted">(Optional)</span>
 								</div>
 							</div>
 
@@ -355,8 +355,10 @@
 
 							<input type="hidden" class="form-control" id="totalPrice"
 								name="totalPrice" placeholder="" value="<%=totalPrice%>">
-								<%session.removeAttribute("currencyType");
-								session.removeAttribute("totalPriceConverted"); %>
+							<%
+							session.removeAttribute("currencyType");
+							session.removeAttribute("totalPriceConverted");
+							%>
 							<button class="w-100 btn btn-primary btn-lg" type="submit">Continue
 								to checkout</button>
 						</form>
