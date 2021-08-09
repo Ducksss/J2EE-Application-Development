@@ -49,7 +49,7 @@ public class BanUser extends HttpServlet {
 		try {
 			int user_id = Integer.parseInt(request.getParameter("user_id"));
 			UserDB UserDB = new UserDB();
-			boolean success = UserDB.editUserStatus(0, user_id);
+			boolean success = UserDB.editUserStatus(1, user_id);
 
 			if (success) {
 				response.sendRedirect("manageUserAndAdmin.jsp");
