@@ -19,9 +19,10 @@ The topics of this module and the recommended time allocation are listed below:
 |Topics|Hours|
 |:---|:---|
 |A. Introduction to J2EE| 6|
-|B. Java Server Pages Technology| 6|
-|C. Database Access| 6|
-|D. Session Management| 6|
-|E. Servlet Technology| 6|
-|F. Model-View-Controller (MVC)| 6|
-|G. Introduction to J2EE| 6|
+|B. Java Server Pages Technology| 10|
+|C. Database Access| 10|
+|D. Session Management| 8|
+|E. Servlet Technology| 8|
+|F. Model-View-Controller (MVC)| 10|
+|G. Introduction to J2EE| 8|
+|Total| 10|
