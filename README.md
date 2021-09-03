@@ -25,4 +25,4 @@ The topics of this module and the recommended time allocation are listed below:
 |E. Servlet Technology| 8|
 |F. Model-View-Controller (MVC)| 10|
 |G. Introduction to J2EE| 8|
-|Total| 10|
+|Total| 60|
